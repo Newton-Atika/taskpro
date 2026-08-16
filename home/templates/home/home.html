@@ -1,0 +1,2805 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Workload</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: #212529;
+            background: #ffffff;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar-dark .navbar-brand,
+        .navbar-dark .nav-link {
+            color: #ffffff !important;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #0d6efd,
+                #6610f2
+            );
+
+            color: #ffffff;
+            padding: 100px 0;
+        }
+
+        .hero h1,
+        .hero p {
+            color: #ffffff !important;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            font-weight: bold;
+        }
+
+        .hero img {
+            max-height: 450px;
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           MY TASKS
+        ========================= */
+
+        .tasks-section {
+            background: #f8f9fa;
+            color: #212529;
+        }
+
+        .tasks-section h3,
+        .tasks-section h6 {
+            color: #212529 !important;
+        }
+
+        .tasks-section p,
+        .tasks-section .text-muted {
+            color: #6c757d !important;
+        }
+
+
+        .tasks-slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            padding: 5px 2px 10px;
+        }
+
+        .tasks-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .task-slide {
+            flex: 0 0 360px;
+        }
+
+
+        .task-mini-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 12px;
+            color: #212529;
+            transition: .2s;
+        }
+
+        .task-mini-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,.10) !important;
+        }
+
+
+        .task-mini-card h6 {
+            color: #212529 !important;
+        }
+
+        .task-mini-card .fw-semibold {
+            color: #212529 !important;
+        }
+
+        .task-mini-card .text-muted {
+            color: #6c757d !important;
+        }
+
+
+        @media (max-width: 768px) {
+
+            .task-slide {
+                flex: 0 0 85%;
+            }
+
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .service-card {
+            background: #ffffff;
+            color: #212529;
+            transition: .3s;
+            border: none;
+        }
+
+        .service-card h4,
+        .service-card p {
+            color: #212529 !important;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,.15);
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .bg-light {
+            color: #212529;
+        }
+
+        .bg-light h2,
+        .bg-light h5 {
+            color: #212529 !important;
+        }
+
+
+        /* =========================
+           WHY US
+        ========================= */
+
+        .shadow {
+            background: #ffffff;
+        }
+
+        .shadow h5 {
+            color: #212529 !important;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            background: #198754;
+            color: #ffffff;
+            padding: 80px 0;
+        }
+
+        .cta h2,
+        .cta p {
+            color: #ffffff !important;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            font-size: 15px;
+            color: #ffffff;
+        }
+
+        footer p {
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           NOTIFICATION DROPDOWN
+        ========================= */
+
+        .notification-dropdown {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+
+        .notification-item {
+            cursor: pointer;
+            transition: background .2s ease;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .notification-item:hover {
+            background: #f8f9fa;
+        }
+
+
+        .notification-unread {
+            background: #eef6ff;
+            border-left: 4px solid #0d6efd;
+        }
+
+        .notification-unread:hover {
+            background: #e3f0ff;
+        }
+
+
+        .notification-title {
+            font-weight: 600;
+            color: #212529;
+        }
+
+
+        .notification-message {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+
+        .notification-time {
+            font-size: 11px;
+            color: #999999;
+        }
+
+
+        #notificationButton {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+        }
+
+
+        #notificationBadge {
+            font-size: 10px;
+            min-width: 20px;
+        }
+
+
+        /* =========================
+           POPUP NOTIFICATION
+        ========================= */
+
+        #notificationToastContainer {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 99999;
+            width: 360px;
+            max-width: calc(100% - 30px);
+        }
+
+
+        .workload-notification-toast {
+            background: #ffffff;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.18);
+            margin-bottom: 12px;
+            overflow: hidden;
+            animation: notificationSlideIn .35s ease;
+        }
+
+
+        .workload-notification-toast .toast-header {
+            background: #0d6efd;
+            color: #ffffff;
+            border: none;
+        }
+
+
+        .workload-notification-toast .toast-header strong {
+            color: #ffffff;
+        }
+
+
+        .workload-notification-toast .toast-body {
+            color: #212529;
+            background: #ffffff;
+        }
+
+
+        @keyframes notificationSlideIn {
+
+            from {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+
+        /* =========================
+           NOTIFICATION BUTTON
+        ========================= */
+
+        #enableNotificationsButton {
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           MOBILE NOTIFICATIONS
+        ========================= */
+
+        @media (max-width: 576px) {
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero img {
+                margin-top: 30px;
+            }
+
+            #notificationToastContainer {
+                right: 10px;
+                left: 10px;
+                width: auto;
+                max-width: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand fw-bold"
+            href="{% url 'home' %}"
+        >
+
+            <i class="fa-solid fa-briefcase"></i>
+
+            Workload
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#nav"
+        >
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="nav"
+        >
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="{% url 'home' %}"
+                    >
+                        Home
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'services' %}"
+                    >
+                        Services
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'how_it_works' %}"
+                    >
+                        How It Works
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'pricing' %}"
+                    >
+                        Pricing
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'contact' %}"
+                    >
+                        Contact
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <div class="ms-3 d-flex align-items-center gap-2">
+
+                {% if user.is_authenticated %}
+
+
+                    <!-- =================================================
+                         NOTIFICATION BUTTON
+                    ================================================= -->
+
+                    <div class="dropdown">
+
+                        <button
+                            class="btn btn-dark position-relative"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            id="notificationButton"
+                        >
+
+                            <i class="fa-solid fa-bell"></i>
+
+
+                            <span
+                                id="notificationBadge"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+
+                        <div
+                            class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
+                            style="width: 380px; max-height: 500px; overflow-y: auto;"
+                        >
+
+                            <div
+                                class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom"
+                            >
+
+                                <strong>
+                                    Notifications
+                                </strong>
+
+
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-link text-decoration-none"
+                                    id="markAllReadButton"
+                                >
+
+                                    Mark all as read
+
+                                </button>
+
+                            </div>
+
+
+                            <div id="notificationList">
+
+                                <div class="text-center text-muted p-4">
+
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                    Loading notifications...
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ENABLE BROWSER NOTIFICATIONS
+                    ================================================= -->
+
+                    <button
+                        id="enableNotificationsButton"
+                        type="button"
+                        class="btn btn-outline-light btn-sm"
+                    >
+
+                        <i class="fa-solid fa-bell me-1"></i>
+
+                        Enable Notifications
+
+                    </button>
+
+
+                    <span class="text-white me-2">
+
+                        Welcome,
+                        {{ user.full_name }}
+
+                    </span>
+
+
+                    <a
+                        href="{% url 'logout' %}"
+                        class="btn btn-outline-danger"
+                    >
+
+                        Logout
+
+                    </a>
+
+
+                {% else %}
+
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="btn btn-outline-light me-2"
+                    >
+
+                        Login
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'register' %}"
+                        class="btn btn-warning me-2"
+                    >
+
+                        Sign Up
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'submit_task' %}"
+                        class="btn btn-success"
+                    >
+
+                        Submit Task
+
+                    </a>
+
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     POPUP NOTIFICATION CONTAINER
+========================================================= -->
+
+{% if user.is_authenticated %}
+
+<div id="notificationToastContainer"></div>
+
+{% endif %}
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1>
+                    Get Your Tasks Done Professionally.
+                </h1>
+
+
+                <p class="lead mt-4">
+
+                    Submit programming, research, assignments,
+                    graphic design, business plans, presentations,
+                    websites, data analysis, Excel work, GIS mapping
+                    and much more.
+
+                </p>
+
+
+                <div class="mt-4">
+
+                    <a
+                        href="{% url 'submit_task' %}"
+                        class="btn btn-primary btn-lg me-3"
+                    >
+
+                        Submit Task
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="btn btn-outline-light btn-lg"
+                    >
+
+                        Our Services
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+                    class="img-fluid rounded shadow"
+                    alt="Workload"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MY TASKS
+========================================================= -->
+
+{% if user.is_authenticated %}
+
+<section class="tasks-section py-4">
+
+    <div class="container">
+
+        <section class="py-4 bg-light">
+
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+
+                            <i class="fa-solid fa-list-check text-primary me-2"></i>
+
+                            My Tasks
+
+                        </h3>
+
+
+                        <p class="text-muted mb-0 small">
+
+                            Your most recent tasks
+
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'my_tasks' %}"
+                        class="btn btn-outline-primary btn-sm"
+                    >
+
+                        See All Tasks
+
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+
+                    </a>
+
+                </div>
+
+
+                {% if tasks %}
+
+                <div
+                    class="tasks-slider"
+                    id="tasksSlider"
+                >
+
+                    {% for task in tasks %}
+
+                    <div class="task-slide">
+
+                        <div class="card task-mini-card shadow-sm h-100">
+
+                            <div class="card-body p-3">
+
+                                <div class="d-flex justify-content-between align-items-start">
+
+                                    <div class="me-2">
+
+                                        <small class="text-muted">
+
+                                            Task #{{ task.id }}
+
+                                        </small>
+
+
+                                        <h6 class="fw-bold mb-0 text-truncate">
+
+                                            {{ task.title }}
+
+                                        </h6>
+
+                                    </div>
+
+
+                                    {% if task.status == "completed" or task.status == "delivered" %}
+
+                                        <span class="badge bg-success">
+
+                                            {{ task.get_status_display }}
+
+                                        </span>
+
+                                    {% elif task.status == "in_progress" %}
+
+                                        <span class="badge bg-primary">
+
+                                            {{ task.get_status_display }}
+
+                                        </span>
+
+                                    {% elif task.status == "cancelled" %}
+
+                                        <span class="badge bg-danger">
+
+                                            {{ task.get_status_display }}
+
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="badge bg-warning text-dark">
+
+                                            {{ task.get_status_display }}
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <hr class="my-3">
+
+
+                                <div class="row small">
+
+                                    <div class="col-6 mb-2">
+
+                                        <span class="text-muted">
+
+                                            Category
+
+                                        </span>
+
+
+                                        <div class="fw-semibold text-truncate">
+
+                                            {{ task.get_category_display }}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-6 mb-2">
+
+                                        <span class="text-muted">
+
+                                            Deadline
+
+                                        </span>
+
+
+                                        <div class="fw-semibold">
+
+                                            {{ task.deadline|date:"d M Y" }}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-6">
+
+                                        <span class="text-muted">
+
+                                            Payment
+
+                                        </span>
+
+
+                                        <div class="fw-semibold">
+
+                                            {{ task.get_payment_status_display }}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-6">
+
+                                        <span class="text-muted">
+
+                                            Submitted
+
+                                        </span>
+
+
+                                        <div class="fw-semibold">
+
+                                            {{ task.created_at|date:"d M Y" }}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="mt-3">
+
+                                    <a
+                                        href="{% url 'task_detail' task.id %}"
+                                        class="btn btn-outline-primary btn-sm w-100"
+                                    >
+
+                                        View Task
+
+                                        <i class="fa-solid fa-arrow-right ms-1"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="text-center mt-3">
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-light shadow-sm me-2"
+                        onclick="slideTasks(-1)"
+                    >
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-light shadow-sm"
+                        onclick="slideTasks(1)"
+                    >
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+
+                {% else %}
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center py-4">
+
+                        <i class="fa-solid fa-clipboard-list fa-2x text-muted mb-2"></i>
+
+
+                        <h6 class="fw-bold">
+
+                            You haven't submitted any tasks yet
+
+                        </h6>
+
+
+                        <p class="text-muted small mb-3">
+
+                            Submit your first task and let our professionals
+                            handle it.
+
+                        </p>
+
+
+                        <a
+                            href="{% url 'submit_task' %}"
+                            class="btn btn-primary btn-sm"
+                        >
+
+                            <i class="fa-solid fa-plus me-1"></i>
+
+                            Submit Your First Task
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>
+                Popular Services
+            </h2>
+
+            <p>
+                Everything can be submitted here.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="card h-100 service-card">
+
+                    <div class="card-body text-center">
+
+                        <i class="fa-solid fa-code fa-3x text-primary mb-3"></i>
+
+                        <h4>
+                            Programming
+                        </h4>
+
+                        <p>
+                            Python, Django, Java, APIs, Websites, Automation
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card h-100 service-card">
+
+                    <div class="card-body text-center">
+
+                        <i class="fa-solid fa-chart-column fa-3x text-success mb-3"></i>
+
+                        <h4>
+                            Data Analysis
+                        </h4>
+
+                        <p>
+                            Excel, Power BI, Dashboards, Statistics
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card h-100 service-card">
+
+                    <div class="card-body text-center">
+
+                        <i class="fa-solid fa-pen fa-3x text-danger mb-3"></i>
+
+                        <h4>
+                            Writing
+                        </h4>
+
+                        <p>
+                            Reports, CVs, Research, Editing, Business Plans
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>
+                How It Works
+            </h2>
+
+        </div>
+
+
+        <div class="row text-center">
+
+
+            <div class="col-md-3">
+
+                <i class="fa-solid fa-upload fa-3x text-primary"></i>
+
+                <h5 class="mt-3">
+                    1. Submit Task
+                </h5>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <i class="fa-solid fa-comments-dollar fa-3x text-success"></i>
+
+                <h5 class="mt-3">
+                    2. Receive Quote
+                </h5>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <i class="fa-solid fa-credit-card fa-3x text-warning"></i>
+
+                <h5 class="mt-3">
+                    3. Pay Securely
+                </h5>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <i class="fa-solid fa-circle-check fa-3x text-danger"></i>
+
+                <h5 class="mt-3">
+                    4. Receive Work
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY US
+========================================================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <h2>
+                Why Choose Workload?
+            </h2>
+
+        </div>
+
+
+        <div class="row mt-5">
+
+
+            <div class="col-md-3 mb-3">
+
+                <div class="p-4 shadow rounded text-center">
+
+                    <h5>
+                        Professional Experts
+                    </h5>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 mb-3">
+
+                <div class="p-4 shadow rounded text-center">
+
+                    <h5>
+                        Affordable Pricing
+                    </h5>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 mb-3">
+
+                <div class="p-4 shadow rounded text-center">
+
+                    <h5>
+                        Fast Delivery
+                    </h5>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 mb-3">
+
+                <div class="p-4 shadow rounded text-center">
+
+                    <h5>
+                        24/7 Support
+                    </h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta">
+
+    <div class="container text-center">
+
+        <h2>
+            Ready to Get Started?
+        </h2>
+
+
+        <p class="lead">
+
+            Submit your task today and let our professionals handle it.
+
+        </p>
+
+
+        <a
+            href="{% url 'submit_task' %}"
+            class="btn btn-lg btn-light"
+        >
+
+            Submit Task
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="bg-dark text-white py-4">
+
+    <div class="container text-center">
+
+        <p>
+            © 2026 Workload. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+/* ============================================================
+   TASK SLIDER
+============================================================ */
+
+function slideTasks(direction) {
+
+    const slider =
+        document.getElementById("tasksSlider");
+
+    if (!slider) {
+        return;
+    }
+
+    slider.scrollBy({
+        left: direction * 380,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ============================================================
+   WORKLOAD NOTIFICATIONS
+============================================================ */
+
+{% if user.is_authenticated %}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const notificationList =
+            document.getElementById(
+                "notificationList"
+            );
+
+        const notificationBadge =
+            document.getElementById(
+                "notificationBadge"
+            );
+
+        const markAllButton =
+            document.getElementById(
+                "markAllReadButton"
+            );
+
+        const toastContainer =
+            document.getElementById(
+                "notificationToastContainer"
+            );
+
+
+        let knownNotificationIds =
+            new Set();
+
+
+        let firstNotificationLoad =
+            true;
+
+
+        /* ====================================================
+           BROWSER PUSH VARIABLES
+        ==================================================== */
+
+        let pushRegistration =
+            null;
+
+
+        /*
+         * IMPORTANT:
+         * Change this only if your service worker
+         * is located somewhere else.
+         */
+
+        const SERVICE_WORKER_URL =
+            "{% static 'js/service-worker.js' %}";
+
+
+        /* ====================================================
+           REGISTER SERVICE WORKER
+        ==================================================== */
+
+        async function registerServiceWorker() {
+
+            if (
+                !("serviceWorker" in navigator)
+            ) {
+
+                console.warn(
+                    "Service workers are not supported."
+                );
+
+                return null;
+
+            }
+
+
+            if (
+                !window.isSecureContext
+            ) {
+
+                console.warn(
+                    "Service workers require HTTPS or localhost."
+                );
+
+                return null;
+
+            }
+
+
+            try {
+
+                pushRegistration =
+                    await navigator.serviceWorker.register(
+                        SERVICE_WORKER_URL
+                    );
+
+
+                console.log(
+                    "Service worker registered:",
+                    pushRegistration.scope
+                );
+
+
+                return pushRegistration;
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Service worker registration failed:",
+                    error
+                );
+
+                return null;
+
+            }
+
+        }
+
+
+        /* ====================================================
+           SHOW BROWSER NOTIFICATION
+        ==================================================== */
+
+        async function showBrowserNotification(
+            title,
+            message,
+            url
+        ) {
+
+            if (
+                !("Notification" in window)
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                Notification.permission !==
+                "granted"
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                /*
+                 * Make sure the service worker
+                 * is available.
+                 */
+
+                if (!pushRegistration) {
+
+                    pushRegistration =
+                        await registerServiceWorker();
+
+                }
+
+
+                if (
+                    !pushRegistration
+                ) {
+
+                    console.warn(
+                        "No service worker registration available."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * Use the service worker to create
+                 * the browser/system notification.
+                 */
+
+                await pushRegistration.showNotification(
+                    title || "Workload",
+                    {
+
+                        body:
+                            message ||
+                            "You have a new notification.",
+
+                        icon:
+                            "{% static 'images/icon-192.png' %}",
+
+                        badge:
+                            "{% static 'images/icon-192.png' %}",
+
+                        data: {
+
+                            url:
+                                url || "/"
+
+                        },
+
+                        requireInteraction:
+                            false
+
+                    }
+                );
+
+
+                console.log(
+                    "Browser notification displayed."
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Unable to display browser notification:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ====================================================
+           LOAD NOTIFICATIONS
+        ==================================================== */
+
+        async function loadNotifications(
+            showPopup = true
+        ) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "{% url 'notifications_api' %}",
+                        {
+
+                            method:
+                                "GET",
+
+                            headers: {
+
+                                "X-Requested-With":
+                                    "XMLHttpRequest",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store"
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Notification request failed: " +
+                        response.status
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Notification response:",
+                    data
+                );
+
+
+                let notifications =
+                    [];
+
+
+                if (
+                    Array.isArray(data)
+                ) {
+
+                    notifications =
+                        data;
+
+                }
+
+                else if (
+                    Array.isArray(
+                        data.notifications
+                    )
+                ) {
+
+                    notifications =
+                        data.notifications;
+
+                }
+
+                else if (
+                    Array.isArray(
+                        data.data
+                    )
+                ) {
+
+                    notifications =
+                        data.data;
+
+                }
+
+
+                renderNotifications(
+                    notifications,
+                    showPopup
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to load notifications:",
+                    error
+                );
+
+
+                if (notificationList) {
+
+                    notificationList.innerHTML = `
+
+                        <div class="text-center p-4">
+
+                            <i class="fa-solid fa-triangle-exclamation text-warning fa-2x mb-2"></i>
+
+                            <div class="fw-semibold">
+                                Unable to load notifications
+                            </div>
+
+                            <div class="small text-muted mt-1">
+                                Please refresh the page and try again.
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+            }
+
+        }
+
+
+        /* ====================================================
+           RENDER NOTIFICATIONS
+        ==================================================== */
+
+        function renderNotifications(
+            notifications,
+            showPopup
+        ) {
+
+            if (!notificationList) {
+                return;
+            }
+
+
+            if (
+                !notifications ||
+                notifications.length === 0
+            ) {
+
+                notificationList.innerHTML = `
+
+                    <div class="text-center text-muted p-4">
+
+                        <i class="fa-regular fa-bell-slash fa-2x mb-2"></i>
+
+                        <div>
+                            No notifications yet.
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                updateBadge(0);
+
+
+                firstNotificationLoad =
+                    false;
+
+
+                return;
+
+            }
+
+
+            let unreadCount =
+                0;
+
+
+            notificationList.innerHTML =
+                "";
+
+
+            notifications.forEach(
+                function(notification) {
+
+                    const id =
+                        notification.id;
+
+
+                    const title =
+                        notification.title ||
+                        "Notification";
+
+
+                    const message =
+                        notification.message ||
+                        notification.body ||
+                        "";
+
+
+                    const isRead =
+                        notification.is_read === true ||
+                        notification.read === true ||
+                        notification.is_read === 1;
+
+
+                    if (!isRead) {
+
+                        unreadCount++;
+
+                    }
+
+
+                    /*
+                     * Work out the URL.
+                     */
+
+                    let notificationUrl =
+                        notification.url ||
+                        null;
+
+
+                    if (
+                        !notificationUrl &&
+                        notification.task_id
+                    ) {
+
+                        notificationUrl =
+                            "/tasks/" +
+                            notification.task_id +
+                            "/";
+
+                    }
+
+
+                    const notificationElement =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    notificationElement.className =
+                        "notification-item p-3 " +
+                        (
+                            !isRead
+                                ? "notification-unread"
+                                : ""
+                        );
+
+
+                    notificationElement.dataset.id =
+                        id;
+
+
+                    notificationElement.innerHTML = `
+
+                        <div class="d-flex">
+
+                            <div class="me-3">
+
+                                <div
+                                    class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                    style="width:40px;height:40px;"
+                                >
+
+                                    <i class="fa-solid fa-bell"></i>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex-grow-1">
+
+                                <div class="notification-title">
+
+                                    ${escapeHtml(title)}
+
+                                </div>
+
+
+                                <div class="notification-message mt-1">
+
+                                    ${escapeHtml(message)}
+
+                                </div>
+
+
+                                ${
+                                    notification.created_at
+                                    ?
+                                    `
+
+                                    <div class="notification-time mt-1">
+
+                                        ${escapeHtml(
+                                            formatNotificationDate(
+                                                notification.created_at
+                                            )
+                                        )}
+
+                                    </div>
+
+                                    `
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+
+                            ${
+                                !isRead
+                                ?
+                                `
+
+                                <div class="ms-2">
+
+                                    <span
+                                        class="badge bg-primary rounded-pill"
+                                    >
+                                        New
+                                    </span>
+
+                                </div>
+
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    `;
+
+
+                    /* =================================================
+                       CLICK NOTIFICATION
+                    ================================================= */
+
+                    notificationElement.addEventListener(
+                        "click",
+                        function() {
+
+                            if (!isRead) {
+
+                                markNotificationRead(
+                                    id
+                                );
+
+                            }
+
+
+                            if (
+                                notificationUrl
+                            ) {
+
+                                window.location.href =
+                                    notificationUrl;
+
+                            }
+
+                        }
+                    );
+
+
+                    notificationList.appendChild(
+                        notificationElement
+                    );
+
+
+                    /* =================================================
+                       NEW NOTIFICATION DETECTION
+                    ================================================= */
+
+                    const notificationKey =
+                        String(id);
+
+
+                    const isNewNotification =
+                        showPopup &&
+                        !firstNotificationLoad &&
+                        !isRead &&
+                        !knownNotificationIds.has(
+                            notificationKey
+                        );
+
+
+                    if (
+                        isNewNotification
+                    ) {
+
+                        /*
+                         * 1. Existing in-page popup
+                         */
+
+                        showNotificationPopup(
+                            title,
+                            message,
+                            notificationUrl
+                        );
+
+
+                        /*
+                         * 2. Real browser/system notification
+                         */
+
+                        showBrowserNotification(
+                            title,
+                            message,
+                            notificationUrl
+                        );
+
+                    }
+
+
+                    knownNotificationIds.add(
+                        notificationKey
+                    );
+
+                }
+            );
+
+
+            updateBadge(
+                unreadCount
+            );
+
+
+            firstNotificationLoad =
+                false;
+
+        }
+
+
+        /* ====================================================
+           BADGE
+        ==================================================== */
+
+        function updateBadge(
+            count
+        ) {
+
+            if (!notificationBadge) {
+                return;
+            }
+
+
+            if (
+                !count ||
+                count <= 0
+            ) {
+
+                notificationBadge.classList.add(
+                    "d-none"
+                );
+
+
+                notificationBadge.textContent =
+                    "0";
+
+
+                return;
+
+            }
+
+
+            notificationBadge.classList.remove(
+                "d-none"
+            );
+
+
+            notificationBadge.textContent =
+                count > 99
+                    ? "99+"
+                    : count;
+
+        }
+
+
+        /* ====================================================
+           MARK ONE AS READ
+        ==================================================== */
+
+        async function markNotificationRead(
+            notificationId
+        ) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/tasks/notifications/${notificationId}/read/`,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "X-CSRFToken":
+                                    getCookie(
+                                        "csrftoken"
+                                    ),
+
+                                "X-Requested-With":
+                                    "XMLHttpRequest",
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            credentials:
+                                "same-origin"
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    console.error(
+                        "Could not mark notification as read."
+                    );
+
+                    return;
+
+                }
+
+
+                loadNotifications(
+                    false
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Mark notification read error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ====================================================
+           MARK ALL AS READ
+        ==================================================== */
+
+        if (markAllButton) {
+
+            markAllButton.addEventListener(
+                "click",
+                async function(event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "{% url 'mark_all_notifications_read' %}",
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    headers: {
+
+                                        "X-CSRFToken":
+                                            getCookie(
+                                                "csrftoken"
+                                            ),
+
+                                        "X-Requested-With":
+                                            "XMLHttpRequest",
+
+                                        "Content-Type":
+                                            "application/json"
+
+                                    },
+
+                                    credentials:
+                                        "same-origin"
+
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Unable to mark all notifications as read."
+                            );
+
+                        }
+
+
+                        loadNotifications(
+                            false
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Mark all notifications error:",
+                            error
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ====================================================
+           IN-PAGE POPUP
+        ==================================================== */
+
+        function showNotificationPopup(
+            title,
+            message,
+            url
+        ) {
+
+            if (!toastContainer) {
+                return;
+            }
+
+
+            const toast =
+                document.createElement(
+                    "div"
+                );
+
+
+            toast.className =
+                "workload-notification-toast";
+
+
+            toast.innerHTML = `
+
+                <div class="toast-header">
+
+                    <i class="fa-solid fa-bell me-2"></i>
+
+                    <strong class="me-auto">
+
+                        ${escapeHtml(title)}
+
+                    </strong>
+
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <div class="toast-body">
+
+                    <div>
+
+                        ${escapeHtml(message)}
+
+                    </div>
+
+
+                    ${
+                        url
+                        ?
+                        `
+
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-primary mt-3 notification-popup-view"
+                        >
+
+                            View Notification
+
+                        </button>
+
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+            `;
+
+
+            toastContainer.appendChild(
+                toast
+            );
+
+
+            const closeButton =
+                toast.querySelector(
+                    ".btn-close"
+                );
+
+
+            if (closeButton) {
+
+                closeButton.addEventListener(
+                    "click",
+                    function() {
+
+                        toast.remove();
+
+                    }
+                );
+
+            }
+
+
+            const viewButton =
+                toast.querySelector(
+                    ".notification-popup-view"
+                );
+
+
+            if (
+                viewButton &&
+                url
+            ) {
+
+                viewButton.addEventListener(
+                    "click",
+                    function() {
+
+                        window.location.href =
+                            url;
+
+                    }
+                );
+
+            }
+
+
+            setTimeout(
+                function() {
+
+                    if (
+                        toast &&
+                        toast.parentNode
+                    ) {
+
+                        toast.remove();
+
+                    }
+
+                },
+                8000
+            );
+
+        }
+
+
+        /* ====================================================
+           ESCAPE HTML
+        ==================================================== */
+
+        function escapeHtml(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                String(value);
+
+
+            return div.innerHTML;
+
+        }
+
+
+        /* ====================================================
+           FORMAT DATE
+        ==================================================== */
+
+        function formatNotificationDate(
+            value
+        ) {
+
+            try {
+
+                const date =
+                    new Date(value);
+
+
+                if (
+                    isNaN(
+                        date.getTime()
+                    )
+                ) {
+
+                    return value;
+
+                }
+
+
+                return date.toLocaleString();
+
+            }
+
+            catch (error) {
+
+                return value;
+
+            }
+
+        }
+
+
+        /* ====================================================
+           CSRF COOKIE
+        ==================================================== */
+
+        function getCookie(
+            name
+        ) {
+
+            let cookieValue =
+                null;
+
+
+            if (
+                document.cookie &&
+                document.cookie !== ""
+            ) {
+
+                const cookies =
+                    document.cookie.split(
+                        ";"
+                    );
+
+
+                for (
+                    let cookie of cookies
+                ) {
+
+                    cookie =
+                        cookie.trim();
+
+
+                    if (
+                        cookie.substring(
+                            0,
+                            name.length + 1
+                        ) ===
+                        name + "="
+                    ) {
+
+                        cookieValue =
+                            decodeURIComponent(
+                                cookie.substring(
+                                    name.length + 1
+                                )
+                            );
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+
+            return cookieValue;
+
+        }
+
+
+        /* ====================================================
+           INITIAL LOAD
+        ==================================================== */
+
+        loadNotifications(
+            false
+        );
+
+
+        /* ====================================================
+           CHECK FOR NEW NOTIFICATIONS
+           EVERY 5 SECONDS
+        ==================================================== */
+
+        setInterval(
+            function() {
+
+                loadNotifications(
+                    true
+                );
+
+            },
+            5000
+        );
+
+
+        /* ====================================================
+           REGISTER SERVICE WORKER
+        ==================================================== */
+
+        registerServiceWorker();
+
+    }
+);
+
+{% endif %}
+
+
+/* ============================================================
+   BROWSER NOTIFICATION PERMISSION
+============================================================ */
+
+{% if user.is_authenticated %}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const button =
+            document.getElementById(
+                "enableNotificationsButton"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        /*
+         * Browser does not support notifications.
+         */
+
+        if (
+            !("Notification" in window)
+        ) {
+
+            button.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        /*
+         * Browser already granted permission.
+         */
+
+        if (
+            Notification.permission ===
+            "granted"
+        ) {
+
+            button.innerHTML = `
+
+                <i class="fa-solid fa-check me-1"></i>
+
+                Notifications Enabled
+
+            `;
+
+
+            button.classList.remove(
+                "btn-outline-light"
+            );
+
+
+            button.classList.add(
+                "btn-success"
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+         * Browser permission was denied.
+         */
+
+        if (
+            Notification.permission ===
+            "denied"
+        ) {
+
+            button.innerHTML = `
+
+                <i class="fa-solid fa-bell-slash me-1"></i>
+
+                Notifications Blocked
+
+            `;
+
+            button.classList.remove(
+                "btn-outline-light"
+            );
+
+            button.classList.add(
+                "btn-secondary"
+            );
+
+            button.disabled =
+                true;
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           ENABLE BUTTON
+        ==================================================== */
+
+        button.addEventListener(
+            "click",
+            async function() {
+
+                try {
+
+                    /*
+                     * Ask for browser permission.
+                     */
+
+                    const permission =
+                        await Notification.requestPermission();
+
+
+                    if (
+                        permission !==
+                        "granted"
+                    ) {
+
+                        alert(
+                            "Browser notifications were not enabled."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Register the service worker.
+                     */
+
+                    if (
+                        "serviceWorker" in navigator
+                    ) {
+
+                        try {
+
+                            const registration =
+                                await navigator.serviceWorker.register(
+                                    "{% static 'service-worker.js' %}"
+                                );
+
+
+                            console.log(
+                                "Service worker registered:",
+                                registration.scope
+                            );
+
+                        }
+
+                        catch (error) {
+
+                            console.error(
+                                "Service worker registration error:",
+                                error
+                            );
+
+                        }
+
+                    }
+
+
+                    /*
+                     * Update button.
+                     */
+
+                    button.innerHTML = `
+
+                        <i class="fa-solid fa-check me-1"></i>
+
+                        Notifications Enabled
+
+                    `;
+
+
+                    button.classList.remove(
+                        "btn-outline-light"
+                    );
+
+
+                    button.classList.add(
+                        "btn-success"
+                    );
+
+
+                    /*
+                     * Test notification.
+                     *
+                     * This uses the service worker rather
+                     * than the old new Notification() method.
+                     */
+
+                    if (
+                        "serviceWorker" in navigator
+                    ) {
+
+                        const registration =
+                            await navigator.serviceWorker.ready;
+
+
+                        await registration.showNotification(
+                            "Workload Notifications Enabled",
+                            {
+
+                                body:
+                                    "You will now receive notification alerts from Workload.",
+
+                                icon:
+                                    "{% static 'images/icon-192.png' %}",
+
+                                badge:
+                                    "{% static 'images/icon-192.png' %}",
+
+                                data: {
+
+                                    url:
+                                        "{% url 'home' %}"
+
+                                },
+
+                                requireInteraction:
+                                    false
+
+                            }
+                        );
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Browser notification error:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+{% endif %}
+
+</script>
+
+
+</body>
+
+</html>

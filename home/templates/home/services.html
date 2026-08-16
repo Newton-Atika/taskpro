@@ -1,0 +1,1504 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Services | Workload</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f9fc;
+            color: #212529;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar-dark .navbar-brand,
+        .navbar-dark .nav-link {
+            color: #ffffff !important;
+        }
+
+
+        .navbar-brand {
+            font-size: 21px;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .services-hero {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #6610f2
+                );
+
+            color: white;
+
+            padding: 90px 0;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .services-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.08);
+
+            top: -180px;
+            right: -100px;
+        }
+
+
+        .services-hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.06);
+
+            bottom: -150px;
+            left: -100px;
+        }
+
+
+        .services-hero-content {
+
+            position: relative;
+            z-index: 2;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            text-align: center;
+        }
+
+
+        .services-label {
+
+            display: inline-block;
+
+            background: rgba(255,255,255,.15);
+
+            border: 1px solid rgba(255,255,255,.25);
+
+            padding: 9px 20px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .services-hero h1 {
+
+            font-size: 52px;
+
+            font-weight: 800;
+
+            margin-top: 22px;
+
+            line-height: 1.15;
+        }
+
+
+        .services-hero p {
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            max-width: 720px;
+
+            margin: 22px auto 0;
+
+            color: rgba(255,255,255,.9);
+        }
+
+
+        /* =========================================================
+           SERVICES SECTION
+        ========================================================= */
+
+        .services-section {
+
+            padding: 80px 0;
+        }
+
+
+        .section-heading {
+
+            text-align: center;
+
+            max-width: 750px;
+
+            margin: 0 auto 50px;
+        }
+
+
+        .section-heading h2 {
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            color: #212529;
+        }
+
+
+        .section-heading p {
+
+            color: #6c757d;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            margin-top: 12px;
+        }
+
+
+        /* =========================================================
+           SERVICE CARDS
+        ========================================================= */
+
+        .service-card {
+
+            height: 100%;
+
+            background: #ffffff;
+
+            border: 1px solid #edf0f5;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.04);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .service-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 18px 40px rgba(0,0,0,.10);
+        }
+
+
+        .service-icon {
+
+            width: 62px;
+            height: 62px;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 27px;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* ICON COLORS */
+
+        .icon-blue {
+
+            background: #eaf2ff;
+            color: #0d6efd;
+        }
+
+
+        .icon-green {
+
+            background: #eaf8f1;
+            color: #198754;
+        }
+
+
+        .icon-orange {
+
+            background: #fff3e6;
+            color: #fd7e14;
+        }
+
+
+        .icon-red {
+
+            background: #fdebec;
+            color: #dc3545;
+        }
+
+
+        .icon-purple {
+
+            background: #f1eaff;
+            color: #6610f2;
+        }
+
+
+        .icon-teal {
+
+            background: #e6f7f7;
+            color: #008b8b;
+        }
+
+
+        .icon-dark {
+
+            background: #e9ecef;
+            color: #212529;
+        }
+
+
+        .icon-pink {
+
+            background: #fdebf4;
+            color: #d63384;
+        }
+
+
+        .icon-yellow {
+
+            background: #fff8df;
+            color: #c79200;
+        }
+
+
+        .service-card h3 {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .service-card > p {
+
+            color: #6c757d;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================================
+           SERVICE ITEMS
+        ========================================================= */
+
+        .service-items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+
+        .service-item {
+
+            font-size: 13px;
+
+            color: #495057;
+        }
+
+
+        .service-item i {
+
+            color: #198754;
+
+            font-size: 11px;
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================================================
+           EXTRA SERVICES
+        ========================================================= */
+
+        .extra-services {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            border: 1px solid #edf0f5;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.04);
+        }
+
+
+        .extra-services h3 {
+
+            font-weight: 750;
+
+            margin-bottom: 10px;
+        }
+
+
+        .extra-services p {
+
+            color: #6c757d;
+
+            line-height: 1.7;
+        }
+
+
+        .service-pill-container {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .service-pill {
+
+            background: #f1f5ff;
+
+            color: #0d6efd;
+
+            padding: 9px 15px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .services-cta {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #198754,
+                    #0d6efd
+                );
+
+            color: white;
+
+            padding: 70px 0;
+
+            text-align: center;
+        }
+
+
+        .services-cta h2 {
+
+            font-size: 38px;
+
+            font-weight: 800;
+        }
+
+
+        .services-cta p {
+
+            max-width: 650px;
+
+            margin: 15px auto 30px;
+
+            font-size: 17px;
+
+            color: rgba(255,255,255,.9);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+
+            background: #212529;
+
+            color: white;
+
+            padding: 30px 0;
+
+            text-align: center;
+        }
+
+
+        footer p {
+
+            margin: 0;
+
+            color: white;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 768px) {
+
+            .services-hero {
+
+                padding: 65px 0;
+            }
+
+
+            .services-hero h1 {
+
+                font-size: 38px;
+            }
+
+
+            .services-hero p {
+
+                font-size: 16px;
+            }
+
+
+            .section-heading h2 {
+
+                font-size: 30px;
+            }
+
+
+            .services-section {
+
+                padding: 55px 0;
+            }
+
+
+            .service-card {
+
+                padding: 25px;
+            }
+
+
+            .services-cta h2 {
+
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+    <div class="container">
+
+
+        <a
+            class="navbar-brand fw-bold"
+            href="{% url 'home' %}"
+        >
+
+            <i class="fa-solid fa-briefcase me-1"></i>
+
+            Workload
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavigation"
+        >
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavigation"
+        >
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'home' %}"
+                    >
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="{% url 'services' %}"
+                    >
+
+                        Services
+
+                    </a>
+
+                </li>
+
+
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+
+                        <a
+                            href="{% url 'submit_task' %}"
+                            class="btn btn-success"
+                        >
+
+                            <i class="fa-solid fa-plus me-1"></i>
+
+                            Submit Task
+
+                        </a>
+
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="btn btn-outline-light me-2"
+                        >
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item mt-2 mt-lg-0">
+
+                        <a
+                            href="{% url 'register' %}"
+                            class="btn btn-warning"
+                        >
+
+                            Sign Up
+
+                        </a>
+
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="services-hero">
+
+    <div class="container">
+
+        <div class="services-hero-content">
+
+
+            <span class="services-label">
+
+                <i class="fa-solid fa-layer-group me-2"></i>
+
+                WHAT WE CAN DO FOR YOU
+
+            </span>
+
+
+            <h1>
+
+                Professional Services.
+                <br>
+
+                One Place.
+
+            </h1>
+
+
+            <p>
+
+                From office documents and data entry to research,
+                design, programming, presentations and business work —
+                submit your task and let Workload get it done.
+
+            </p>
+
+
+            <div class="mt-4">
+
+                <a
+                    href="{% url 'submit_task' %}"
+                    class="btn btn-light btn-lg px-4"
+                >
+
+                    <i class="fa-solid fa-paper-plane me-2"></i>
+
+                    Submit a Task
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="services-section">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <h2>
+
+                Everything You Need,
+                <span class="text-primary">
+                    In One Place
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                Workload provides support across office work,
+                digital services, research, data, design and
+                technology. If you have a task, you can submit it.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 DOCUMENTS
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-blue">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Documents & Office Work
+                    </h3>
+
+
+                    <p>
+
+                        Professional assistance with everyday
+                        office documents and administrative work.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Word Documents
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Typing & Data Entry
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Document Formatting
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            PDF Conversion
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Transcription
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 EXCEL
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-green">
+
+                        <i class="fa-solid fa-table"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Excel & Data Management
+                    </h3>
+
+
+                    <p>
+
+                        Clean, organize, analyze and present
+                        your information professionally.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Excel Data Entry
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Data Cleaning
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Excel Formulas
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Pivot Tables
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Data Organization
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRESENTATIONS
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-orange">
+
+                        <i class="fa-solid fa-display"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Presentations & PowerPoint
+                    </h3>
+
+
+                    <p>
+
+                        Professional presentations designed to
+                        communicate your ideas clearly.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            PowerPoint Presentations
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Presentation Design
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Charts & Graphs
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Infographics
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Pitch Decks
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 WRITING
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-red">
+
+                        <i class="fa-solid fa-pen-nib"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Writing & Editing
+                    </h3>
+
+
+                    <p>
+
+                        Clear, professional and well-structured
+                        written materials.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Reports
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            CVs & Resumes
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Proofreading
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Editing
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Business Documents
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESEARCH
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-purple">
+
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Research & Analysis
+                    </h3>
+
+
+                    <p>
+
+                        Research support and analytical services
+                        for projects and organizations.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Research Support
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Literature Reviews
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Research Reports
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Data Interpretation
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Research Assistance
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-teal">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Statistics & Data Analysis
+                    </h3>
+
+
+                    <p>
+
+                        Statistical analysis, visualization and
+                        professional reporting.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            SPSS
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Stata
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            R & Python
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Statistical Reports
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Data Visualization
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROGRAMMING
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-dark">
+
+                        <i class="fa-solid fa-code"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Programming & Technology
+                    </h3>
+
+
+                    <p>
+
+                        Technical solutions for websites,
+                        applications, automation and software.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Python
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Django
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Websites
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Automation
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            APIs & Integrations
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DESIGN
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-pink">
+
+                        <i class="fa-solid fa-palette"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Design & Creative Work
+                    </h3>
+
+
+                    <p>
+
+                        Professional visual materials for
+                        businesses, organizations and individuals.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Posters
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Flyers
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Infographics
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Social Media Graphics
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Business Materials
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BUSINESS
+            ================================================== -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon icon-yellow">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Business & Professional
+                    </h3>
+
+
+                    <p>
+
+                        Professional business materials and
+                        practical support for organizations.
+
+                    </p>
+
+
+                    <div class="service-items">
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Business Plans
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Proposals
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Budgets
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Business Reports
+                        </span>
+
+                        <span class="service-item">
+                            <i class="fa-solid fa-check"></i>
+                            Professional Profiles
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================================================
+             OTHER SERVICES
+        ========================================================= -->
+
+        <div class="extra-services mt-5">
+
+
+            <h3>
+                And Much More...
+            </h3>
+
+
+            <p>
+
+                Have something different? Don't worry.
+                Workload is designed for tasks rather than
+                rigid service categories. If you have a task
+                that can be completed digitally or professionally,
+                you can submit it for review.
+
+            </p>
+
+
+            <div class="service-pill-container">
+
+                <span class="service-pill">
+                    Data Entry
+                </span>
+
+                <span class="service-pill">
+                    Web Research
+                </span>
+
+                <span class="service-pill">
+                    PDF Work
+                </span>
+
+                <span class="service-pill">
+                    Database Work
+                </span>
+
+                <span class="service-pill">
+                    GIS & Mapping
+                </span>
+
+                <span class="service-pill">
+                    Dashboards
+                </span>
+
+                <span class="service-pill">
+                    Microsoft Office
+                </span>
+
+                <span class="service-pill">
+                    Google Workspace
+                </span>
+
+                <span class="service-pill">
+                    Data Visualization
+                </span>
+
+                <span class="service-pill">
+                    Administrative Support
+                </span>
+
+                <span class="service-pill">
+                    Digital Work
+                </span>
+
+                <span class="service-pill">
+                    Custom Requests
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="services-cta">
+
+    <div class="container">
+
+        <h2>
+            Have a Task?
+        </h2>
+
+
+        <p>
+
+            You don't need to figure out which category
+            your task belongs to. Just tell us what you need
+            done and we'll take it from there.
+
+        </p>
+
+
+        <a
+            href="{% url 'submit_task' %}"
+            class="btn btn-light btn-lg px-4"
+        >
+
+            <i class="fa-solid fa-paper-plane me-2"></i>
+
+            Submit Your Task
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 Workload. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+</body>
+
+</html>
