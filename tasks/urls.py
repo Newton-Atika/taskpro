@@ -57,6 +57,28 @@ urlpatterns = [
 
 
     # ============================================================
+    # DOCUMENT DOWNLOAD
+    # ============================================================
+
+    path(
+        "documents/<int:document_id>/download/",
+        views.download_task_document,
+        name="download_task_document"
+    ),
+
+
+    # ============================================================
+    # DELIVERABLE DOWNLOAD
+    # ============================================================
+
+    path(
+        "deliverables/<int:deliverable_id>/download/",
+        views.download_deliverable,
+        name="download_deliverable"
+    ),
+
+
+    # ============================================================
     # ADMIN
     # ============================================================
 
@@ -191,20 +213,5 @@ urlpatterns = [
         "<int:task_id>/",
         views.task_detail,
         name="task_detail"
-    ),
-        path(
-        "documents/<int:document_id>/download/",
-        views.download_task_document,
-        name="download_task_document"
-    ),
-
-    # --------------------------------------------------------
-    # DELIVERABLE DOWNLOAD
-    # --------------------------------------------------------
-
-    path(
-        "deliverables/<int:deliverable_id>/download/",
-        views.download_deliverable,
-        name="download_deliverable"
     ),
 ]
