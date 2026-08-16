@@ -2,7 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.http import JsonResponse
+from django.http import (
+    JsonResponse,
+    HttpResponse,
+    Http404,
+)
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.urls import reverse
@@ -10,7 +14,10 @@ from urllib.parse import quote
 from .notification_helpers import notify_user
 from django.views.decorators.http import require_POST
 from django.contrib.auth import get_user_model
-
+from urllib.parse import quote
+from pathlib import Path
+import mimetypes
+import requests
 from .models import PushSubscription
 
 from .push_notifications import send_push_notification
@@ -819,6 +826,332 @@ def start_task(request, task_id):
         task_id=task.id
     )
 
+# ============================================================
+# CLOUDINARY DOWNLOAD HELPERS
+# ============================================================
+
+def _get_cloudinary_download_url(file_field, filename):
+    """
+    Build a Cloudinary attachment URL.
+
+    The important part is fl_attachment, which tells Cloudinary
+    to return the file as a download rather than displaying it.
+    """
+
+    if not file_field:
+        return None
+
+    try:
+        original_url = str(file_field.url)
+    except Exception:
+        return None
+
+    if not original_url:
+        return None
+
+    safe_filename = quote(
+        filename,
+        safe=""
+    )
+
+    # Cloudinary URLs normally contain /upload/
+    if "/upload/" in original_url:
+        return original_url.replace(
+            "/upload/",
+            f"/upload/fl_attachment:{safe_filename}/",
+            1
+        )
+
+    return original_url
+
+
+def _get_file_filename(file_field, default_name="download"):
+    """
+    Safely determine a filename from a CloudinaryResource.
+    """
+
+    if not file_field:
+        return default_name
+
+    # CloudinaryResource may expose original filename
+    for attribute in [
+        "filename",
+        "original_filename",
+    ]:
+        value = getattr(
+            file_field,
+            attribute,
+            None
+        )
+
+        if value:
+            value = str(value)
+
+            if "." in value:
+                return Path(value).name
+
+    # Cloudinary format
+    public_id = getattr(
+        file_field,
+        "public_id",
+        None
+    )
+
+    file_format = getattr(
+        file_field,
+        "format",
+        None
+    )
+
+    if public_id:
+        name = str(public_id).split("/")[-1]
+
+        if file_format:
+            file_format = str(file_format).lower()
+
+            if not name.lower().endswith(
+                "." + file_format
+            ):
+                name = f"{name}.{file_format}"
+
+        return name
+
+    # Last fallback
+    try:
+        value = str(file_field)
+
+        if value:
+            value = value.split("/")[-1]
+            return value
+    except Exception:
+        pass
+
+    return default_name
+
+
+def _download_cloudinary_file(
+    request,
+    file_field,
+    filename
+):
+    """
+    Download a Cloudinary asset through the Workload server.
+
+    The browser never receives a Cloudinary URL.
+    """
+
+    if not file_field:
+        raise Http404(
+            "The requested file does not exist."
+        )
+
+    try:
+        download_url = _get_cloudinary_download_url(
+            file_field,
+            filename
+        )
+    except Exception:
+        download_url = None
+
+    if not download_url:
+        raise Http404(
+            "Unable to create a download URL for this file."
+        )
+
+    try:
+
+        cloudinary_response = requests.get(
+            download_url,
+            timeout=60,
+        )
+
+    except requests.RequestException as exc:
+
+        raise Http404(
+            "Unable to retrieve the file from storage."
+        ) from exc
+
+    if cloudinary_response.status_code != 200:
+
+        raise Http404(
+            "The file could not be retrieved from storage."
+        )
+
+    # Determine content type
+    content_type = (
+        cloudinary_response.headers.get(
+            "Content-Type"
+        )
+        or mimetypes.guess_type(
+            filename
+        )[0]
+        or "application/octet-stream"
+    )
+
+    response = HttpResponse(
+        cloudinary_response.content,
+        content_type=content_type
+    )
+
+    response[
+        "Content-Disposition"
+    ] = (
+        f'attachment; filename="{filename}"'
+    )
+
+    # Prevent caching sensitive task documents
+    response[
+        "Cache-Control"
+    ] = "private, no-store, max-age=0"
+
+    return response
+
+
+# ============================================================
+# DOWNLOAD TASK DOCUMENT
+# ============================================================
+
+@login_required
+def download_task_document(
+    request,
+    document_id
+):
+
+    document = get_object_or_404(
+        TaskDocument,
+        id=document_id
+    )
+
+    task = document.task
+
+    # --------------------------------------------------------
+    # ACCESS CONTROL
+    # --------------------------------------------------------
+
+    is_customer = (
+        task.customer == request.user
+    )
+
+    is_assigned_staff = (
+        task.assigned_staff == request.user
+    )
+
+    is_staff = (
+        request.user.is_staff
+    )
+
+    is_admin = (
+        request.user.is_superuser
+    )
+
+    if not (
+        is_customer
+        or is_assigned_staff
+        or is_staff
+        or is_admin
+    ):
+        raise Http404(
+            "You do not have permission to access this file."
+        )
+
+    if not document.file:
+        raise Http404(
+            "This document does not have a file."
+        )
+
+    filename = _get_file_filename(
+        document.file,
+        default_name=(
+            f"task_{task.id}_document"
+        )
+    )
+
+    return _download_cloudinary_file(
+        request,
+        document.file,
+        filename
+    )
+
+
+# ============================================================
+# DOWNLOAD DELIVERABLE
+# ============================================================
+
+@login_required
+def download_deliverable(
+    request,
+    deliverable_id
+):
+
+    deliverable = get_object_or_404(
+        TaskDeliverable,
+        id=deliverable_id
+    )
+
+    task = deliverable.task
+
+    # --------------------------------------------------------
+    # ACCESS CONTROL
+    # --------------------------------------------------------
+
+    is_customer = (
+        task.customer == request.user
+    )
+
+    is_assigned_staff = (
+        task.assigned_staff == request.user
+    )
+
+    is_staff = (
+        request.user.is_staff
+    )
+
+    is_admin = (
+        request.user.is_superuser
+    )
+
+    if not (
+        is_customer
+        or is_assigned_staff
+        or is_staff
+        or is_admin
+    ):
+        raise Http404(
+            "You do not have permission to access this file."
+        )
+
+    if not deliverable.file:
+        raise Http404(
+            "This deliverable does not have a file."
+        )
+
+    # --------------------------------------------------------
+    # CUSTOMER SECURITY
+    #
+    # Customer can only download approved deliverables.
+    # Staff/admin can access deliverables for review.
+    # --------------------------------------------------------
+
+    if (
+        is_customer
+        and not deliverable.approved
+    ):
+        raise Http404(
+            "This deliverable has not been released."
+        )
+
+    filename = _get_file_filename(
+        deliverable.file,
+        default_name=(
+            f"task_{task.id}_deliverable"
+        )
+    )
+
+    return _download_cloudinary_file(
+        request,
+        deliverable.file,
+        filename
+    )
 
 # ============================================================
 # TASK DETAIL
