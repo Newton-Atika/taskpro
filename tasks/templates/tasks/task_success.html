@@ -1,0 +1,172 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>Task Submitted | Workload</title>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    rel="stylesheet">
+
+<style>
+
+    body {
+
+        font-family: 'Segoe UI', sans-serif;
+
+        background: #f5f7fb;
+
+    }
+
+    .success-wrapper {
+
+        min-height: 100vh;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 30px;
+
+    }
+
+    .success-card {
+
+        background: white;
+
+        max-width: 600px;
+
+        width: 100%;
+
+        text-align: center;
+
+        padding: 60px 40px;
+
+        border-radius: 22px;
+
+        box-shadow:
+            0 20px 50px
+            rgba(0,0,0,.08);
+
+    }
+
+    .success-icon {
+
+        width: 90px;
+
+        height: 90px;
+
+        background: #d1e7dd;
+
+        color: #198754;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin: 0 auto 25px;
+
+        font-size: 40px;
+
+    }
+
+    .success-card h1 {
+
+        font-weight: 700;
+
+    }
+
+    .btn-workload {
+
+        background:
+            linear-gradient(
+                135deg,
+                #0d6efd,
+                #6610f2
+            );
+
+        color: white;
+
+        border: none;
+
+        padding: 13px 28px;
+
+        border-radius: 10px;
+
+        font-weight: 600;
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="success-wrapper">
+
+```
+<div class="success-card">
+
+    <div class="success-icon">
+
+        <i class="fa-solid fa-check"></i>
+
+    </div>
+
+    <h1>Task Submitted!</h1>
+
+    <p class="text-muted mt-3">
+
+        Your task has been successfully submitted
+        to Workload.
+
+    </p>
+
+    <p class="text-muted">
+
+        Our team will review your request and
+        provide you with a quote.
+
+    </p>
+
+    <a
+        href="/"
+        class="btn btn-workload mt-3"
+    >
+
+        <i class="fa-solid fa-house me-2"></i>
+
+        Return Home
+
+    </a>
+
+</div>
+```
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Add Documents | Workload</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .upload-card {
+            border: none;
+            border-radius: 18px;
+        }
+
+        .upload-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e7f1ff;
+            color: #0d6efd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar navbar-dark bg-dark shadow-sm">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand fw-bold"
+            href="/"
+        >
+
+            <i class="fa-solid fa-briefcase me-2"></i>
+
+            Workload
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+
+            <div class="card upload-card shadow-sm">
+
+                <div class="card-body p-5">
+
+
+                    <div class="upload-icon">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    </div>
+
+
+                    <h2 class="text-center fw-bold">
+
+                        Add More Documents
+
+                    </h2>
+
+
+                    <p class="text-center text-muted mb-4">
+
+                        Add additional files to:
+
+                        <strong>{{ task.title }}</strong>
+
+                    </p>
+
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Select Document
+
+                            </label>
+
+                            {{ form.file }}
+
+                            {% if form.file.errors %}
+
+                                <div class="text-danger small mt-2">
+
+                                    {{ form.file.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Description
+
+                                <span class="text-muted fw-normal">
+
+                                    (Optional)
+
+                                </span>
+
+                            </label>
+
+                            {{ form.description }}
+
+                            <div class="form-text">
+
+                                Tell us what this document is for.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex gap-2">
+
+                            <a
+                                href="{% url 'task_detail' task.id %}"
+                                class="btn btn-outline-secondary flex-fill"
+                            >
+
+                                Cancel
+
+                            </a>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary flex-fill"
+                            >
+
+                                <i class="fa-solid fa-upload me-1"></i>
+
+                                Upload Document
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
