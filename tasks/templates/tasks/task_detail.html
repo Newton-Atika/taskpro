@@ -70,6 +70,7 @@
     .info-value {
         font-weight: 600;
         color: #212529;
+        overflow-wrap: anywhere;
     }
 
     .document-item,
@@ -184,6 +185,20 @@
         font-weight: 700;
     }
 
+    @media (max-width: 991px) {
+
+        .workflow-card .row {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 10px;
+        }
+
+        .workflow-card .col {
+            min-width: 90px;
+        }
+
+    }
+
     @media (max-width: 768px) {
 
         .page-header {
@@ -201,14 +216,13 @@
     }
 
 </style>
+
 </head>
 
 <body>
 
 <!-- ================================================= -->
-
 <!-- NAVBAR -->
-
 <!-- ================================================= -->
 
 <nav class="navbar navbar-dark bg-dark">
@@ -245,18 +259,16 @@
 
 </nav>
 
+
 <!-- ================================================= -->
-
 <!-- PAGE HEADER -->
-
 <!-- ================================================= -->
 
 <div class="page-header">
 
-
 <div class="container">
 
-    <div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 
         <div>
 
@@ -286,70 +298,99 @@
             {% if task.status == "completed" %}
 
                 <span class="badge bg-success status-badge">
+
                     <i class="fa-solid fa-circle-check me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "delivered" %}
 
                 <span class="badge bg-success status-badge">
+
                     <i class="fa-solid fa-box-open me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "reviewing" %}
 
                 <span class="badge bg-warning text-dark status-badge">
+
                     <i class="fa-solid fa-clock me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "in_progress" %}
 
                 <span class="badge bg-primary status-badge">
+
                     <i class="fa-solid fa-spinner me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "assigned" %}
 
                 <span class="badge bg-info text-dark status-badge">
+
                     <i class="fa-solid fa-user-check me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "paid" %}
 
                 <span class="badge bg-success status-badge">
+
                     <i class="fa-solid fa-money-check-dollar me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "accepted" %}
 
                 <span class="badge bg-primary status-badge">
+
                     <i class="fa-solid fa-file-signature me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "quoted" %}
 
                 <span class="badge bg-warning text-dark status-badge">
+
                     <i class="fa-solid fa-file-invoice-dollar me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% elif task.status == "cancelled" %}
 
                 <span class="badge bg-danger status-badge">
+
                     <i class="fa-solid fa-xmark me-1"></i>
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% else %}
 
                 <span class="badge bg-light text-dark status-badge">
+
                     {{ task.get_status_display }}
+
                 </span>
 
             {% endif %}
@@ -360,60 +401,62 @@
 
 </div>
 
-
 </div>
+
 
 <div class="container mt-4">
 
+
 <!-- ================================================= -->
-
 <!-- MESSAGES -->
-
 <!-- ================================================= -->
 
 {% if messages %}
 
+    {% for message in messages %}
 
-{% for message in messages %}
+        <div
+            class="
+                alert
+                {% if message.tags == 'error' %}
+                    alert-danger
+                {% elif message.tags == 'success' %}
+                    alert-success
+                {% elif message.tags == 'warning' %}
+                    alert-warning
+                {% else %}
+                    alert-info
+                {% endif %}
+                alert-dismissible
+                fade
+                show
+            "
+            role="alert"
+        >
 
-    <div
-        class="alert
-        {% if message.tags == 'error' %}
-            alert-danger
-        {% elif message.tags == 'success' %}
-            alert-success
-        {% else %}
-            alert-info
-        {% endif %}
-        alert-dismissible fade show"
-        role="alert"
-    >
+            {{ message }}
 
-        {{ message }}
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+            ></button>
 
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-        ></button>
+        </div>
 
-    </div>
-
-{% endfor %}
-
+    {% endfor %}
 
 {% endif %}
 
+
 <!-- ================================================= -->
-
 <!-- STAFF ACTIONS -->
-
 <!-- ================================================= -->
 
 {% if is_assigned_staff %}
 
 <div class="card task-card staff-actions mb-4">
-
 
 <div class="card-body p-4">
 
@@ -460,6 +503,7 @@
 
             </form>
 
+
         {% elif task.status == "in_progress" %}
 
             <a
@@ -473,6 +517,7 @@
 
             </a>
 
+
         {% elif task.status == "reviewing" %}
 
             <span class="badge bg-warning text-dark p-2">
@@ -483,6 +528,7 @@
 
             </span>
 
+
         {% elif task.status == "delivered" %}
 
             <span class="badge bg-success p-2">
@@ -492,6 +538,7 @@
                 Deliverable Approved
 
             </span>
+
 
         {% elif task.status == "completed" %}
 
@@ -509,19 +556,16 @@
 
 </div>
 
-
 </div>
 
 {% endif %}
 
+
 <!-- ================================================= -->
-
 <!-- WORKFLOW -->
-
 <!-- ================================================= -->
 
 <div class="card workflow-card mb-4">
-
 
 <div class="card-body p-4">
 
@@ -554,7 +598,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-paper-plane"></i>
+                    {% if task.status == "submitted" %}
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    {% elif task.status == "quoted" or task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -584,7 +640,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    {% if task.status == "quoted" %}
+
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                    {% elif task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -614,7 +682,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-file-signature"></i>
+                    {% if task.status == "accepted" %}
+
+                        <i class="fa-solid fa-file-signature"></i>
+
+                    {% elif task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-file-signature"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -644,7 +724,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-money-check-dollar"></i>
+                    {% if task.status == "paid" %}
+
+                        <i class="fa-solid fa-money-check-dollar"></i>
+
+                    {% elif task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-money-check-dollar"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -674,7 +766,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-user-check"></i>
+                    {% if task.status == "assigned" %}
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    {% elif task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -704,7 +808,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-gears"></i>
+                    {% if task.status == "in_progress" %}
+
+                        <i class="fa-solid fa-gears"></i>
+
+                    {% elif task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-gears"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -734,7 +850,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    {% if task.status == "reviewing" %}
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    {% elif task.status == "delivered" or task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -764,7 +892,19 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-box-open"></i>
+                    {% if task.status == "delivered" %}
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                    {% elif task.status == "completed" %}
+
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -792,7 +932,15 @@
 
                 <div class="workflow-icon">
 
-                    <i class="fa-solid fa-circle-check"></i>
+                    {% if task.status == "completed" %}
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    {% endif %}
 
                 </div>
 
@@ -808,27 +956,24 @@
 
 </div>
 
-
 </div>
+
 
 <div class="row g-4">
 
+
 <!-- ================================================= -->
-
 <!-- LEFT COLUMN -->
-
 <!-- ================================================= -->
 
 <div class="col-lg-8">
 
+
 <!-- ================================================= -->
-
 <!-- TASK DESCRIPTION -->
-
 <!-- ================================================= -->
 
 <div class="card task-card mb-4">
-
 
 <div class="card-body p-4">
 
@@ -848,21 +993,18 @@
 
 </div>
 
-
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- CUSTOMER DOCUMENTS -->
-
 <!-- ================================================= -->
 
 <div class="card task-card mb-4">
 
-
 <div class="card-body p-4">
 
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
         <h4 class="section-title mb-0">
 
@@ -899,15 +1041,15 @@
 
             <div class="document-item">
 
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-                    <div class="me-3">
+                    <div class="me-3 flex-grow-1">
 
                         <i class="fa-solid fa-file text-primary me-2"></i>
 
                         <strong class="file-name">
 
-                            {{ document.file.name|cut:"task_documents/" }}
+                            {{ document.download_filename }}
 
                         </strong>
 
@@ -939,13 +1081,16 @@
                     </div>
 
 
-                        <a
-                            href="{% url 'download_task_document' document.id %}"
-                            class="btn btn-outline-primary btn-sm"
-                        >
-                            <i class="fa-solid fa-download me-1"></i>
-                            Download
-                        </a>
+                    <a
+                        href="{% url 'download_task_document' document.id %}"
+                        class="btn btn-outline-primary btn-sm"
+                    >
+
+                        <i class="fa-solid fa-download me-1"></i>
+
+                        Download
+
+                    </a>
 
                 </div>
 
@@ -970,21 +1115,18 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- CUSTOMER DELIVERABLES -->
-
 <!-- ================================================= -->
 
 {% if is_customer %}
 
 <div class="card task-card mb-4">
 
-  
 <div class="card-body p-4">
 
     <h4 class="section-title">
@@ -1008,7 +1150,7 @@
 
                     <div class="deliverable-item">
 
-                        <div class="d-flex justify-content-between align-items-start">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 
                             <div class="me-3">
 
@@ -1049,8 +1191,11 @@
                                     href="{% url 'download_deliverable' deliverable.id %}"
                                     class="btn btn-outline-success btn-sm"
                                 >
+
                                     <i class="fa-solid fa-download me-1"></i>
+
                                     Download
+
                                 </a>
 
                             {% endif %}
@@ -1089,9 +1234,9 @@
 
             <div class="alert alert-success delivered-alert mt-4 mb-0">
 
-                <div class="d-flex">
+                <div class="d-flex align-items-start">
 
-                    <i class="fa-solid fa-circle-check fa-2x me-3"></i>
+                    <i class="fa-solid fa-circle-check fa-2x me-3 mt-1"></i>
 
                     <div class="flex-grow-1">
 
@@ -1181,24 +1326,22 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
+
 {% else %}
 
+
 <!-- ================================================= -->
-
 <!-- STAFF / ADMIN DELIVERABLES -->
-
 <!-- ================================================= -->
 
 <div class="card task-card mb-4">
 
-  
 <div class="card-body p-4">
 
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
         <h4 class="section-title mb-0">
 
@@ -1235,7 +1378,7 @@
 
             <div class="deliverable-item">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 
                     <div class="me-3">
 
@@ -1270,8 +1413,11 @@
                             href="{% url 'download_deliverable' deliverable.id %}"
                             class="btn btn-outline-success btn-sm"
                         >
+
                             <i class="fa-solid fa-download me-1"></i>
+
                             Download
+
                         </a>
 
                     {% endif %}
@@ -1398,7 +1544,6 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
@@ -1406,23 +1551,20 @@
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- RIGHT COLUMN -->
-
 <!-- ================================================= -->
 
 <div class="col-lg-4">
 
+
 <!-- ================================================= -->
-
 <!-- TASK INFORMATION -->
-
 <!-- ================================================= -->
 
 <div class="card task-card mb-4">
 
-  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1499,19 +1641,16 @@
     </div>
 
 </div>
-  
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- CUSTOMER -->
-
 <!-- ================================================= -->
 
 <div class="card task-card customer-panel mb-4">
 
-  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1562,14 +1701,12 @@
     </div>
 
 </div>
-  
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- FINANCIAL INFORMATION -->
-
 <!-- ================================================= -->
 
 <div class="card task-card mb-4
@@ -1580,7 +1717,6 @@
     {% endif %}
 ">
 
-  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1922,19 +2058,16 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- STAFF ASSIGNMENT -->
-
 <!-- ================================================= -->
 
 <div class="card task-card staff-panel mb-4">
 
-  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -2000,21 +2133,18 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
+
 <!-- ================================================= -->
-
 <!-- ADMIN PANEL -->
-
 <!-- ================================================= -->
 
 {% if is_admin %}
 
 <div class="card task-card admin-alert mb-4">
 
-  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -2053,6 +2183,7 @@
 
         </div>
 
+
     {% elif task.status == "delivered" %}
 
         <div class="alert alert-success mb-0">
@@ -2062,6 +2193,7 @@
             Deliverable approved and released.
 
         </div>
+
 
     {% elif task.status == "completed" %}
 
@@ -2076,17 +2208,18 @@
     {% endif %}
 
 </div>
-  
 
 </div>
 
 {% endif %}
 
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
