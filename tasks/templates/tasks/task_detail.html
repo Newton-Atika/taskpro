@@ -1,225 +1,236 @@
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
-<title>{{ task.title }} | Workload</title>
+    <title>{{ task.title }} | Workload</title>
 
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    rel="stylesheet"
->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
 
-<style>
+    <style>
 
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background: #f6f8fb;
-        color: #212529;
-    }
-
-    .navbar {
-        box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    }
-
-    .page-header {
-        background: linear-gradient(
-            135deg,
-            #0d6efd,
-            #6610f2
-        );
-        color: white;
-        padding: 45px 0;
-    }
-
-    .task-card {
-        border: none;
-        border-radius: 14px;
-        box-shadow: 0 5px 20px rgba(0,0,0,.07);
-    }
-
-    .section-title {
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #212529;
-    }
-
-    .info-label {
-        font-size: 12px;
-        color: #6c757d;
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: .3px;
-    }
-
-    .info-value {
-        font-weight: 600;
-        color: #212529;
-        overflow-wrap: anywhere;
-    }
-
-    .document-item,
-    .deliverable-item {
-        border: 1px solid #e9ecef;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 10px;
-        background: white;
-    }
-
-    .document-item:hover,
-    .deliverable-item:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,.06);
-    }
-
-    .empty-state {
-        padding: 35px;
-        text-align: center;
-        color: #6c757d;
-    }
-
-    .staff-panel {
-        border-left: 4px solid #198754;
-    }
-
-    .customer-panel {
-        border-left: 4px solid #0d6efd;
-    }
-
-    .status-badge {
-        font-size: 13px;
-        padding: 7px 12px;
-    }
-
-    .workflow-card {
-        border-radius: 14px;
-        border: none;
-        box-shadow: 0 5px 20px rgba(0,0,0,.06);
-    }
-
-    .workflow-step {
-        text-align: center;
-        position: relative;
-    }
-
-    .workflow-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 8px;
-    }
-
-    .workflow-step.active .workflow-icon {
-        background: #0d6efd;
-        color: white;
-    }
-
-    .workflow-step.completed .workflow-icon {
-        background: #198754;
-        color: white;
-    }
-
-    .workflow-step.pending .workflow-icon {
-        background: #e9ecef;
-        color: #6c757d;
-    }
-
-    .workflow-label {
-        font-size: 11px;
-        font-weight: 600;
-        color: #6c757d;
-    }
-
-    .review-alert {
-        border-left: 4px solid #ffc107;
-    }
-
-    .delivered-alert {
-        border-left: 4px solid #198754;
-    }
-
-    .completed-alert {
-        border-left: 4px solid #0d6efd;
-    }
-
-    .admin-alert {
-        border-left: 4px solid #6610f2;
-    }
-
-    .file-name {
-        word-break: break-word;
-    }
-
-    .staff-actions {
-        border-left: 4px solid #198754;
-    }
-
-    .quote-card {
-        border-left: 4px solid #ffc107;
-    }
-
-    .quote-accepted-card {
-        border-left: 4px solid #198754;
-    }
-
-    .quote-amount {
-        font-size: 26px;
-        font-weight: 700;
-    }
-
-    @media (max-width: 991px) {
-
-        .workflow-card .row {
-            overflow-x: auto;
-            flex-wrap: nowrap;
-            padding-bottom: 10px;
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f6f8fb;
+            color: #212529;
         }
 
-        .workflow-card .col {
-            min-width: 90px;
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,.08);
         }
-
-    }
-
-    @media (max-width: 768px) {
 
         .page-header {
-            padding: 30px 0;
+            background: linear-gradient(
+                135deg,
+                #0d6efd,
+                #6610f2
+            );
+            color: white;
+            padding: 45px 0;
         }
 
-        .page-header h1 {
-            font-size: 28px;
+        .task-card {
+            border: none;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.07);
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #212529;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: .3px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #212529;
+            overflow-wrap: anywhere;
+        }
+
+        .document-item,
+        .deliverable-item {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            transition: .2s ease;
+        }
+
+        .document-item:hover,
+        .deliverable-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,.06);
+        }
+
+        .empty-state {
+            padding: 35px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .staff-panel {
+            border-left: 4px solid #198754;
+        }
+
+        .customer-panel {
+            border-left: 4px solid #0d6efd;
+        }
+
+        .status-badge {
+            font-size: 13px;
+            padding: 7px 12px;
+        }
+
+        .workflow-card {
+            border-radius: 14px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .workflow-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .workflow-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .workflow-step.active .workflow-icon {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .workflow-step.completed .workflow-icon {
+            background: #198754;
+            color: white;
+        }
+
+        .workflow-step.pending .workflow-icon {
+            background: #e9ecef;
+            color: #6c757d;
         }
 
         .workflow-label {
-            font-size: 9px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6c757d;
         }
 
-    }
+        .review-alert {
+            border-left: 4px solid #ffc107;
+        }
 
-</style>
+        .delivered-alert {
+            border-left: 4px solid #198754;
+        }
+
+        .completed-alert {
+            border-left: 4px solid #0d6efd;
+        }
+
+        .admin-alert {
+            border-left: 4px solid #6610f2;
+        }
+
+        .file-name {
+            word-break: break-word;
+        }
+
+        .staff-actions {
+            border-left: 4px solid #198754;
+        }
+
+        .quote-card {
+            border-left: 4px solid #ffc107;
+        }
+
+        .quote-accepted-card {
+            border-left: 4px solid #198754;
+        }
+
+        .quote-amount {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .workflow-scroll {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .workflow-row {
+            min-width: 850px;
+        }
+
+        @media (max-width: 991px) {
+
+            .workflow-card .row {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
+
+            .workflow-card .col {
+                min-width: 90px;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .page-header {
+                padding: 30px 0;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .workflow-label {
+                font-size: 9px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
 
 <!-- ================================================= -->
 <!-- NAVBAR -->
@@ -227,35 +238,35 @@
 
 <nav class="navbar navbar-dark bg-dark">
 
-<div class="container">
-
-    <a
-        class="navbar-brand fw-bold"
-        href="{% url 'home' %}"
-    >
-
-        <i class="fa-solid fa-briefcase me-2"></i>
-
-        Workload
-
-    </a>
-
-    <div>
+    <div class="container">
 
         <a
+            class="navbar-brand fw-bold"
             href="{% url 'home' %}"
-            class="btn btn-outline-light btn-sm"
         >
 
-            <i class="fa-solid fa-house me-1"></i>
+            <i class="fa-solid fa-briefcase me-2"></i>
 
-            Home
+            Workload
 
         </a>
 
-    </div>
+        <div>
 
-</div>
+            <a
+                href="{% url 'home' %}"
+                class="btn btn-outline-light btn-sm"
+            >
+
+                <i class="fa-solid fa-house me-1"></i>
+
+                Home
+
+            </a>
+
+        </div>
+
+    </div>
 
 </nav>
 
@@ -266,140 +277,140 @@
 
 <div class="page-header">
 
-<div class="container">
+    <div class="container">
 
-    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 
-        <div>
+            <div>
 
-            <div class="small mb-2 opacity-75">
+                <div class="small mb-2 opacity-75">
 
-                Task #{{ task.id }}
+                    Task #{{ task.id }}
+
+                </div>
+
+                <h1 class="fw-bold mb-2">
+
+                    {{ task.title }}
+
+                </h1>
+
+                <p class="mb-0">
+
+                    {{ task.get_category_display }}
+
+                </p>
 
             </div>
 
-            <h1 class="fw-bold mb-2">
 
-                {{ task.title }}
+            <div>
 
-            </h1>
+                {% if task.status == "completed" %}
 
-            <p class="mb-0">
+                    <span class="badge bg-success status-badge">
 
-                {{ task.get_category_display }}
+                        <i class="fa-solid fa-circle-check me-1"></i>
 
-            </p>
+                        {{ task.get_status_display }}
 
-        </div>
+                    </span>
 
+                {% elif task.status == "delivered" %}
 
-        <div>
+                    <span class="badge bg-success status-badge">
 
-            {% if task.status == "completed" %}
+                        <i class="fa-solid fa-box-open me-1"></i>
 
-                <span class="badge bg-success status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-circle-check me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "reviewing" %}
 
-                </span>
+                    <span class="badge bg-warning text-dark status-badge">
 
-            {% elif task.status == "delivered" %}
+                        <i class="fa-solid fa-clock me-1"></i>
 
-                <span class="badge bg-success status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-box-open me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "in_progress" %}
 
-                </span>
+                    <span class="badge bg-primary status-badge">
 
-            {% elif task.status == "reviewing" %}
+                        <i class="fa-solid fa-spinner me-1"></i>
 
-                <span class="badge bg-warning text-dark status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-clock me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "assigned" %}
 
-                </span>
+                    <span class="badge bg-info text-dark status-badge">
 
-            {% elif task.status == "in_progress" %}
+                        <i class="fa-solid fa-user-check me-1"></i>
 
-                <span class="badge bg-primary status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-spinner me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "paid" %}
 
-                </span>
+                    <span class="badge bg-success status-badge">
 
-            {% elif task.status == "assigned" %}
+                        <i class="fa-solid fa-money-check-dollar me-1"></i>
 
-                <span class="badge bg-info text-dark status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-user-check me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "accepted" %}
 
-                </span>
+                    <span class="badge bg-primary status-badge">
 
-            {% elif task.status == "paid" %}
+                        <i class="fa-solid fa-file-signature me-1"></i>
 
-                <span class="badge bg-success status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-money-check-dollar me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "quoted" %}
 
-                </span>
+                    <span class="badge bg-warning text-dark status-badge">
 
-            {% elif task.status == "accepted" %}
+                        <i class="fa-solid fa-file-invoice-dollar me-1"></i>
 
-                <span class="badge bg-primary status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-file-signature me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% elif task.status == "cancelled" %}
 
-                </span>
+                    <span class="badge bg-danger status-badge">
 
-            {% elif task.status == "quoted" %}
+                        <i class="fa-solid fa-xmark me-1"></i>
 
-                <span class="badge bg-warning text-dark status-badge">
+                        {{ task.get_status_display }}
 
-                    <i class="fa-solid fa-file-invoice-dollar me-1"></i>
+                    </span>
 
-                    {{ task.get_status_display }}
+                {% else %}
 
-                </span>
+                    <span class="badge bg-light text-dark status-badge">
 
-            {% elif task.status == "cancelled" %}
+                        {{ task.get_status_display }}
 
-                <span class="badge bg-danger status-badge">
+                    </span>
 
-                    <i class="fa-solid fa-xmark me-1"></i>
+                {% endif %}
 
-                    {{ task.get_status_display }}
-
-                </span>
-
-            {% else %}
-
-                <span class="badge bg-light text-dark status-badge">
-
-                    {{ task.get_status_display }}
-
-                </span>
-
-            {% endif %}
+            </div>
 
         </div>
 
     </div>
-
-</div>
 
 </div>
 
@@ -456,107 +467,107 @@
 
 {% if is_assigned_staff %}
 
-<div class="card task-card staff-actions mb-4">
+    <div class="card task-card staff-actions mb-4">
 
-<div class="card-body p-4">
+        <div class="card-body p-4">
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-        <div>
+                <div>
 
-            <h5 class="fw-bold mb-1">
+                    <h5 class="fw-bold mb-1">
 
-                <i class="fa-solid fa-user-gear text-success me-2"></i>
+                        <i class="fa-solid fa-user-gear text-success me-2"></i>
 
-                Staff Actions
+                        Staff Actions
 
-            </h5>
+                    </h5>
 
-            <div class="small text-muted">
+                    <div class="small text-muted">
 
-                This task is assigned to you.
+                        This task is assigned to you.
+
+                    </div>
+
+                </div>
+
+
+                {% if task.status == "submitted" or task.status == "assigned" %}
+
+                    <form
+                        method="POST"
+                        action="{% url 'start_task' task.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+
+                            <i class="fa-solid fa-play me-1"></i>
+
+                            Start Task
+
+                        </button>
+
+                    </form>
+
+
+                {% elif task.status == "in_progress" %}
+
+                    <a
+                        href="{% url 'add_deliverable' task.id %}"
+                        class="btn btn-success"
+                    >
+
+                        <i class="fa-solid fa-upload me-1"></i>
+
+                        Add Deliverable
+
+                    </a>
+
+
+                {% elif task.status == "reviewing" %}
+
+                    <span class="badge bg-warning text-dark p-2">
+
+                        <i class="fa-solid fa-clock me-1"></i>
+
+                        Deliverable Under Review
+
+                    </span>
+
+
+                {% elif task.status == "delivered" %}
+
+                    <span class="badge bg-success p-2">
+
+                        <i class="fa-solid fa-check-circle me-1"></i>
+
+                        Deliverable Approved
+
+                    </span>
+
+
+                {% elif task.status == "completed" %}
+
+                    <span class="badge bg-primary p-2">
+
+                        <i class="fa-solid fa-circle-check me-1"></i>
+
+                        Task Completed
+
+                    </span>
+
+                {% endif %}
 
             </div>
 
         </div>
 
-
-        {% if task.status == "submitted" or task.status == "assigned" %}
-
-            <form
-                method="POST"
-                action="{% url 'start_task' task.id %}"
-            >
-
-                {% csrf_token %}
-
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-
-                    <i class="fa-solid fa-play me-1"></i>
-
-                    Start Task
-
-                </button>
-
-            </form>
-
-
-        {% elif task.status == "in_progress" %}
-
-            <a
-                href="{% url 'add_deliverable' task.id %}"
-                class="btn btn-success"
-            >
-
-                <i class="fa-solid fa-upload me-1"></i>
-
-                Add Deliverable
-
-            </a>
-
-
-        {% elif task.status == "reviewing" %}
-
-            <span class="badge bg-warning text-dark p-2">
-
-                <i class="fa-solid fa-clock me-1"></i>
-
-                Deliverable Under Review
-
-            </span>
-
-
-        {% elif task.status == "delivered" %}
-
-            <span class="badge bg-success p-2">
-
-                <i class="fa-solid fa-check-circle me-1"></i>
-
-                Deliverable Approved
-
-            </span>
-
-
-        {% elif task.status == "completed" %}
-
-            <span class="badge bg-primary p-2">
-
-                <i class="fa-solid fa-circle-check me-1"></i>
-
-                Task Completed
-
-            </span>
-
-        {% endif %}
-
     </div>
-
-</div>
-
-</div>
 
 {% endif %}
 
@@ -567,394 +578,391 @@
 
 <div class="card workflow-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h5 class="fw-bold mb-4">
+        <h5 class="fw-bold mb-4">
 
-        <i class="fa-solid fa-route text-primary me-2"></i>
+            <i class="fa-solid fa-route text-primary me-2"></i>
 
-        Task Progress
+            Task Progress
 
-    </h5>
-
-
-    <div class="row g-2">
+        </h5>
 
 
-        <!-- SUBMITTED -->
+        <div class="workflow-scroll">
 
-        <div class="col">
-
-            <div class="
-                workflow-step
-                {% if task.status == 'submitted' %}
-                    active
-                {% elif task.status == 'quoted' or task.status == 'accepted' or task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
-
-                <div class="workflow-icon">
-
-                    {% if task.status == "submitted" %}
-
-                        <i class="fa-solid fa-paper-plane"></i>
-
-                    {% elif task.status == "quoted" or task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
-
-                        <i class="fa-solid fa-check"></i>
-
-                    {% else %}
-
-                        <i class="fa-solid fa-paper-plane"></i>
-
-                    {% endif %}
-
-                </div>
-
-                <div class="workflow-label">
-                    Submitted
-                </div>
-
-            </div>
-
-        </div>
+            <div class="row g-2 workflow-row">
 
 
-        <!-- QUOTE -->
+                <!-- SUBMITTED -->
 
-        <div class="col">
+                <div class="col">
 
-            <div class="
-                workflow-step
-                {% if task.status == 'quoted' %}
-                    active
-                {% elif task.status == 'accepted' or task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'submitted' %}
+                            active
+                        {% elif task.status == 'quoted' or task.status == 'accepted' or task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
 
-                <div class="workflow-icon">
+                        <div class="workflow-icon">
 
-                    {% if task.status == "quoted" %}
+                            {% if task.status == "submitted" %}
 
-                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                                <i class="fa-solid fa-paper-plane"></i>
 
-                    {% elif task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+                            {% elif task.status == "quoted" or task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
 
-                        <i class="fa-solid fa-check"></i>
+                                <i class="fa-solid fa-check"></i>
 
-                    {% else %}
+                            {% else %}
 
-                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                                <i class="fa-solid fa-paper-plane"></i>
 
-                    {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="workflow-label">
+                            Submitted
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="workflow-label">
-                    Quote Sent
-                </div>
 
-            </div>
+                <!-- QUOTE -->
 
-        </div>
+                <div class="col">
 
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'quoted' %}
+                            active
+                        {% elif task.status == 'accepted' or task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
 
-        <!-- ACCEPTED -->
+                        <div class="workflow-icon">
 
-        <div class="col">
+                            {% if task.status == "quoted" %}
 
-            <div class="
-                workflow-step
-                {% if task.status == 'accepted' %}
-                    active
-                {% elif task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
 
-                <div class="workflow-icon">
+                            {% elif task.status == "accepted" or task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
 
-                    {% if task.status == "accepted" %}
+                                <i class="fa-solid fa-check"></i>
 
-                        <i class="fa-solid fa-file-signature"></i>
+                            {% else %}
 
-                    {% elif task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
 
-                        <i class="fa-solid fa-check"></i>
+                            {% endif %}
 
-                    {% else %}
+                        </div>
 
-                        <i class="fa-solid fa-file-signature"></i>
+                        <div class="workflow-label">
+                            Quote Sent
+                        </div>
 
-                    {% endif %}
-
-                </div>
-
-                <div class="workflow-label">
-                    Quote Accepted
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- PAID -->
-
-        <div class="col">
-
-            <div class="
-                workflow-step
-                {% if task.status == 'paid' %}
-                    active
-                {% elif task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
-
-                <div class="workflow-icon">
-
-                    {% if task.status == "paid" %}
-
-                        <i class="fa-solid fa-money-check-dollar"></i>
-
-                    {% elif task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
-
-                        <i class="fa-solid fa-check"></i>
-
-                    {% else %}
-
-                        <i class="fa-solid fa-money-check-dollar"></i>
-
-                    {% endif %}
+                    </div>
 
                 </div>
 
-                <div class="workflow-label">
-                    Paid
-                </div>
 
-            </div>
+                <!-- ACCEPTED -->
 
-        </div>
+                <div class="col">
 
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'accepted' %}
+                            active
+                        {% elif task.status == 'paid' or task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
 
-        <!-- ASSIGNED -->
+                        <div class="workflow-icon">
 
-        <div class="col">
+                            {% if task.status == "accepted" %}
 
-            <div class="
-                workflow-step
-                {% if task.status == 'assigned' %}
-                    active
-                {% elif task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
+                                <i class="fa-solid fa-file-signature"></i>
 
-                <div class="workflow-icon">
+                            {% elif task.status == "paid" or task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
 
-                    {% if task.status == "assigned" %}
+                                <i class="fa-solid fa-check"></i>
 
-                        <i class="fa-solid fa-user-check"></i>
+                            {% else %}
 
-                    {% elif task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+                                <i class="fa-solid fa-file-signature"></i>
 
-                        <i class="fa-solid fa-check"></i>
+                            {% endif %}
 
-                    {% else %}
+                        </div>
 
-                        <i class="fa-solid fa-user-check"></i>
+                        <div class="workflow-label">
+                            Quote Accepted
+                        </div>
 
-                    {% endif %}
-
-                </div>
-
-                <div class="workflow-label">
-                    Assigned
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- IN PROGRESS -->
-
-        <div class="col">
-
-            <div class="
-                workflow-step
-                {% if task.status == 'in_progress' %}
-                    active
-                {% elif task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
-
-                <div class="workflow-icon">
-
-                    {% if task.status == "in_progress" %}
-
-                        <i class="fa-solid fa-gears"></i>
-
-                    {% elif task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
-
-                        <i class="fa-solid fa-check"></i>
-
-                    {% else %}
-
-                        <i class="fa-solid fa-gears"></i>
-
-                    {% endif %}
+                    </div>
 
                 </div>
 
-                <div class="workflow-label">
-                    In Progress
-                </div>
 
-            </div>
+                <!-- PAID -->
 
-        </div>
+                <div class="col">
 
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'paid' %}
+                            active
+                        {% elif task.status == 'assigned' or task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
 
-        <!-- REVIEW -->
+                        <div class="workflow-icon">
 
-        <div class="col">
+                            {% if task.status == "paid" %}
 
-            <div class="
-                workflow-step
-                {% if task.status == 'reviewing' %}
-                    active
-                {% elif task.status == 'delivered' or task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
+                                <i class="fa-solid fa-money-check-dollar"></i>
 
-                <div class="workflow-icon">
+                            {% elif task.status == "assigned" or task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
 
-                    {% if task.status == "reviewing" %}
+                                <i class="fa-solid fa-check"></i>
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                            {% else %}
 
-                    {% elif task.status == "delivered" or task.status == "completed" %}
+                                <i class="fa-solid fa-money-check-dollar"></i>
 
-                        <i class="fa-solid fa-check"></i>
+                            {% endif %}
 
-                    {% else %}
+                        </div>
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <div class="workflow-label">
+                            Paid
+                        </div>
 
-                    {% endif %}
-
-                </div>
-
-                <div class="workflow-label">
-                    Under Review
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- DELIVERED -->
-
-        <div class="col">
-
-            <div class="
-                workflow-step
-                {% if task.status == 'delivered' %}
-                    active
-                {% elif task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
-
-                <div class="workflow-icon">
-
-                    {% if task.status == "delivered" %}
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                    {% elif task.status == "completed" %}
-
-                        <i class="fa-solid fa-check"></i>
-
-                    {% else %}
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                    {% endif %}
+                    </div>
 
                 </div>
 
-                <div class="workflow-label">
-                    Delivered
+
+                <!-- ASSIGNED -->
+
+                <div class="col">
+
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'assigned' %}
+                            active
+                        {% elif task.status == 'in_progress' or task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
+
+                        <div class="workflow-icon">
+
+                            {% if task.status == "assigned" %}
+
+                                <i class="fa-solid fa-user-check"></i>
+
+                            {% elif task.status == "in_progress" or task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
+
+                                <i class="fa-solid fa-check"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-user-check"></i>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="workflow-label">
+                            Assigned
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
 
-        </div>
+                <!-- IN PROGRESS -->
 
+                <div class="col">
 
-        <!-- COMPLETED -->
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'in_progress' %}
+                            active
+                        {% elif task.status == 'reviewing' or task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
 
-        <div class="col">
+                        <div class="workflow-icon">
 
-            <div class="
-                workflow-step
-                {% if task.status == 'completed' %}
-                    completed
-                {% else %}
-                    pending
-                {% endif %}
-            ">
+                            {% if task.status == "in_progress" %}
 
-                <div class="workflow-icon">
+                                <i class="fa-solid fa-gears"></i>
 
-                    {% if task.status == "completed" %}
+                            {% elif task.status == "reviewing" or task.status == "delivered" or task.status == "completed" %}
 
-                        <i class="fa-solid fa-circle-check"></i>
+                                <i class="fa-solid fa-check"></i>
 
-                    {% else %}
+                            {% else %}
 
-                        <i class="fa-solid fa-circle-check"></i>
+                                <i class="fa-solid fa-gears"></i>
 
-                    {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="workflow-label">
+                            In Progress
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="workflow-label">
-                    Completed
+
+                <!-- REVIEW -->
+
+                <div class="col">
+
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'reviewing' %}
+                            active
+                        {% elif task.status == 'delivered' or task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
+
+                        <div class="workflow-icon">
+
+                            {% if task.status == "reviewing" %}
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                            {% elif task.status == "delivered" or task.status == "completed" %}
+
+                                <i class="fa-solid fa-check"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="workflow-label">
+                            Under Review
+                        </div>
+
+                    </div>
+
                 </div>
+
+
+                <!-- DELIVERED -->
+
+                <div class="col">
+
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'delivered' %}
+                            active
+                        {% elif task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
+
+                        <div class="workflow-icon">
+
+                            {% if task.status == "delivered" %}
+
+                                <i class="fa-solid fa-box-open"></i>
+
+                            {% elif task.status == "completed" %}
+
+                                <i class="fa-solid fa-check"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-box-open"></i>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="workflow-label">
+                            Delivered
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPLETED -->
+
+                <div class="col">
+
+                    <div class="
+                        workflow-step
+                        {% if task.status == 'completed' %}
+                            completed
+                        {% else %}
+                            pending
+                        {% endif %}
+                    ">
+
+                        <div class="workflow-icon">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div class="workflow-label">
+                            Completed
+                        </div>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
         </div>
 
     </div>
-
-</div>
 
 </div>
 
@@ -975,23 +983,23 @@
 
 <div class="card task-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h4 class="section-title">
+        <h4 class="section-title">
 
-        <i class="fa-solid fa-file-lines text-primary me-2"></i>
+            <i class="fa-solid fa-file-lines text-primary me-2"></i>
 
-        Task Description
+            Task Description
 
-    </h4>
+        </h4>
 
-    <div>
+        <div>
 
-        {{ task.description|linebreaks }}
+            {{ task.description|linebreaks }}
+
+        </div>
 
     </div>
-
-</div>
 
 </div>
 
@@ -1002,119 +1010,119 @@
 
 <div class="card task-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
-        <h4 class="section-title mb-0">
+            <h4 class="section-title mb-0">
 
-            <i class="fa-solid fa-paperclip text-primary me-2"></i>
+                <i class="fa-solid fa-paperclip text-primary me-2"></i>
 
-            Task Documents
+                Task Documents
 
-        </h4>
+            </h4>
 
 
-        {% if is_customer %}
+            {% if is_customer %}
 
-            <a
-                href="{% url 'add_task_document' task.id %}"
-                class="btn btn-primary btn-sm"
-            >
+                <a
+                    href="{% url 'add_task_document' task.id %}"
+                    class="btn btn-primary btn-sm"
+                >
 
-                <i class="fa-solid fa-plus me-1"></i>
+                    <i class="fa-solid fa-plus me-1"></i>
 
-                Add Document
+                    Add Document
 
-            </a>
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+
+        {% if documents %}
+
+            {% for document in documents %}
+
+                <div class="document-item">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                        <div class="me-3 flex-grow-1">
+
+                            <i class="fa-solid fa-file text-primary me-2"></i>
+
+                            <strong class="file-name">
+
+                                {{ document.download_filename }}
+
+                            </strong>
+
+
+                            {% if document.description %}
+
+                                <div class="small text-muted mt-1">
+
+                                    {{ document.description }}
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <div class="small text-muted mt-1">
+
+                                Uploaded
+                                {{ document.uploaded_at|date:"d M Y H:i" }}
+
+                                {% if document.uploaded_by %}
+
+                                    by {{ document.uploaded_by.full_name }}
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'download_task_document' document.id %}"
+                            class="btn btn-outline-primary btn-sm"
+                        >
+
+                            <i class="fa-solid fa-download me-1"></i>
+
+                            Download
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-folder-open fa-2x mb-3"></i>
+
+                <p class="mb-0">
+
+                    No additional documents have been uploaded.
+
+                </p>
+
+            </div>
 
         {% endif %}
 
     </div>
-
-    <hr>
-
-
-    {% if documents %}
-
-        {% for document in documents %}
-
-            <div class="document-item">
-
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-
-                    <div class="me-3 flex-grow-1">
-
-                        <i class="fa-solid fa-file text-primary me-2"></i>
-
-                        <strong class="file-name">
-
-                            {{ document.download_filename }}
-
-                        </strong>
-
-
-                        {% if document.description %}
-
-                            <div class="small text-muted mt-1">
-
-                                {{ document.description }}
-
-                            </div>
-
-                        {% endif %}
-
-
-                        <div class="small text-muted mt-1">
-
-                            Uploaded
-                            {{ document.uploaded_at|date:"d M Y H:i" }}
-
-                            {% if document.uploaded_by %}
-
-                                by {{ document.uploaded_by.full_name }}
-
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="{% url 'download_task_document' document.id %}"
-                        class="btn btn-outline-primary btn-sm"
-                    >
-
-                        <i class="fa-solid fa-download me-1"></i>
-
-                        Download
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        {% endfor %}
-
-    {% else %}
-
-        <div class="empty-state">
-
-            <i class="fa-solid fa-folder-open fa-2x mb-3"></i>
-
-            <p class="mb-0">
-
-                No additional documents have been uploaded.
-
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</div>
 
 </div>
 
@@ -1127,205 +1135,205 @@
 
 <div class="card task-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h4 class="section-title">
+        <h4 class="section-title">
 
-        <i class="fa-solid fa-box-open text-success me-2"></i>
+            <i class="fa-solid fa-box-open text-success me-2"></i>
 
-        Deliverables
+            Deliverables
 
-    </h4>
+        </h4>
 
-    <hr>
-
-
-    {% if task.status == "delivered" or task.status == "completed" %}
-
-        {% if deliverables %}
-
-            {% for deliverable in deliverables %}
-
-                {% if deliverable.approved %}
-
-                    <div class="deliverable-item">
-
-                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
-
-                            <div class="me-3">
-
-                                <strong>
-
-                                    <i class="fa-solid fa-file-circle-check text-success me-2"></i>
-
-                                    Approved Deliverable
-
-                                </strong>
+        <hr>
 
 
-                                <div class="small text-muted mt-1">
+        {% if task.status == "delivered" or task.status == "completed" %}
 
-                                    Approved
+            {% if deliverables %}
 
-                                    {% if deliverable.approved_at %}
+                {% for deliverable in deliverables %}
 
-                                        {{ deliverable.approved_at|date:"d M Y H:i" }}
+                    {% if deliverable.approved %}
 
-                                    {% endif %}
+                        <div class="deliverable-item">
+
+                            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+                                <div class="me-3">
+
+                                    <strong>
+
+                                        <i class="fa-solid fa-file-circle-check text-success me-2"></i>
+
+                                        Approved Deliverable
+
+                                    </strong>
 
 
-                                    {% if deliverable.approved_by %}
+                                    <div class="small text-muted mt-1">
 
-                                        by {{ deliverable.approved_by.full_name }}
+                                        Approved
 
-                                    {% endif %}
+                                        {% if deliverable.approved_at %}
+
+                                            {{ deliverable.approved_at|date:"d M Y H:i" }}
+
+                                        {% endif %}
+
+
+                                        {% if deliverable.approved_by %}
+
+                                            by {{ deliverable.approved_by.full_name }}
+
+                                        {% endif %}
+
+                                    </div>
 
                                 </div>
+
+
+                                {% if deliverable.file %}
+
+                                    <a
+                                        href="{% url 'download_deliverable' deliverable.id %}"
+                                        class="btn btn-outline-success btn-sm"
+                                    >
+
+                                        <i class="fa-solid fa-download me-1"></i>
+
+                                        Download
+
+                                    </a>
+
+                                {% endif %}
 
                             </div>
 
 
-                            {% if deliverable.file %}
+                            {% if deliverable.comment %}
 
-                                <a
-                                    href="{% url 'download_deliverable' deliverable.id %}"
-                                    class="btn btn-outline-success btn-sm"
-                                >
+                                <div class="mt-3 p-3 bg-light rounded">
 
-                                    <i class="fa-solid fa-download me-1"></i>
+                                    <strong>
+                                        Staff Comment
+                                    </strong>
 
-                                    Download
+                                    <div class="mt-1">
 
-                                </a>
+                                        {{ deliverable.comment|linebreaks }}
+
+                                    </div>
+
+                                </div>
 
                             {% endif %}
 
                         </div>
 
+                    {% endif %}
 
-                        {% if deliverable.comment %}
+                {% endfor %}
 
-                            <div class="mt-3 p-3 bg-light rounded">
+            {% endif %}
 
-                                <strong>
-                                    Staff Comment
-                                </strong>
 
-                                <div class="mt-1">
+            {% if task.status == "delivered" %}
 
-                                    {{ deliverable.comment|linebreaks }}
+                <div class="alert alert-success delivered-alert mt-4 mb-0">
 
-                                </div>
+                    <div class="d-flex align-items-start">
+
+                        <i class="fa-solid fa-circle-check fa-2x me-3 mt-1"></i>
+
+                        <div class="flex-grow-1">
+
+                            <strong>
+                                Your work is ready!
+                            </strong>
+
+                            <div class="small mt-1">
+
+                                The administrator has reviewed and approved
+                                your deliverable. Please review the work and
+                                confirm completion.
 
                             </div>
 
-                        {% endif %}
 
-                    </div>
+                            <form
+                                method="POST"
+                                action="{% url 'confirm_task_completion' task.id %}"
+                                class="mt-3"
+                            >
 
-                {% endif %}
+                                {% csrf_token %}
 
-            {% endfor %}
+                                <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                >
 
-        {% endif %}
+                                    <i class="fa-solid fa-check me-1"></i>
 
+                                    Confirm Completion
 
-        {% if task.status == "delivered" %}
+                                </button>
 
-            <div class="alert alert-success delivered-alert mt-4 mb-0">
-
-                <div class="d-flex align-items-start">
-
-                    <i class="fa-solid fa-circle-check fa-2x me-3 mt-1"></i>
-
-                    <div class="flex-grow-1">
-
-                        <strong>
-                            Your work is ready!
-                        </strong>
-
-                        <div class="small mt-1">
-
-                            The administrator has reviewed and approved
-                            your deliverable. Please review the work and
-                            confirm completion.
+                            </form>
 
                         </div>
 
+                    </div>
 
-                        <form
-                            method="POST"
-                            action="{% url 'confirm_task_completion' task.id %}"
-                            class="mt-3"
-                        >
+                </div>
 
-                            {% csrf_token %}
 
-                            <button
-                                type="submit"
-                                class="btn btn-success"
-                            >
+            {% elif task.status == "completed" %}
 
-                                <i class="fa-solid fa-check me-1"></i>
+                <div class="alert alert-primary completed-alert mt-4 mb-0">
 
-                                Confirm Completion
+                    <i class="fa-solid fa-circle-check me-2"></i>
 
-                            </button>
+                    <strong>
+                        Task Completed
+                    </strong>
 
-                        </form>
+                    <div class="small mt-1">
+
+                        You confirmed that you received and accepted the
+                        completed work.
 
                     </div>
 
                 </div>
 
-            </div>
+            {% endif %}
 
 
-        {% elif task.status == "completed" %}
+        {% else %}
 
-            <div class="alert alert-primary completed-alert mt-4 mb-0">
+            <div class="empty-state">
 
-                <i class="fa-solid fa-circle-check me-2"></i>
+                <i class="fa-solid fa-hourglass-half fa-2x mb-3"></i>
 
-                <strong>
-                    Task Completed
-                </strong>
+                <h6 class="fw-bold">
+                    Your deliverables are not ready yet
+                </h6>
 
-                <div class="small mt-1">
+                <p class="mb-0">
 
-                    You confirmed that you received and accepted the
-                    completed work.
+                    Once the staff member submits the work and the
+                    administrator approves it, the deliverables will appear
+                    here.
 
-                </div>
+                </p>
 
             </div>
 
         {% endif %}
 
-
-    {% else %}
-
-        <div class="empty-state">
-
-            <i class="fa-solid fa-hourglass-half fa-2x mb-3"></i>
-
-            <h6 class="fw-bold">
-                Your deliverables are not ready yet
-            </h6>
-
-            <p class="mb-0">
-
-                Once the staff member submits the work and the
-                administrator approves it, the deliverables will appear
-                here.
-
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</div>
+    </div>
 
 </div>
 
@@ -1339,211 +1347,211 @@
 
 <div class="card task-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
-        <h4 class="section-title mb-0">
+            <h4 class="section-title mb-0">
 
-            <i class="fa-solid fa-box-open text-success me-2"></i>
+                <i class="fa-solid fa-box-open text-success me-2"></i>
 
-            Deliverables
+                Deliverables
 
-        </h4>
-
-
-        {% if is_assigned_staff and task.status == "in_progress" %}
-
-            <a
-                href="{% url 'add_deliverable' task.id %}"
-                class="btn btn-success btn-sm"
-            >
-
-                <i class="fa-solid fa-upload me-1"></i>
-
-                Add Deliverable
-
-            </a>
-
-        {% endif %}
-
-    </div>
-
-    <hr>
+            </h4>
 
 
-    {% if deliverables %}
+            {% if is_assigned_staff and task.status == "in_progress" %}
 
-        {% for deliverable in deliverables %}
+                <a
+                    href="{% url 'add_deliverable' task.id %}"
+                    class="btn btn-success btn-sm"
+                >
 
-            <div class="deliverable-item">
+                    <i class="fa-solid fa-upload me-1"></i>
 
-                <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                    Add Deliverable
 
-                    <div class="me-3">
+                </a>
 
-                        <strong>
+            {% endif %}
 
-                            <i class="fa-solid fa-file-circle-check text-success me-2"></i>
+        </div>
 
-                            Deliverable
-
-                        </strong>
+        <hr>
 
 
-                        <div class="small text-muted mt-1">
+        {% if deliverables %}
 
-                            Submitted
-                            {{ deliverable.submitted_at|date:"d M Y H:i" }}
+            {% for deliverable in deliverables %}
 
-                            {% if deliverable.submitted_by %}
+                <div class="deliverable-item">
 
-                                by {{ deliverable.submitted_by.full_name }}
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+                        <div class="me-3">
+
+                            <strong>
+
+                                <i class="fa-solid fa-file-circle-check text-success me-2"></i>
+
+                                Deliverable
+
+                            </strong>
+
+
+                            <div class="small text-muted mt-1">
+
+                                Submitted
+                                {{ deliverable.submitted_at|date:"d M Y H:i" }}
+
+                                {% if deliverable.submitted_by %}
+
+                                    by {{ deliverable.submitted_by.full_name }}
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        {% if deliverable.file %}
+
+                            <a
+                                href="{% url 'download_deliverable' deliverable.id %}"
+                                class="btn btn-outline-success btn-sm"
+                            >
+
+                                <i class="fa-solid fa-download me-1"></i>
+
+                                Download
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    {% if deliverable.comment %}
+
+                        <div class="mt-3 p-3 bg-light rounded">
+
+                            <strong>
+                                Staff Comment
+                            </strong>
+
+                            <div class="mt-1">
+
+                                {{ deliverable.comment|linebreaks }}
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    {% if is_admin and not deliverable.approved %}
+
+                        <div class="alert alert-warning review-alert mt-3 mb-0">
+
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+                                <div>
+
+                                    <strong>
+
+                                        <i class="fa-solid fa-shield-halved me-1"></i>
+
+                                        Awaiting Admin Approval
+
+                                    </strong>
+
+                                    <div class="small">
+
+                                        Approving this deliverable will release
+                                        it to the client.
+
+                                    </div>
+
+                                </div>
+
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'approve_deliverable' task.id deliverable.id %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-success"
+                                    >
+
+                                        <i class="fa-solid fa-check-double me-1"></i>
+
+                                        Approve & Release
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+
+                    {% elif deliverable.approved %}
+
+                        <div class="alert alert-success mt-3 mb-0">
+
+                            <i class="fa-solid fa-circle-check me-1"></i>
+
+                            <strong>
+                                Approved & Released
+                            </strong>
+
+                            {% if deliverable.approved_by %}
+
+                                by {{ deliverable.approved_by.full_name }}
+
+                            {% endif %}
+
+                            {% if deliverable.approved_at %}
+
+                                on
+                                {{ deliverable.approved_at|date:"d M Y H:i" }}
 
                             {% endif %}
 
                         </div>
 
-                    </div>
-
-
-                    {% if deliverable.file %}
-
-                        <a
-                            href="{% url 'download_deliverable' deliverable.id %}"
-                            class="btn btn-outline-success btn-sm"
-                        >
-
-                            <i class="fa-solid fa-download me-1"></i>
-
-                            Download
-
-                        </a>
-
                     {% endif %}
 
                 </div>
 
-
-                {% if deliverable.comment %}
-
-                    <div class="mt-3 p-3 bg-light rounded">
-
-                        <strong>
-                            Staff Comment
-                        </strong>
-
-                        <div class="mt-1">
-
-                            {{ deliverable.comment|linebreaks }}
-
-                        </div>
-
-                    </div>
-
-                {% endif %}
+            {% endfor %}
 
 
-                {% if is_admin and not deliverable.approved %}
+        {% else %}
 
-                    <div class="alert alert-warning review-alert mt-3 mb-0">
+            <div class="empty-state">
 
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <i class="fa-solid fa-box-open fa-2x mb-3"></i>
 
-                            <div>
+                <p class="mb-0">
 
-                                <strong>
+                    No deliverables have been submitted yet.
 
-                                    <i class="fa-solid fa-shield-halved me-1"></i>
-
-                                    Awaiting Admin Approval
-
-                                </strong>
-
-                                <div class="small">
-
-                                    Approving this deliverable will release
-                                    it to the client.
-
-                                </div>
-
-                            </div>
-
-
-                            <form
-                                method="POST"
-                                action="{% url 'approve_deliverable' task.id deliverable.id %}"
-                            >
-
-                                {% csrf_token %}
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-success"
-                                >
-
-                                    <i class="fa-solid fa-check-double me-1"></i>
-
-                                    Approve & Release
-
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    </div>
-
-
-                {% elif deliverable.approved %}
-
-                    <div class="alert alert-success mt-3 mb-0">
-
-                        <i class="fa-solid fa-circle-check me-1"></i>
-
-                        <strong>
-                            Approved & Released
-                        </strong>
-
-                        {% if deliverable.approved_by %}
-
-                            by {{ deliverable.approved_by.full_name }}
-
-                        {% endif %}
-
-                        {% if deliverable.approved_at %}
-
-                            on
-                            {{ deliverable.approved_at|date:"d M Y H:i" }}
-
-                        {% endif %}
-
-                    </div>
-
-                {% endif %}
+                </p>
 
             </div>
 
-        {% endfor %}
+        {% endif %}
 
-
-    {% else %}
-
-        <div class="empty-state">
-
-            <i class="fa-solid fa-box-open fa-2x mb-3"></i>
-
-            <p class="mb-0">
-
-                No deliverables have been submitted yet.
-
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</div>
+    </div>
 
 </div>
 
@@ -1565,82 +1573,98 @@
 
 <div class="card task-card mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h5 class="section-title">
+        <h5 class="section-title">
 
-        <i class="fa-solid fa-circle-info text-primary me-2"></i>
+            <i class="fa-solid fa-circle-info text-primary me-2"></i>
 
-        Task Information
+            Task Information
 
-    </h5>
+        </h5>
 
 
-    <div class="mb-3">
+        <div class="mb-3">
 
-        <div class="info-label">
-            Category
+            <div class="info-label">
+                Category
+            </div>
+
+            <div class="info-value">
+                {{ task.get_category_display }}
+            </div>
+
         </div>
 
-        <div class="info-value">
-            {{ task.get_category_display }}
+
+        <div class="mb-3">
+
+            <div class="info-label">
+                Deadline
+            </div>
+
+            <div class="info-value">
+
+                {% if task.deadline %}
+
+                    {{ task.deadline|date:"d M Y H:i" }}
+
+                {% else %}
+
+                    Not specified
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <div class="info-label">
+                Submitted
+            </div>
+
+            <div class="info-value">
+
+                {{ task.created_at|date:"d M Y H:i" }}
+
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <div class="info-label">
+                Last Updated
+            </div>
+
+            <div class="info-value">
+
+                {{ task.updated_at|date:"d M Y H:i" }}
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div class="info-label">
+                Status
+            </div>
+
+            <div class="info-value">
+
+                {{ task.get_status_display }}
+
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Deadline
-        </div>
-
-        <div class="info-value">
-            {{ task.deadline|date:"d M Y H:i" }}
-        </div>
-
-    </div>
-
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Submitted
-        </div>
-
-        <div class="info-value">
-            {{ task.created_at|date:"d M Y H:i" }}
-        </div>
-
-    </div>
-
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Last Updated
-        </div>
-
-        <div class="info-value">
-            {{ task.updated_at|date:"d M Y H:i" }}
-        </div>
-
-    </div>
-
-
-    <div>
-
-        <div class="info-label">
-            Status
-        </div>
-
-        <div class="info-value">
-            {{ task.get_status_display }}
-        </div>
-
-    </div>
-
-</div>
 
 </div>
 
@@ -1651,56 +1675,62 @@
 
 <div class="card task-card customer-panel mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h5 class="section-title">
+        <h5 class="section-title">
 
-        <i class="fa-solid fa-user text-primary me-2"></i>
+            <i class="fa-solid fa-user text-primary me-2"></i>
 
-        Client
+            Client
 
-    </h5>
+        </h5>
 
 
-    <div class="mb-2">
+        <div class="mb-2">
 
-        <div class="info-label">
-            Name
+            <div class="info-label">
+                Name
+            </div>
+
+            <div class="info-value">
+
+                {{ task.customer.full_name }}
+
+            </div>
+
         </div>
 
-        <div class="info-value">
-            {{ task.customer.full_name }}
+
+        <div class="mb-2">
+
+            <div class="info-label">
+                Email
+            </div>
+
+            <div class="info-value">
+
+                {{ task.customer.email }}
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div class="info-label">
+                Phone
+            </div>
+
+            <div class="info-value">
+
+                {{ task.customer.phone_number }}
+
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="mb-2">
-
-        <div class="info-label">
-            Email
-        </div>
-
-        <div class="info-value">
-            {{ task.customer.email }}
-        </div>
-
-    </div>
-
-
-    <div>
-
-        <div class="info-label">
-            Phone
-        </div>
-
-        <div class="info-value">
-            {{ task.customer.phone_number }}
-        </div>
-
-    </div>
-
-</div>
 
 </div>
 
@@ -1717,347 +1747,345 @@
     {% endif %}
 ">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h5 class="section-title">
+        <h5 class="section-title">
 
-        <i class="fa-solid fa-money-bill-wave text-success me-2"></i>
+            <i class="fa-solid fa-money-bill-wave text-success me-2"></i>
 
-        Payment & Quote
+            Payment & Quote
 
-    </h5>
+        </h5>
 
 
-    <!-- CLIENT BUDGET -->
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Client Budget
-        </div>
-
-        <div class="info-value">
-
-            {% if task.budget %}
-
-                KES {{ task.budget|floatformat:2 }}
-
-            {% else %}
-
-                Not provided
-
-            {% endif %}
-
-        </div>
-
-    </div>
-
-
-    <!-- QUOTED AMOUNT -->
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Quoted Amount
-        </div>
-
-        <div class="info-value quote-amount">
-
-            {% if task.quoted_amount %}
-
-                KES {{ task.quoted_amount|floatformat:2 }}
-
-            {% else %}
-
-                <span class="fs-6 text-muted">
-                    Awaiting quote
-                </span>
-
-            {% endif %}
-
-        </div>
-
-    </div>
-
-
-    <!-- QUOTE STATUS -->
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Quote Status
-        </div>
-
-        <div class="info-value">
-
-            {% if task.quoted_amount_accepted %}
-
-                <span class="badge bg-success p-2">
-
-                    <i class="fa-solid fa-circle-check me-1"></i>
-
-                    Quote Accepted
-
-                </span>
-
-            {% elif task.quoted_amount %}
-
-                <span class="badge bg-warning text-dark p-2">
-
-                    <i class="fa-solid fa-clock me-1"></i>
-
-                    Awaiting Customer Acceptance
-
-                </span>
-
-            {% else %}
-
-                <span class="badge bg-secondary">
-
-                    Quote Not Yet Sent
-
-                </span>
-
-            {% endif %}
-
-        </div>
-
-    </div>
-
-
-    <!-- PAYMENT STATUS -->
-
-    <div class="mb-3">
-
-        <div class="info-label">
-            Payment Status
-        </div>
-
-        <div class="info-value">
-
-            {% if task.payment_status == "paid" %}
-
-                <span class="badge bg-success">
-
-                    <i class="fa-solid fa-circle-check me-1"></i>
-
-                    {{ task.get_payment_status_display }}
-
-                </span>
-
-            {% elif task.payment_status == "failed" %}
-
-                <span class="badge bg-danger">
-
-                    <i class="fa-solid fa-circle-xmark me-1"></i>
-
-                    {{ task.get_payment_status_display }}
-
-                </span>
-
-            {% elif task.payment_status == "requested" %}
-
-                <span class="badge bg-warning text-dark">
-
-                    <i class="fa-solid fa-clock me-1"></i>
-
-                    {{ task.get_payment_status_display }}
-
-                </span>
-
-            {% else %}
-
-                <span class="badge bg-secondary">
-
-                    {{ task.get_payment_status_display }}
-
-                </span>
-
-            {% endif %}
-
-        </div>
-
-    </div>
-
-
-    {% if task.payment_reference %}
+        <!-- CLIENT BUDGET -->
 
         <div class="mb-3">
 
             <div class="info-label">
-                Payment Reference
+                Client Budget
             </div>
 
             <div class="info-value">
-                {{ task.payment_reference }}
+
+                {% if task.budget %}
+
+                    KES {{ task.budget|floatformat:2 }}
+
+                {% else %}
+
+                    Not provided
+
+                {% endif %}
+
             </div>
 
         </div>
 
-    {% endif %}
 
-
-    {% if task.paid_at %}
+        <!-- QUOTED AMOUNT -->
 
         <div class="mb-3">
 
             <div class="info-label">
-                Paid At
+                Quoted Amount
             </div>
 
-            <div class="info-value">
-                {{ task.paid_at|date:"d M Y H:i" }}
+            <div class="info-value quote-amount">
+
+                {% if task.quoted_amount %}
+
+                    KES {{ task.quoted_amount|floatformat:2 }}
+
+                {% else %}
+
+                    <span class="fs-6 text-muted">
+                        Awaiting quote
+                    </span>
+
+                {% endif %}
+
             </div>
 
         </div>
 
-    {% endif %}
+
+        <!-- QUOTE STATUS -->
+
+        <div class="mb-3">
+
+            <div class="info-label">
+                Quote Status
+            </div>
+
+            <div class="info-value">
+
+                {% if task.quoted_amount_accepted %}
+
+                    <span class="badge bg-success p-2">
+
+                        <i class="fa-solid fa-circle-check me-1"></i>
+
+                        Quote Accepted
+
+                    </span>
+
+                {% elif task.quoted_amount %}
+
+                    <span class="badge bg-warning text-dark p-2">
+
+                        <i class="fa-solid fa-clock me-1"></i>
+
+                        Awaiting Customer Acceptance
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary">
+
+                        Quote Not Yet Sent
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
 
 
-    <!-- ================================================= -->
-    <!-- CUSTOMER ACTION: ACCEPT QUOTE -->
-    <!-- ================================================= -->
+        <!-- PAYMENT STATUS -->
 
-    {% if is_customer and task.quoted_amount and not task.quoted_amount_accepted %}
+        <div class="mb-3">
 
-        <div class="alert alert-warning mt-4 mb-0">
+            <div class="info-label">
+                Payment Status
+            </div>
 
-            <div class="d-flex align-items-start">
+            <div class="info-value">
 
-                <i class="fa-solid fa-file-invoice-dollar fa-2x me-3"></i>
+                {% if task.payment_status == "paid" %}
 
-                <div class="flex-grow-1">
+                    <span class="badge bg-success">
 
-                    <strong>
-                        New Quote Received
-                    </strong>
+                        <i class="fa-solid fa-circle-check me-1"></i>
 
-                    <div class="small mt-1">
+                        {{ task.get_payment_status_display }}
 
-                        The administrator has proposed:
+                    </span>
 
-                    </div>
+                {% elif task.payment_status == "failed" %}
 
-                    <div class="fw-bold fs-4 mt-2">
+                    <span class="badge bg-danger">
 
-                        KES {{ task.quoted_amount|floatformat:2 }}
+                        <i class="fa-solid fa-circle-xmark me-1"></i>
 
-                    </div>
+                        {{ task.get_payment_status_display }}
 
-                    <div class="small mt-1">
+                    </span>
 
-                        Please accept the quote to proceed to payment.
+                {% elif task.payment_status == "requested" %}
 
-                    </div>
+                    <span class="badge bg-warning text-dark">
+
+                        <i class="fa-solid fa-clock me-1"></i>
+
+                        {{ task.get_payment_status_display }}
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary">
+
+                        {{ task.get_payment_status_display }}
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
 
 
-                    <form
-                        method="POST"
-                        action="{% url 'accept_quoted_amount' task.id %}"
-                        class="mt-3"
-                    >
+        {% if task.payment_reference %}
 
-                        {% csrf_token %}
+            <div class="mb-3">
 
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                        >
+                <div class="info-label">
+                    Payment Reference
+                </div>
 
-                            <i class="fa-solid fa-check me-1"></i>
+                <div class="info-value">
 
-                            Accept Quote
-
-                        </button>
-
-                    </form>
+                    {{ task.payment_reference }}
 
                 </div>
 
             </div>
 
-        </div>
+        {% endif %}
 
 
-    <!-- ================================================= -->
-    <!-- QUOTE ACCEPTED -->
-    <!-- ================================================= -->
+        {% if task.paid_at %}
 
-    {% elif task.quoted_amount_accepted and task.payment_status != "paid" %}
+            <div class="mb-3">
 
-        <div class="alert alert-success mt-4 mb-0">
+                <div class="info-label">
+                    Paid At
+                </div>
 
-            <div class="d-flex align-items-start">
+                <div class="info-value">
 
-                <i class="fa-solid fa-circle-check fa-2x me-3"></i>
+                    {{ task.paid_at|date:"d M Y H:i" }}
 
-                <div class="flex-grow-1">
+                </div>
 
-                    <strong>
-                        Quote Accepted
-                    </strong>
+            </div>
 
-                    <div class="small mt-1">
+        {% endif %}
 
-                        The quoted amount of
+
+        <!-- CUSTOMER ACTION: ACCEPT QUOTE -->
+
+        {% if is_customer and task.quoted_amount and not task.quoted_amount_accepted %}
+
+            <div class="alert alert-warning mt-4 mb-0">
+
+                <div class="d-flex align-items-start">
+
+                    <i class="fa-solid fa-file-invoice-dollar fa-2x me-3"></i>
+
+                    <div class="flex-grow-1">
 
                         <strong>
-                            KES {{ task.quoted_amount|floatformat:2 }}
+                            New Quote Received
                         </strong>
 
-                        has been accepted.
+                        <div class="small mt-1">
 
-                    </div>
+                            The administrator has proposed:
+
+                        </div>
+
+                        <div class="fw-bold fs-4 mt-2">
+
+                            KES {{ task.quoted_amount|floatformat:2 }}
+
+                        </div>
+
+                        <div class="small mt-1">
+
+                            Please accept the quote to proceed to payment.
+
+                        </div>
 
 
-                    {% if is_customer %}
-
-                        <a
-                            href="{% url 'payment_page' task.id %}"
-                            class="btn btn-success mt-3"
+                        <form
+                            method="POST"
+                            action="{% url 'accept_quoted_amount' task.id %}"
+                            class="mt-3"
                         >
 
-                            <i class="fa-solid fa-credit-card me-1"></i>
+                            {% csrf_token %}
 
-                            Proceed to Payment
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                            >
 
-                        </a>
+                                <i class="fa-solid fa-check me-1"></i>
 
-                    {% endif %}
+                                Accept Quote
+
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+
+        <!-- QUOTE ACCEPTED -->
+
+        {% elif task.quoted_amount_accepted and task.payment_status != "paid" %}
+
+            <div class="alert alert-success mt-4 mb-0">
+
+                <div class="d-flex align-items-start">
+
+                    <i class="fa-solid fa-circle-check fa-2x me-3"></i>
+
+                    <div class="flex-grow-1">
+
+                        <strong>
+                            Quote Accepted
+                        </strong>
+
+                        <div class="small mt-1">
+
+                            The quoted amount of
+
+                            <strong>
+                                KES {{ task.quoted_amount|floatformat:2 }}
+                            </strong>
+
+                            has been accepted.
+
+                        </div>
 
 
-    <!-- ================================================= -->
-    <!-- PAYMENT COMPLETE -->
-    <!-- ================================================= -->
+                        {% if is_customer %}
 
-    {% elif task.payment_status == "paid" %}
+                            <a
+                                href="{% url 'payment_page' task.id %}"
+                                class="btn btn-success mt-3"
+                            >
 
-        <div class="alert alert-success mt-4 mb-0">
+                                <i class="fa-solid fa-credit-card me-1"></i>
 
-            <i class="fa-solid fa-circle-check me-1"></i>
+                                Proceed to Payment
 
-            <strong>
-                Payment Complete
-            </strong>
+                            </a>
 
-            <div class="small mt-1">
+                        {% endif %}
 
-                Your payment has been received.
-                The task can now proceed through the workflow.
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
 
-    {% endif %}
+        <!-- PAYMENT COMPLETE -->
 
-</div>
+        {% elif task.payment_status == "paid" %}
+
+            <div class="alert alert-success mt-4 mb-0">
+
+                <i class="fa-solid fa-circle-check me-1"></i>
+
+                <strong>
+                    Payment Complete
+                </strong>
+
+                <div class="small mt-1">
+
+                    Your payment has been received.
+                    The task can now proceed through the workflow.
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
 
 </div>
 
@@ -2068,71 +2096,77 @@
 
 <div class="card task-card staff-panel mb-4">
 
-<div class="card-body p-4">
+    <div class="card-body p-4">
 
-    <h5 class="section-title">
+        <h5 class="section-title">
 
-        <i class="fa-solid fa-user-gear text-success me-2"></i>
+            <i class="fa-solid fa-user-gear text-success me-2"></i>
 
-        Assigned Staff
+            Assigned Staff
 
-    </h5>
+        </h5>
 
 
-    {% if task.assigned_staff %}
+        {% if task.assigned_staff %}
 
-        <div class="mb-2">
+            <div class="mb-2">
 
-            <div class="info-label">
-                Staff Member
+                <div class="info-label">
+                    Staff Member
+                </div>
+
+                <div class="info-value">
+
+                    {{ task.assigned_staff.full_name }}
+
+                </div>
+
             </div>
 
-            <div class="info-value">
-                {{ task.assigned_staff.full_name }}
+
+            <div class="mb-2">
+
+                <div class="info-label">
+                    Email
+                </div>
+
+                <div class="info-value">
+
+                    {{ task.assigned_staff.email }}
+
+                </div>
+
             </div>
 
-        </div>
 
+            <div>
 
-        <div class="mb-2">
+                <div class="info-label">
+                    Phone
+                </div>
 
-            <div class="info-label">
-                Email
+                <div class="info-value">
+
+                    {{ task.assigned_staff.phone_number }}
+
+                </div>
+
             </div>
 
-            <div class="info-value">
-                {{ task.assigned_staff.email }}
+
+        {% else %}
+
+            <div class="text-muted">
+
+                <i class="fa-solid fa-clock me-2"></i>
+
+                No staff member has been assigned yet.
+
             </div>
 
-        </div>
+        {% endif %}
 
-
-        <div>
-
-            <div class="info-label">
-                Phone
-            </div>
-
-            <div class="info-value">
-                {{ task.assigned_staff.phone_number }}
-            </div>
-
-        </div>
-
-
-    {% else %}
-
-        <div class="text-muted">
-
-            <i class="fa-solid fa-clock me-2"></i>
-
-            No staff member has been assigned yet.
-
-        </div>
-
-    {% endif %}
-
-</div>
+    </div>
 
 </div>
 
@@ -2143,73 +2177,73 @@
 
 {% if is_admin %}
 
-<div class="card task-card admin-alert mb-4">
+    <div class="card task-card admin-alert mb-4">
 
-<div class="card-body p-4">
+        <div class="card-body p-4">
 
-    <h5 class="section-title">
+            <h5 class="section-title">
 
-        <i class="fa-solid fa-user-shield text-primary me-2"></i>
+                <i class="fa-solid fa-user-shield text-primary me-2"></i>
 
-        Administrator
+                Administrator
 
-    </h5>
-
-
-    <div class="small text-muted mb-3">
-
-        You are viewing this task as an administrator.
-        Staff submissions require approval before being
-        released to the customer.
-
-    </div>
+            </h5>
 
 
-    {% if task.status == "reviewing" %}
+            <div class="small text-muted mb-3">
 
-        <div class="alert alert-warning mb-0">
-
-            <i class="fa-solid fa-bell me-1"></i>
-
-            <strong>
-                Action Required
-            </strong>
-
-            <div class="small mt-1">
-
-                A deliverable is waiting for your review.
+                You are viewing this task as an administrator.
+                Staff submissions require approval before being
+                released to the customer.
 
             </div>
 
+
+            {% if task.status == "reviewing" %}
+
+                <div class="alert alert-warning mb-0">
+
+                    <i class="fa-solid fa-bell me-1"></i>
+
+                    <strong>
+                        Action Required
+                    </strong>
+
+                    <div class="small mt-1">
+
+                        A deliverable is waiting for your review.
+
+                    </div>
+
+                </div>
+
+
+            {% elif task.status == "delivered" %}
+
+                <div class="alert alert-success mb-0">
+
+                    <i class="fa-solid fa-check-circle me-1"></i>
+
+                    Deliverable approved and released.
+
+                </div>
+
+
+            {% elif task.status == "completed" %}
+
+                <div class="alert alert-primary mb-0">
+
+                    <i class="fa-solid fa-flag-checkered me-1"></i>
+
+                    Customer has confirmed completion.
+
+                </div>
+
+            {% endif %}
+
         </div>
 
-
-    {% elif task.status == "delivered" %}
-
-        <div class="alert alert-success mb-0">
-
-            <i class="fa-solid fa-check-circle me-1"></i>
-
-            Deliverable approved and released.
-
-        </div>
-
-
-    {% elif task.status == "completed" %}
-
-        <div class="alert alert-primary mb-0">
-
-            <i class="fa-solid fa-flag-checkered me-1"></i>
-
-            Customer has confirmed completion.
-
-        </div>
-
-    {% endif %}
-
-</div>
-
-</div>
+    </div>
 
 {% endif %}
 
@@ -2221,9 +2255,14 @@
 </div>
 
 
+<!-- ================================================= -->
+<!-- BOOTSTRAP JAVASCRIPT -->
+<!-- ================================================= -->
+
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
 ></script>
+
 
 </body>
 
