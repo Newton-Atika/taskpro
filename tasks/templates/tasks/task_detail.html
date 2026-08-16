@@ -6,7 +6,6 @@
 
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta
@@ -202,8 +201,6 @@
     }
 
 </style>
-```
-
 </head>
 
 <body>
@@ -216,7 +213,6 @@
 
 <nav class="navbar navbar-dark bg-dark">
 
-```
 <div class="container">
 
     <a
@@ -246,7 +242,6 @@
     </div>
 
 </div>
-```
 
 </nav>
 
@@ -258,7 +253,7 @@
 
 <div class="page-header">
 
-```
+
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-start">
@@ -364,7 +359,7 @@
     </div>
 
 </div>
-```
+
 
 </div>
 
@@ -378,7 +373,7 @@
 
 {% if messages %}
 
-```
+
 {% for message in messages %}
 
     <div
@@ -405,7 +400,7 @@
     </div>
 
 {% endfor %}
-```
+
 
 {% endif %}
 
@@ -419,7 +414,7 @@
 
 <div class="card task-card staff-actions mb-4">
 
-```
+
 <div class="card-body p-4">
 
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
@@ -513,7 +508,7 @@
     </div>
 
 </div>
-```
+
 
 </div>
 
@@ -527,7 +522,7 @@
 
 <div class="card workflow-card mb-4">
 
-```
+
 <div class="card-body p-4">
 
     <h5 class="fw-bold mb-4">
@@ -812,7 +807,7 @@
     </div>
 
 </div>
-```
+
 
 </div>
 
@@ -834,7 +829,7 @@
 
 <div class="card task-card mb-4">
 
-```
+
 <div class="card-body p-4">
 
     <h4 class="section-title">
@@ -852,7 +847,7 @@
     </div>
 
 </div>
-```
+
 
 </div>
 
@@ -864,7 +859,7 @@
 
 <div class="card task-card mb-4">
 
-```
+
 <div class="card-body p-4">
 
     <div class="d-flex justify-content-between align-items-center">
@@ -944,17 +939,13 @@
                     </div>
 
 
-                    <a
-                        href="{{ document.file.url }}"
-                        target="_blank"
-                        class="btn btn-outline-primary btn-sm"
-                    >
-
-                        <i class="fa-solid fa-download me-1"></i>
-
-                        Open
-
-                    </a>
+                        <a
+                            href="{% url 'download_task_document' document.id %}"
+                            class="btn btn-outline-primary btn-sm"
+                        >
+                            <i class="fa-solid fa-download me-1"></i>
+                            Download
+                        </a>
 
                 </div>
 
@@ -979,7 +970,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
@@ -993,7 +984,7 @@
 
 <div class="card task-card mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <h4 class="section-title">
@@ -1055,15 +1046,11 @@
                             {% if deliverable.file %}
 
                                 <a
-                                    href="{{ deliverable.file.url }}"
-                                    target="_blank"
+                                    href="{% url 'download_deliverable' deliverable.id %}"
                                     class="btn btn-outline-success btn-sm"
                                 >
-
                                     <i class="fa-solid fa-download me-1"></i>
-
-                                    Open
-
+                                    Download
                                 </a>
 
                             {% endif %}
@@ -1194,7 +1181,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
@@ -1208,7 +1195,7 @@
 
 <div class="card task-card mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <div class="d-flex justify-content-between align-items-center">
@@ -1280,15 +1267,11 @@
                     {% if deliverable.file %}
 
                         <a
-                            href="{{ deliverable.file.url }}"
-                            target="_blank"
+                            href="{% url 'download_deliverable' deliverable.id %}"
                             class="btn btn-outline-success btn-sm"
                         >
-
                             <i class="fa-solid fa-download me-1"></i>
-
-                            Open
-
+                            Download
                         </a>
 
                     {% endif %}
@@ -1415,7 +1398,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
@@ -1439,7 +1422,7 @@
 
 <div class="card task-card mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1516,7 +1499,7 @@
     </div>
 
 </div>
-```
+  
 
 </div>
 
@@ -1528,7 +1511,7 @@
 
 <div class="card task-card customer-panel mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1579,7 +1562,7 @@
     </div>
 
 </div>
-```
+  
 
 </div>
 
@@ -1597,7 +1580,7 @@
     {% endif %}
 ">
 
-```
+  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -1939,7 +1922,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
@@ -1951,7 +1934,7 @@
 
 <div class="card task-card staff-panel mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -2017,7 +2000,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
@@ -2031,7 +2014,7 @@
 
 <div class="card task-card admin-alert mb-4">
 
-```
+  
 <div class="card-body p-4">
 
     <h5 class="section-title">
@@ -2093,7 +2076,7 @@
     {% endif %}
 
 </div>
-```
+  
 
 </div>
 
