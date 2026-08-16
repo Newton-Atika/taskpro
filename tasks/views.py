@@ -1046,15 +1046,20 @@ def _download_cloudinary_file(
 # DOWNLOAD TASK DOCUMENT
 # ============================================================
 
+# ============================================================
+# DOWNLOAD TASK DOCUMENT
+# ============================================================
+
 @login_required
-def download_task_document(
-    request,
-    document_id
-):
+def download_task_document(request, document_id):
 
     document = get_object_or_404(
-        TaskDocument,
-        id=document_id
+        TaskDocument.objects.select_related(
+            "task",
+            "task__customer",
+            "task__assigned_staff",
+        ),
+        id=document_id,
     )
 
     task = document.task
@@ -1063,63 +1068,70 @@ def download_task_document(
     # ACCESS CONTROL
     # ========================================================
 
-    is_customer = (
+    allowed = (
         task.customer == request.user
+        or task.assigned_staff == request.user
+        or request.user.is_staff
+        or request.user.is_superuser
     )
 
-    is_assigned_staff = (
-        task.assigned_staff == request.user
-    )
+    if not allowed:
 
-    is_staff = (
-        request.user.is_staff
-    )
+        messages.error(
+            request,
+            "You do not have permission to download this file."
+        )
 
-    is_admin = (
-        request.user.is_superuser
-    )
-
-    if not (
-        is_customer
-        or is_assigned_staff
-        or is_staff
-        or is_admin
-    ):
-
-        raise Http404(
-            "You do not have permission to access this file."
+        return redirect(
+            "task_detail",
+            task_id=task.id
         )
 
     # ========================================================
-    # FILE EXISTS
+    # CHECK FILE
     # ========================================================
 
     if not document.file:
 
-        raise Http404(
-            "This document does not have a file."
+        messages.error(
+            request,
+            "This document does not contain a file."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
         )
 
     # ========================================================
-    # FILENAME
+    # GET CLOUDINARY URL
     # ========================================================
 
-    filename = _get_file_filename(
-        document.file,
-        default_name=(
-            f"task_{task.id}_document"
+    try:
+
+        file_url = document.file.url
+
+    except Exception:
+
+        file_url = None
+
+    if not file_url:
+
+        messages.error(
+            request,
+            "The stored file could not be found."
         )
-    )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
+        )
 
     # ========================================================
-    # DOWNLOAD
+    # REDIRECT DIRECTLY TO CLOUDINARY
     # ========================================================
 
-    return _download_cloudinary_file(
-        request=request,
-        file_field=document.file,
-        filename=filename,
-    )
+    return redirect(file_url)
 
 
 # ============================================================
@@ -1133,8 +1145,12 @@ def download_deliverable(
 ):
 
     deliverable = get_object_or_404(
-        TaskDeliverable,
-        id=deliverable_id
+        TaskDeliverable.objects.select_related(
+            "task",
+            "task__customer",
+            "task__assigned_staff",
+        ),
+        id=deliverable_id,
     )
 
     task = deliverable.task
@@ -1166,8 +1182,14 @@ def download_deliverable(
         or is_admin
     ):
 
-        raise Http404(
-            "You do not have permission to access this file."
+        messages.error(
+            request,
+            "You do not have permission to download this file."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
         )
 
     # ========================================================
@@ -1176,8 +1198,14 @@ def download_deliverable(
 
     if not deliverable.file:
 
-        raise Http404(
-            "This deliverable does not have a file."
+        messages.error(
+            request,
+            "This deliverable does not contain a file."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
         )
 
     # ========================================================
@@ -1189,34 +1217,45 @@ def download_deliverable(
         and not deliverable.approved
     ):
 
-        raise Http404(
-            "This deliverable has not been released."
+        messages.error(
+            request,
+            "This deliverable has not yet been released."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
         )
 
     # ========================================================
-    # FILENAME
+    # GET CLOUDINARY URL
     # ========================================================
 
-    filename = _get_file_filename(
-        deliverable.file,
-        default_name=(
-            f"task_{task.id}_deliverable"
+    try:
+
+        file_url = deliverable.file.url
+
+    except Exception:
+
+        file_url = None
+
+    if not file_url:
+
+        messages.error(
+            request,
+            "The stored file could not be found."
         )
-    )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
+        )
 
     # ========================================================
-    # DOWNLOAD
+    # REDIRECT DIRECTLY TO CLOUDINARY
     # ========================================================
 
-    return _download_cloudinary_file(
-        request=request,
-        file_field=deliverable.file,
-        filename=filename,
-    )
-# ============================================================
-# TASK DETAIL
-# ============================================================
-
+    return redirect(file_url)
 @login_required
 def task_detail(request, task_id):
 
