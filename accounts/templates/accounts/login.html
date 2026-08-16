@@ -1,0 +1,1279 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Login | Workload</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f7fb;
+        min-height: 100vh;
+    }
+
+    /* ==============================
+       MAIN WRAPPER
+    ============================== */
+
+    .login-wrapper {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 40px 15px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 1050px;
+
+        background: white;
+
+        border-radius: 24px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+
+
+    /* ==============================
+       BRAND PANEL
+    ============================== */
+
+    .brand-panel {
+
+        background:
+            linear-gradient(
+                145deg,
+                #0d6efd 0%,
+                #6610f2 100%
+            );
+
+        color: white;
+
+        min-height: 650px;
+
+        padding: 55px 45px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .brand-panel::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 320px;
+        height: 320px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,0.08);
+
+        top: -120px;
+        right: -120px;
+    }
+
+
+    .brand-panel::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 240px;
+        height: 240px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,0.06);
+
+        bottom: -100px;
+        left: -100px;
+    }
+
+
+    .brand-logo {
+
+        font-size: 28px;
+
+        font-weight: 700;
+
+        margin-bottom: 50px;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .brand-logo i {
+
+        margin-right: 8px;
+    }
+
+
+    .brand-panel h1 {
+
+        font-size: 45px;
+
+        font-weight: 700;
+
+        line-height: 1.15;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .brand-panel p {
+
+        font-size: 17px;
+
+        line-height: 1.7;
+
+        opacity: 0.9;
+
+        margin-top: 20px;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    /* ==============================
+       BENEFITS
+    ============================== */
+
+    .benefit {
+
+        display: flex;
+
+        align-items: center;
+
+        margin-top: 25px;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .benefit-icon {
+
+        width: 44px;
+        height: 44px;
+
+        border-radius: 12px;
+
+        background:
+            rgba(255,255,255,0.15);
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        margin-right: 14px;
+    }
+
+
+    .benefit span {
+
+        font-size: 15px;
+    }
+
+
+    /* ==============================
+       FORM PANEL
+    ============================== */
+
+    .form-panel {
+
+        padding: 65px 60px;
+
+        min-height: 650px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+    }
+
+
+    .form-title {
+
+        font-size: 31px;
+
+        font-weight: 700;
+
+        color: #1f2937;
+
+        margin-bottom: 8px;
+    }
+
+
+    .form-subtitle {
+
+        color: #6b7280;
+
+        margin-bottom: 35px;
+    }
+
+
+    /* ==============================
+       DJANGO MESSAGES
+    ============================== */
+
+    .message-box {
+
+        padding: 13px 15px;
+
+        border-radius: 10px;
+
+        margin-bottom: 20px;
+
+        font-size: 14px;
+    }
+
+
+    .message-box.error {
+
+        background: #fff1f2;
+
+        border: 1px solid #fecdd3;
+
+        color: #dc3545;
+    }
+
+
+    .message-box.success {
+
+        background: #f0fdf4;
+
+        border: 1px solid #bbf7d0;
+
+        color: #198754;
+    }
+
+
+    /* ==============================
+       INPUTS
+    ============================== */
+
+    .field-group {
+
+        margin-bottom: 23px;
+    }
+
+
+    .field-label {
+
+        font-weight: 600;
+
+        color: #374151;
+
+        margin-bottom: 8px;
+
+        display: block;
+    }
+
+
+    .input-wrapper {
+
+        position: relative;
+    }
+
+
+    .input-icon {
+
+        position: absolute;
+
+        left: 16px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #9ca3af;
+
+        z-index: 2;
+    }
+
+
+    .form-control {
+
+        height: 54px;
+
+        border-radius: 12px;
+
+        border: 1px solid #dbe1ea;
+
+        padding-left: 46px;
+
+        padding-right: 45px;
+
+        font-size: 15px;
+
+        transition: all 0.2s ease;
+    }
+
+
+    .form-control:focus {
+
+        border-color: #0d6efd;
+
+        box-shadow:
+            0 0 0 4px
+            rgba(13,110,253,0.10);
+    }
+
+
+    .form-control.invalid {
+
+        border-color: #dc3545;
+
+        background: #fff8f8;
+    }
+
+
+    .form-control.valid {
+
+        border-color: #198754;
+
+        background: #f3fff8;
+    }
+
+
+    /* ==============================
+       PASSWORD TOGGLE
+    ============================== */
+
+    .password-toggle {
+
+        position: absolute;
+
+        right: 15px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        border: none;
+
+        background: transparent;
+
+        color: #9ca3af;
+
+        cursor: pointer;
+
+        z-index: 3;
+    }
+
+
+    .password-toggle:hover {
+
+        color: #0d6efd;
+    }
+
+
+    /* ==============================
+       FIELD VALIDATION
+    ============================== */
+
+    .validation-message {
+
+        font-size: 13px;
+
+        margin-top: 7px;
+
+        display: none;
+    }
+
+
+    .validation-message.error {
+
+        display: block;
+
+        color: #dc3545;
+    }
+
+
+    .validation-message.success {
+
+        display: block;
+
+        color: #198754;
+    }
+
+
+    /* ==============================
+       LOGIN BUTTON
+    ============================== */
+
+    .login-btn {
+
+        width: 100%;
+
+        height: 54px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0d6efd,
+                #6610f2
+            );
+
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        transition: all 0.25s ease;
+    }
+
+
+    .login-btn:hover {
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 10px 25px
+            rgba(13,110,253,0.25);
+    }
+
+
+    .login-btn:disabled {
+
+        opacity: 0.7;
+
+        cursor: not-allowed;
+
+        transform: none;
+    }
+
+
+    /* ==============================
+       EXTRA LINKS
+    ============================== */
+
+    .form-links {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 25px;
+
+        font-size: 14px;
+    }
+
+
+    .remember-me {
+
+        color: #6b7280;
+    }
+
+
+    .forgot-password {
+
+        color: #0d6efd;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+
+    .forgot-password:hover {
+
+        text-decoration: underline;
+    }
+
+
+    /* ==============================
+       REGISTER LINK
+    ============================== */
+
+    .register-link {
+
+        text-align: center;
+
+        margin-top: 28px;
+
+        color: #6b7280;
+
+        font-size: 14px;
+    }
+
+
+    .register-link a {
+
+        color: #0d6efd;
+
+        font-weight: 600;
+
+        text-decoration: none;
+    }
+
+
+    .register-link a:hover {
+
+        text-decoration: underline;
+    }
+
+
+    /* ==============================
+       SECURITY NOTE
+    ============================== */
+
+    .security-note {
+
+        text-align: center;
+
+        margin-top: 25px;
+
+        font-size: 12px;
+
+        color: #9ca3af;
+    }
+
+
+    .security-note i {
+
+        color: #198754;
+
+        margin-right: 5px;
+    }
+
+
+    /* ==============================
+       MOBILE
+    ============================== */
+
+    @media (max-width: 991px) {
+
+        .brand-panel {
+
+            min-height: auto;
+
+            padding: 45px 35px;
+        }
+
+
+        .brand-panel h1 {
+
+            font-size: 36px;
+        }
+
+
+        .form-panel {
+
+            min-height: auto;
+
+            padding: 45px 35px;
+        }
+
+    }
+
+
+    @media (max-width: 576px) {
+
+        .login-wrapper {
+
+            padding: 0;
+        }
+
+
+        .login-container {
+
+            border-radius: 0;
+        }
+
+
+        .brand-panel {
+
+            padding: 40px 25px;
+        }
+
+
+        .brand-panel h1 {
+
+            font-size: 32px;
+        }
+
+
+        .form-panel {
+
+            padding: 40px 22px;
+        }
+
+
+        .form-links {
+
+            flex-direction: column;
+
+            align-items: flex-start;
+
+            gap: 12px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+```
+<div class="login-container">
+
+    <div class="row g-0">
+
+
+        <!-- =====================================
+             LEFT BRAND PANEL
+        ====================================== -->
+
+        <div class="col-lg-5">
+
+            <div class="brand-panel">
+
+
+                <div class="brand-logo">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    Workload
+
+                </div>
+
+
+                <h1>
+
+                    Welcome
+                    <br>
+                    back.
+
+                </h1>
+
+
+                <p>
+
+                    Your tasks are waiting.
+                    Log in to manage your requests,
+                    track progress and receive completed
+                    work from our professionals.
+
+                </p>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                    </div>
+
+                    <span>
+                        Manage your submitted tasks
+                    </span>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                    <span>
+                        Track your task progress
+                    </span>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+                    <span>
+                        Secure and confidential
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             LOGIN FORM
+        ====================================== -->
+
+        <div class="col-lg-7">
+
+            <div class="form-panel">
+
+
+                <div class="form-title">
+
+                    Login to Workload
+
+                </div>
+
+
+                <div class="form-subtitle">
+
+                    Enter your details to continue.
+
+                </div>
+
+
+                <!-- DJANGO MESSAGES -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="message-box
+                            {% if message.tags == 'success' %}
+                                success
+                            {% else %}
+                                error
+                            {% endif %}"
+                        >
+
+                            {% if message.tags == 'success' %}
+
+                                <i class="fa-solid fa-circle-check me-2"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-circle-exclamation me-2"></i>
+
+                            {% endif %}
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- LOGIN FORM -->
+
+                <form
+                    method="POST"
+                    id="loginForm"
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- EMAIL -->
+
+                    <div class="field-group">
+
+                        <label
+                            for="email"
+                            class="field-label"
+                        >
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-envelope input-icon">
+                            </i>
+
+
+                            <input
+
+                                type="email"
+
+                                name="email"
+
+                                id="email"
+
+                                class="form-control"
+
+                                placeholder="you@example.com"
+
+                                autocomplete="email"
+
+                                required
+
+                            >
+
+                        </div>
+
+
+                        <div
+                            id="emailMessage"
+                            class="validation-message"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="field-group">
+
+                        <label
+                            for="password"
+                            class="field-label"
+                        >
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-lock input-icon">
+                            </i>
+
+
+                            <input
+
+                                type="password"
+
+                                name="password"
+
+                                id="password"
+
+                                class="form-control"
+
+                                placeholder="Enter your password"
+
+                                autocomplete="current-password"
+
+                                required
+
+                            >
+
+
+                            <button
+
+                                type="button"
+
+                                class="password-toggle"
+
+                                id="togglePassword"
+
+                                aria-label="Show password"
+
+                            >
+
+                                <i
+                                    class="fa-solid fa-eye"
+                                    id="passwordIcon">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="passwordMessage"
+                            class="validation-message"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <!-- LINKS -->
+
+                    <div class="form-links">
+
+                        <div class="remember-me">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                class="form-check-input me-1"
+                            >
+
+                            <label for="remember">
+                                Remember me
+                            </label>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="forgot-password"
+                        >
+
+                            Forgot password?
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="loginButton"
+                    >
+
+                        <span id="loginButtonText">
+
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>
+
+                            Login
+
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <div class="register-link">
+
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Create one
+                    </a>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="security-note">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Your connection and account information
+                    are protected.
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+
+    /* =========================================
+       PASSWORD SHOW / HIDE
+    ========================================= */
+
+    const password =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const passwordIcon =
+        document.getElementById("passwordIcon");
+
+
+    togglePassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                password.type === "password"
+            ) {
+
+                password.type = "text";
+
+                passwordIcon.className =
+                    "fa-solid fa-eye-slash";
+
+                togglePassword.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                passwordIcon.className =
+                    "fa-solid fa-eye";
+
+                togglePassword.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       EMAIL VALIDATION
+    ========================================= */
+
+    const email =
+        document.getElementById("email");
+
+    const emailMessage =
+        document.getElementById("emailMessage");
+
+
+    email.addEventListener(
+        "input",
+        function () {
+
+            const value =
+                email.value.trim();
+
+
+            if (!value) {
+
+                email.classList.remove(
+                    "valid",
+                    "invalid"
+                );
+
+                emailMessage.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            const valid =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(value);
+
+
+            emailMessage.style.display =
+                "block";
+
+
+            if (valid) {
+
+                email.classList.remove(
+                    "invalid"
+                );
+
+                email.classList.add(
+                    "valid"
+                );
+
+                emailMessage.className =
+                    "validation-message success";
+
+                emailMessage.innerHTML =
+                    '<i class="fa-solid fa-circle-check me-1"></i> Valid email address.';
+
+            } else {
+
+                email.classList.remove(
+                    "valid"
+                );
+
+                email.classList.add(
+                    "invalid"
+                );
+
+                emailMessage.className =
+                    "validation-message error";
+
+                emailMessage.innerHTML =
+                    '<i class="fa-solid fa-circle-xmark me-1"></i> Enter a valid email address.';
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       PASSWORD VALIDATION
+    ========================================= */
+
+    password.addEventListener(
+        "input",
+        function () {
+
+            const value =
+                password.value;
+
+
+            if (!value) {
+
+                password.classList.remove(
+                    "valid",
+                    "invalid"
+                );
+
+                passwordMessage.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            if (value.length >= 8) {
+
+                password.classList.add(
+                    "valid"
+                );
+
+                password.classList.remove(
+                    "invalid"
+                );
+
+                passwordMessage.className =
+                    "validation-message success";
+
+                passwordMessage.innerHTML =
+                    '<i class="fa-solid fa-circle-check me-1"></i> Password entered.';
+
+            } else {
+
+                password.classList.add(
+                    "invalid"
+                );
+
+                password.classList.remove(
+                    "valid"
+                );
+
+                passwordMessage.className =
+                    "validation-message error";
+
+                passwordMessage.innerHTML =
+                    '<i class="fa-solid fa-circle-xmark me-1"></i> Password must contain at least 8 characters.';
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       LOGIN SUBMIT STATE
+    ========================================= */
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginButtonText =
+        document.getElementById("loginButtonText");
+
+
+    loginForm.addEventListener(
+        "submit",
+        function () {
+
+            loginButton.disabled = true;
+
+
+            loginButtonText.innerHTML =
+
+                '<span class="spinner-border spinner-border-sm me-2"></span>' +
+
+                'Signing in...';
+
+        }
+    );
+
+
+</script>
+
+</body>
+
+</html>
