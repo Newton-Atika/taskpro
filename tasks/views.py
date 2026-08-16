@@ -926,6 +926,8 @@ def _get_file_filename(file_field, default_name="download"):
     return default_name
 
 
+import cloudinary
+
 # ============================================================
 # DOWNLOAD CLOUDINARY FILE
 # ============================================================
@@ -936,36 +938,53 @@ def _download_cloudinary_file(
     filename
 ):
     """
-    Download a Cloudinary file through Django.
-
-    The Cloudinary file is retrieved by its existing URL and
-    returned to the browser as an attachment.
+    Download a private/raw Cloudinary file through Django
+    using a signed Cloudinary URL.
     """
 
     if not file_field:
-
         raise Http404(
             "The requested file does not exist."
         )
 
     # --------------------------------------------------------
-    # GET CLOUDINARY URL
+    # GET CLOUDINARY PUBLIC ID
+    # --------------------------------------------------------
+
+    public_id = getattr(
+        file_field,
+        "public_id",
+        None
+    )
+
+    if not public_id:
+        raise Http404(
+            "The Cloudinary file does not have a public ID."
+        )
+
+    # --------------------------------------------------------
+    # GENERATE SIGNED CLOUDINARY URL
     # --------------------------------------------------------
 
     try:
 
-        file_url = file_field.url
+        file_url, options = cloudinary.utils.cloudinary_url(
+            public_id,
+            resource_type="raw",
+            type="upload",
+            secure=True,
+            sign_url=True,
+        )
 
     except Exception as exc:
 
         raise Http404(
-            "Unable to access the stored file."
+            "Unable to generate the Cloudinary file URL."
         ) from exc
 
     if not file_url:
-
         raise Http404(
-            "The stored file does not have a valid URL."
+            "Cloudinary did not provide a valid file URL."
         )
 
     # --------------------------------------------------------
@@ -983,7 +1002,7 @@ def _download_cloudinary_file(
     except requests.RequestException as exc:
 
         raise Http404(
-            "Unable to retrieve the file from storage."
+            "Unable to retrieve the file from Cloudinary."
         ) from exc
 
     # --------------------------------------------------------
@@ -993,7 +1012,8 @@ def _download_cloudinary_file(
     if cloudinary_response.status_code != 200:
 
         raise Http404(
-            "The file could not be retrieved from storage."
+            f"Cloudinary returned HTTP "
+            f"{cloudinary_response.status_code}."
         )
 
     # --------------------------------------------------------
