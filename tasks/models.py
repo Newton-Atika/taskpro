@@ -192,9 +192,26 @@ class TaskDocument(models.Model):
     )
 
     def __str__(self):
+        """
+        Safely return a readable representation of the document.
+    
+        CloudinaryResource does not always expose `.name`,
+        so we use public_id / string representation instead.
+        """
+    
         if self.file:
+            public_id = getattr(
+                self.file,
+                "public_id",
+                None
+            )
+    
+            if public_id:
+                return str(public_id)
+    
             return str(self.file)
-        return f"Document - {self.task.title}"
+    
+        return f"Task Document #{self.pk}"
 
 
 # =========================================================
@@ -251,7 +268,23 @@ class TaskDeliverable(models.Model):
     )
 
     def __str__(self):
-        return f"Deliverable - {self.task.title}"
+        """
+        Safely return a readable representation of the deliverable.
+        """
+    
+        if self.file:
+            public_id = getattr(
+                self.file,
+                "public_id",
+                None
+            )
+    
+            if public_id:
+                return str(public_id)
+    
+            return str(self.file)
+    
+        return f"Task Deliverable #{self.pk}"
 
 
 # ============================================================
