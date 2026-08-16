@@ -38,7 +38,12 @@ SECRET_KEY = 'django-insecure-wzkdp_l_v=_*kz0=-u&)cd$%cspd7g=k1#-zss51!%_95p-fhs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["taskpro-tau.vercel.app"]
+ALLOWED_HOSTS = [
+    "taskpro-8m9sc9i19-newton-shivachis-projects-9df317c5.vercel.app",
+    ".vercel.app",
+    "localhost",
+    "127.0.0.1",
+]
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 # Application definition
