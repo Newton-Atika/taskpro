@@ -192,7 +192,9 @@ class TaskDocument(models.Model):
     )
 
     def __str__(self):
-        return self.file.name
+        if self.file:
+            return str(self.file)
+        return f"Document - {self.task.title}"
 
 
 # =========================================================
