@@ -171,7 +171,7 @@ class TaskDocument(models.Model):
 
     file = CloudinaryField(
         "file",
-        resource_type="auto"
+        resource_type="raw"
     )
 
     description = models.CharField(
@@ -228,7 +228,7 @@ class TaskDeliverable(models.Model):
 
     file = CloudinaryField(
         "file",
-        resource_type="auto",
+        resource_type="raw",
         blank=True,
         null=True
     )
