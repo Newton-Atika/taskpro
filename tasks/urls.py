@@ -63,7 +63,7 @@ urlpatterns = [
     path(
         "documents/<int:document_id>/download/",
         views.download_task_document,
-        name="download_task_document"
+        name="download_task_document",
     ),
 
 
