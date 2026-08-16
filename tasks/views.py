@@ -1161,7 +1161,10 @@ def download_deliverable(
 def task_detail(request, task_id):
 
     task = get_object_or_404(
-        Task,
+        Task.objects.select_related(
+            "customer",
+            "assigned_staff",
+        ),
         id=task_id
     )
 
@@ -1197,7 +1200,9 @@ def task_detail(request, task_id):
             "You do not have permission to view this task."
         )
 
-        return redirect("home")
+        return redirect(
+            "home"
+        )
 
     # ========================================================
     # CUSTOMER DOCUMENTS
@@ -1205,8 +1210,12 @@ def task_detail(request, task_id):
 
     documents = (
         task.documents
-        .select_related("uploaded_by")
-        .order_by("-uploaded_at")
+        .select_related(
+            "uploaded_by"
+        )
+        .order_by(
+            "-uploaded_at"
+        )
     )
 
     # ========================================================
@@ -1215,9 +1224,40 @@ def task_detail(request, task_id):
 
     deliverables = (
         task.deliverables
-        .select_related("submitted_by")
-        .order_by("-submitted_at")
+        .select_related(
+            "submitted_by",
+            "approved_by",
+        )
+        .order_by(
+            "-submitted_at"
+        )
     )
+
+    # ========================================================
+    # ADD DISPLAY FILENAMES
+    # ========================================================
+
+    for document in documents:
+
+        document.download_filename = (
+            _get_file_filename(
+                document.file,
+                default_name=(
+                    f"task_{task.id}_document"
+                )
+            )
+        )
+
+    for deliverable in deliverables:
+
+        deliverable.download_filename = (
+            _get_file_filename(
+                deliverable.file,
+                default_name=(
+                    f"task_{task.id}_deliverable"
+                )
+            )
+        )
 
     # ========================================================
     # CONTEXT
@@ -1238,6 +1278,7 @@ def task_detail(request, task_id):
         "is_staff": is_staff,
 
         "is_admin": is_admin,
+
     }
 
     return render(
