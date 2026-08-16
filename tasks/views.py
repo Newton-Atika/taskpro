@@ -1046,92 +1046,139 @@ def _download_cloudinary_file(
 # DOWNLOAD TASK DOCUMENT
 # ============================================================
 
-# ============================================================
-# DOWNLOAD TASK DOCUMENT
-# ============================================================
-
 @login_required
 def download_task_document(request, document_id):
 
     document = get_object_or_404(
-        TaskDocument.objects.select_related(
-            "task",
-            "task__customer",
-            "task__assigned_staff",
-        ),
-        id=document_id,
+        TaskDocument,
+        pk=document_id
     )
 
     task = document.task
 
-    # ========================================================
+    # --------------------------------------------------------
     # ACCESS CONTROL
-    # ========================================================
+    # --------------------------------------------------------
 
-    allowed = (
-        task.customer == request.user
-        or task.assigned_staff == request.user
+    if not (
+        request.user.is_superuser
         or request.user.is_staff
-        or request.user.is_superuser
-    )
-
-    if not allowed:
-
-        messages.error(
-            request,
-            "You do not have permission to download this file."
+        or task.customer == request.user
+        or task.assigned_staff == request.user
+    ):
+        raise Http404(
+            "You do not have permission to access this file."
         )
 
-        return redirect(
-            "task_detail",
-            task_id=task.id
-        )
-
-    # ========================================================
+    # --------------------------------------------------------
     # CHECK FILE
-    # ========================================================
+    # --------------------------------------------------------
 
     if not document.file:
-
-        messages.error(
-            request,
-            "This document does not contain a file."
+        raise Http404(
+            "This document has no file."
         )
 
-        return redirect(
-            "task_detail",
-            task_id=task.id
-        )
-
-    # ========================================================
+    # --------------------------------------------------------
     # GET CLOUDINARY URL
-    # ========================================================
+    # --------------------------------------------------------
+
+    try:
+        file_url = document.file.url
+    except Exception as exc:
+        raise Http404(
+            "Unable to obtain the Cloudinary file URL."
+        ) from exc
+
+    if not file_url:
+        raise Http404(
+            "Cloudinary did not provide a file URL."
+        )
+
+    # --------------------------------------------------------
+    # DOWNLOAD FROM CLOUDINARY
+    # --------------------------------------------------------
 
     try:
 
-        file_url = document.file.url
-
-    except Exception:
-
-        file_url = None
-
-    if not file_url:
-
-        messages.error(
-            request,
-            "The stored file could not be found."
+        cloudinary_response = requests.get(
+            file_url,
+            timeout=60,
+            allow_redirects=True
         )
 
-        return redirect(
-            "task_detail",
-            task_id=task.id
+    except requests.RequestException as exc:
+
+        raise Http404(
+            "Unable to retrieve the file from Cloudinary."
+        ) from exc
+
+    # --------------------------------------------------------
+    # CHECK CLOUDINARY RESPONSE
+    # --------------------------------------------------------
+
+    if cloudinary_response.status_code != 200:
+
+        raise Http404(
+            f"Cloudinary returned HTTP "
+            f"{cloudinary_response.status_code}."
         )
 
-    # ========================================================
-    # REDIRECT DIRECTLY TO CLOUDINARY
-    # ========================================================
+    # --------------------------------------------------------
+    # DETERMINE FILENAME
+    # --------------------------------------------------------
 
-    return redirect(file_url)
+    filename = _get_file_filename(
+        document.file,
+        default_name=f"task_{task.id}_document"
+    )
+
+    # Make sure PDF extension is retained
+    if (
+        not Path(filename).suffix
+        and cloudinary_response.headers.get("Content-Type")
+    ):
+
+        content_type = (
+            cloudinary_response
+            .headers
+            .get("Content-Type")
+            .split(";")[0]
+            .strip()
+        )
+
+        extension = mimetypes.guess_extension(
+            content_type
+        )
+
+        if extension:
+            filename += extension
+
+    # --------------------------------------------------------
+    # RESPONSE
+    # --------------------------------------------------------
+
+    response = HttpResponse(
+        cloudinary_response.content,
+        content_type=(
+            cloudinary_response
+            .headers
+            .get(
+                "Content-Type",
+                "application/octet-stream"
+            )
+        )
+    )
+
+    response["Content-Disposition"] = (
+        f'attachment; filename="{filename}"'
+    )
+
+    response["Cache-Control"] = (
+        "private, no-store, max-age=0"
+    )
+
+    return response
 
 
 # ============================================================
@@ -1139,74 +1186,145 @@ def download_task_document(request, document_id):
 # ============================================================
 
 @login_required
-def download_deliverable(
-    request,
-    deliverable_id
-):
+def download_deliverable(request, deliverable_id):
 
     deliverable = get_object_or_404(
-        TaskDeliverable.objects.select_related(
-            "task",
-            "task__customer",
-            "task__assigned_staff",
-        ),
-        id=deliverable_id,
+        TaskDeliverable,
+        pk=deliverable_id
     )
 
     task = deliverable.task
 
-    # ========================================================
+    # --------------------------------------------------------
     # ACCESS CONTROL
-    # ========================================================
-
-    is_customer = (
-        task.customer == request.user
-    )
-
-    is_assigned_staff = (
-        task.assigned_staff == request.user
-    )
-
-    is_staff = (
-        request.user.is_staff
-    )
-
-    is_admin = (
-        request.user.is_superuser
-    )
+    # --------------------------------------------------------
 
     if not (
-        is_customer
-        or is_assigned_staff
-        or is_staff
-        or is_admin
+        request.user.is_superuser
+        or request.user.is_staff
+        or task.customer == request.user
+        or task.assigned_staff == request.user
     ):
-
-        messages.error(
-            request,
-            "You do not have permission to download this file."
+        raise Http404(
+            "You do not have permission to access this file."
         )
 
-        return redirect(
-            "task_detail",
-            task_id=task.id
-        )
-
-    # ========================================================
-    # FILE EXISTS
-    # ========================================================
+    # --------------------------------------------------------
+    # CHECK FILE
+    # --------------------------------------------------------
 
     if not deliverable.file:
-
-        messages.error(
-            request,
-            "This deliverable does not contain a file."
+        raise Http404(
+            "This deliverable has no file."
         )
 
-        return redirect(
-            "task_detail",
-            task_id=task.id
+    # --------------------------------------------------------
+    # CUSTOMER CANNOT DOWNLOAD UNAPPROVED DELIVERABLE
+    # --------------------------------------------------------
+
+    if (
+        task.customer == request.user
+        and not deliverable.approved
+    ):
+        raise Http404(
+            "This deliverable has not been released."
         )
+
+    # --------------------------------------------------------
+    # CLOUDINARY URL
+    # --------------------------------------------------------
+
+    try:
+        file_url = deliverable.file.url
+    except Exception as exc:
+        raise Http404(
+            "Unable to obtain the Cloudinary file URL."
+        ) from exc
+
+    if not file_url:
+        raise Http404(
+            "Cloudinary did not provide a file URL."
+        )
+
+    # --------------------------------------------------------
+    # DOWNLOAD FROM CLOUDINARY
+    # --------------------------------------------------------
+
+    try:
+
+        cloudinary_response = requests.get(
+            file_url,
+            timeout=60,
+            allow_redirects=True
+        )
+
+    except requests.RequestException as exc:
+
+        raise Http404(
+            "Unable to retrieve the file from Cloudinary."
+        ) from exc
+
+    if cloudinary_response.status_code != 200:
+
+        raise Http404(
+            f"Cloudinary returned HTTP "
+            f"{cloudinary_response.status_code}."
+        )
+
+    # --------------------------------------------------------
+    # FILENAME
+    # --------------------------------------------------------
+
+    filename = _get_file_filename(
+        deliverable.file,
+        default_name=f"task_{task.id}_deliverable"
+    )
+
+    if (
+        not Path(filename).suffix
+        and cloudinary_response.headers.get("Content-Type")
+    ):
+
+        content_type = (
+            cloudinary_response
+            .headers
+            .get("Content-Type")
+            .split(";")[0]
+            .strip()
+        )
+
+        extension = mimetypes.guess_extension(
+            content_type
+        )
+
+        if extension:
+            filename += extension
+
+    # --------------------------------------------------------
+    # RESPONSE
+    # --------------------------------------------------------
+
+    response = HttpResponse(
+        cloudinary_response.content,
+        content_type=(
+            cloudinary_response
+            .headers
+            .get(
+                "Content-Type",
+                "application/octet-stream"
+            )
+        )
+    )
+
+    response["Content-Disposition"] = (
+        f'attachment; filename="{filename}"'
+    )
+
+    response["Cache-Control"] = (
+        "private, no-store, max-age=0"
+    )
+
+    return response
 
     # ========================================================
     # CUSTOMER SECURITY
