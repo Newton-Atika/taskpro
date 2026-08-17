@@ -19,9 +19,9 @@ import cloudinary
 load_dotenv()
 
 cloudinary.config(
-    cloud_name="dvg4cttcl",
-    api_key="433563769388989",
-    api_secret="eJePBi_9nVmvSEpU9XoUXakqDkI",
+    cloud_name=os.environ["cloud_name"],
+    api_key=os.environ["api_key"],
+    api_secret=os.environ["api_secret"],
     secure=True,
 )
 
@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wzkdp_l_v=_*kz0=-u&)cd$%cspd7g=k1#-zss51!%_95p-fhs'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'workload.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASE_URL = "postgresql://neondb_owner:npg_iOWLwIVya0Q3@ep-calm-heart-aw06pfqr-pooler.c-12.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require"
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 if DATABASE_URL:
     DATABASES = {
@@ -168,9 +168,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 # PAYSTACK
 # ============================================================
 
-PAYSTACK_SECRET_KEY = "sk_test_d50b2d43213a91922470eee1eea7fee305c3beff"
+PAYSTACK_SECRET_KEY = os.environ["PAYSTACK_SECRET_KEY"]
 
-PAYSTACK_PUBLIC_KEY = "pk_test_1add01d278e4485c17af0931cb678675e56eed61"
+PAYSTACK_PUBLIC_KEY = os.environ["PAYSTACK_PUBLIC_KEY"]
 
 PAYSTACK_BASE_URL = "https://api.paystack.co"
 
@@ -178,9 +178,8 @@ PAYSTACK_BASE_URL = "https://api.paystack.co"
 # WEB PUSH / VAPID
 # ============================================================
 
-WEBPUSH_VAPID_PUBLIC_KEY = "<cryptography.hazmat.bindings._rust.openssl.ec.ECPublicKey object at 0x000001F95505D050>"
-
-WEBPUSH_VAPID_PRIVATE_KEY = "<cryptography.hazmat.bindings._rust.openssl.ec.ECPrivateKey object at 0x000001F9513BDBF0>"
+WEBPUSH_VAPID_PUBLIC_KEY = os.environ["WEBPUSH_VAPID_PUBLIC_KEY"]
+WEBPUSH_VAPID_PRIVATE_KEY = os.environ["WEBPUSH_VAPID_PRIVATE_KEY"]
 
 WEBPUSH_VAPID_CLAIMS = {
     "sub": "mailto:newtonatika@gmail.com"
@@ -188,6 +187,7 @@ WEBPUSH_VAPID_CLAIMS = {
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.vercel.app",
+    "https://www.taskpro.space",
 ]
 
 STORAGES = {
