@@ -43,7 +43,7 @@ ALLOWED_HOSTS = [
     ".vercel.app",
     "localhost",
     "127.0.0.1",
-    "www.taskpro.space/"
+    "www.taskpro.space"
 ]
 
 AUTH_USER_MODEL = "accounts.CustomUser"
