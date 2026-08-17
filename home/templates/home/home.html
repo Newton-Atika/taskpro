@@ -856,23 +856,34 @@
 
     <div class="container">
 
+        <!-- =====================================================
+             BRAND
+        ====================================================== -->
+
         <a
-            class="navbar-brand fw-bold"
+            class="navbar-brand fw-bold d-flex align-items-center"
             href="{% url 'home' %}"
         >
 
-            <i class="fa-solid fa-briefcase"></i>
+            <i class="fa-solid fa-briefcase me-2"></i>
 
-            Workload
+            <span>Workload</span>
 
         </a>
 
+
+        <!-- =====================================================
+             MOBILE NAVBAR TOGGLER
+        ====================================================== -->
 
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#nav"
+            aria-controls="nav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
         >
 
             <span class="navbar-toggler-icon"></span>
@@ -880,12 +891,20 @@
         </button>
 
 
+        <!-- =====================================================
+             NAVIGATION
+        ====================================================== -->
+
         <div
             class="collapse navbar-collapse"
             id="nav"
         >
 
-            <ul class="navbar-nav ms-auto">
+            <!-- =================================================
+                 MAIN NAVIGATION LINKS
+            ================================================== -->
+
+            <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
 
                 <li class="nav-item">
 
@@ -949,23 +968,40 @@
             </ul>
 
 
-            <div class="ms-3 d-flex align-items-center gap-2">
+            <!-- =================================================
+                 USER / AUTHENTICATION AREA
+            ================================================== -->
+
+            <div
+                class="
+                    navbar-user-area
+                    d-flex
+                    align-items-center
+                    gap-2
+                "
+            >
 
                 {% if user.is_authenticated %}
 
 
-                    <!-- =================================================
-                         NOTIFICATION BUTTON
-                    ================================================= -->
+                    <!-- =========================================
+                         NOTIFICATIONS
+                    ========================================== -->
 
-                    <div class="dropdown">
+                    <div class="dropdown notification-wrapper">
 
                         <button
-                            class="btn btn-dark position-relative"
+                            class="
+                                btn
+                                btn-dark
+                                position-relative
+                                notification-button
+                            "
                             type="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                             id="notificationButton"
+                            title="Notifications"
                         >
 
                             <i class="fa-solid fa-bell"></i>
@@ -973,7 +1009,16 @@
 
                             <span
                                 id="notificationBadge"
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+                                class="
+                                    position-absolute
+                                    top-0
+                                    start-100
+                                    translate-middle
+                                    badge
+                                    rounded-pill
+                                    bg-danger
+                                    d-none
+                                "
                             >
                                 0
                             </span>
@@ -981,13 +1026,29 @@
                         </button>
 
 
+                        <!-- =====================================
+                             NOTIFICATION DROPDOWN
+                        ====================================== -->
+
                         <div
-                            class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
-                            style="width: 380px; max-height: 500px; overflow-y: auto;"
+                            class="
+                                dropdown-menu
+                                dropdown-menu-end
+                                shadow
+                                notification-dropdown
+                            "
                         >
 
                             <div
-                                class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom"
+                                class="
+                                    notification-header
+                                    d-flex
+                                    justify-content-between
+                                    align-items-center
+                                    px-3
+                                    py-2
+                                    border-bottom
+                                "
                             >
 
                                 <strong>
@@ -997,7 +1058,12 @@
 
                                 <button
                                     type="button"
-                                    class="btn btn-sm btn-link text-decoration-none"
+                                    class="
+                                        btn
+                                        btn-sm
+                                        btn-link
+                                        text-decoration-none
+                                    "
                                     id="markAllReadButton"
                                 >
 
@@ -1010,9 +1076,22 @@
 
                             <div id="notificationList">
 
-                                <div class="text-center text-muted p-4">
+                                <div
+                                    class="
+                                        text-center
+                                        text-muted
+                                        p-4
+                                    "
+                                >
 
-                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    <i
+                                        class="
+                                            fa-solid
+                                            fa-spinner
+                                            fa-spin
+                                            me-1
+                                        "
+                                    ></i>
 
                                     Loading notifications...
 
@@ -1025,24 +1104,35 @@
                     </div>
 
 
-                    <!-- =================================================
+                    <!-- =========================================
                          ENABLE BROWSER NOTIFICATIONS
-                    ================================================= -->
+                    ========================================== -->
 
                     <button
                         id="enableNotificationsButton"
                         type="button"
-                        class="btn btn-outline-light btn-sm"
+                        class="
+                            btn
+                            btn-outline-light
+                            btn-sm
+                            notification-enable-button
+                        "
                     >
 
                         <i class="fa-solid fa-bell me-1"></i>
 
-                        Enable Notifications
+                        <span>
+                            Enable Notifications
+                        </span>
 
                     </button>
 
 
-                    <span class="text-white me-2">
+                    <!-- =========================================
+                         WELCOME MESSAGE
+                    ========================================== -->
+
+                    <span class="text-white welcome-user">
 
                         Welcome,
                         {{ user.full_name }}
@@ -1050,9 +1140,17 @@
                     </span>
 
 
+                    <!-- =========================================
+                         LOGOUT
+                    ========================================== -->
+
                     <a
                         href="{% url 'logout' %}"
-                        class="btn btn-outline-danger"
+                        class="
+                            btn
+                            btn-outline-danger
+                            logout-button
+                        "
                     >
 
                         Logout
@@ -1063,9 +1161,17 @@
                 {% else %}
 
 
+                    <!-- =========================================
+                         LOGIN
+                    ========================================== -->
+
                     <a
                         href="{% url 'login' %}"
-                        class="btn btn-outline-light me-2"
+                        class="
+                            btn
+                            btn-outline-light
+                            login-button
+                        "
                     >
 
                         Login
@@ -1073,9 +1179,17 @@
                     </a>
 
 
+                    <!-- =========================================
+                         SIGN UP
+                    ========================================== -->
+
                     <a
                         href="{% url 'register' %}"
-                        class="btn btn-warning me-2"
+                        class="
+                            btn
+                            btn-warning
+                            signup-button
+                        "
                     >
 
                         Sign Up
@@ -1083,9 +1197,17 @@
                     </a>
 
 
+                    <!-- =========================================
+                         SUBMIT TASK
+                    ========================================== -->
+
                     <a
                         href="{% url 'submit_task' %}"
-                        class="btn btn-success"
+                        class="
+                            btn
+                            btn-success
+                            submit-task-button
+                        "
                     >
 
                         Submit Task
@@ -1103,6 +1225,392 @@
 
 </nav>
 
+
+<!-- =========================================================
+     NAVBAR MOBILE STYLING
+========================================================= -->
+
+<style>
+
+    /* =========================================================
+       GENERAL NAVBAR
+    ========================================================== */
+
+    .navbar {
+        position: relative;
+        z-index: 1050;
+    }
+
+
+    .navbar-brand {
+        white-space: nowrap;
+    }
+
+
+    .navbar-brand i {
+        font-size: 17px;
+    }
+
+
+    .navbar-nav .nav-link {
+        padding-left: 10px;
+        padding-right: 10px;
+        transition: background-color .2s ease;
+        border-radius: 6px;
+    }
+
+
+    .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, .08);
+    }
+
+
+    /* =========================================================
+       USER AREA
+    ========================================================== */
+
+    .navbar-user-area {
+        margin-left: 16px;
+    }
+
+
+    .notification-button {
+        width: 42px;
+        height: 42px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        padding: 0;
+    }
+
+
+    .notification-button:hover {
+        background: #343a40;
+    }
+
+
+    .notification-enable-button {
+        white-space: nowrap;
+    }
+
+
+    .welcome-user {
+        white-space: nowrap;
+    }
+
+
+    .logout-button,
+    .login-button,
+    .signup-button,
+    .submit-task-button {
+        white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       NOTIFICATION DROPDOWN
+    ========================================================== */
+
+    .notification-wrapper {
+        position: relative;
+    }
+
+
+    .notification-dropdown {
+        width: 380px;
+        max-width: calc(100vw - 30px);
+
+        max-height: 500px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        border: none;
+        border-radius: 12px;
+
+        padding: 0;
+
+        z-index: 1100;
+    }
+
+
+    .notification-header {
+        position: sticky;
+        top: 0;
+
+        background: #ffffff;
+
+        z-index: 2;
+    }
+
+
+    .notification-header strong {
+        color: #212529;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================== */
+
+    @media (max-width: 991.98px) {
+
+        .navbar-collapse {
+            margin-top: 12px;
+
+            padding: 15px;
+
+            background: #212529;
+
+            border-radius: 10px;
+        }
+
+
+        .navbar-nav {
+            width: 100%;
+        }
+
+
+        .navbar-nav .nav-item {
+            width: 100%;
+        }
+
+
+        .navbar-nav .nav-link {
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border-radius: 7px;
+        }
+
+
+        /* -----------------------------------------
+           USER AREA
+        ------------------------------------------ */
+
+        .navbar-user-area {
+
+            width: 100%;
+
+            margin-left: 0;
+
+            padding-top: 12px;
+
+            border-top: 1px solid rgba(255,255,255,.12);
+
+            display: flex !important;
+
+            flex-direction: column;
+
+            align-items: stretch !important;
+
+            gap: 8px !important;
+        }
+
+
+        /* -----------------------------------------
+           NOTIFICATION BUTTON
+        ------------------------------------------ */
+
+        .notification-wrapper {
+            width: 100%;
+        }
+
+
+        .notification-button {
+
+            width: 100%;
+            height: 44px;
+
+            border-radius: 7px;
+
+            justify-content: flex-start;
+
+            padding: 0 14px;
+        }
+
+
+        .notification-button i {
+            margin-right: 8px;
+        }
+
+
+        .notification-button::after {
+
+            content: "Notifications";
+
+            font-family: 'Segoe UI', sans-serif;
+
+            font-size: 14px;
+        }
+
+
+        /* -----------------------------------------
+           NOTIFICATION DROPDOWN
+        ------------------------------------------ */
+
+        .notification-dropdown {
+
+            position: absolute !important;
+
+            left: 0 !important;
+            right: auto !important;
+
+            width: 100%;
+
+            max-width: 100%;
+
+            max-height: 65vh;
+
+            margin-top: 5px;
+        }
+
+
+        /* -----------------------------------------
+           ENABLE NOTIFICATIONS
+        ------------------------------------------ */
+
+        .notification-enable-button {
+
+            width: 100%;
+
+            min-height: 42px;
+        }
+
+
+        /* -----------------------------------------
+           WELCOME
+        ------------------------------------------ */
+
+        .welcome-user {
+
+            display: block;
+
+            width: 100%;
+
+            padding: 9px 12px;
+
+            background: rgba(255,255,255,.05);
+
+            border-radius: 7px;
+
+            text-align: left;
+        }
+
+
+        /* -----------------------------------------
+           BUTTONS
+        ------------------------------------------ */
+
+        .logout-button,
+        .login-button,
+        .signup-button,
+        .submit-task-button {
+
+            width: 100%;
+
+            min-height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+    }
+
+
+    /* =========================================================
+       SMALL PHONES
+    ========================================================== */
+
+    @media (max-width: 576px) {
+
+        .navbar {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+
+        .navbar-brand {
+            font-size: 18px;
+        }
+
+
+        .navbar-toggler {
+            padding: 6px 9px;
+
+            border-radius: 7px;
+        }
+
+
+        .navbar-collapse {
+
+            margin-top: 10px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+        }
+
+
+        .notification-dropdown {
+
+            max-height: 60vh;
+        }
+
+
+        .notification-header {
+
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+
+
+        #notificationList {
+
+            font-size: 14px;
+        }
+
+    }
+
+
+    /* =========================================================
+       VERY SMALL PHONES
+    ========================================================== */
+
+    @media (max-width: 380px) {
+
+        .navbar-brand {
+            font-size: 17px;
+        }
+
+
+        .navbar-brand i {
+            font-size: 15px;
+        }
+
+
+        .navbar-toggler {
+            padding: 5px 8px;
+        }
+
+
+        .notification-dropdown {
+
+            max-width: calc(100vw - 24px);
+
+            left: 0 !important;
+        }
+
+    }
+
+</style>
 
 <!-- =========================================================
      POPUP NOTIFICATION CONTAINER
