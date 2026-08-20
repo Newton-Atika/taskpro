@@ -214,4 +214,14 @@ urlpatterns = [
         views.task_detail,
         name="task_detail"
     ),
+
+    # ============================================================
+    # EDIT TASK
+    # ============================================================
+    
+    path(
+        "<int:task_id>/edit/",
+        views.edit_task,
+        name="edit_task"
+    ),
 ]
