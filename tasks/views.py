@@ -387,6 +387,95 @@ def submit_task(request):
     )
 
 
+
+# ============================================================
+# EDIT TASK — CUSTOMER
+# ============================================================
+
+@login_required
+def edit_task(request, task_id):
+
+    # --------------------------------------------------------
+    # GET TASK
+    #
+    # Only the customer who created the task can edit it.
+    # --------------------------------------------------------
+
+    task = get_object_or_404(
+        Task,
+        id=task_id,
+        customer=request.user
+    )
+
+    # --------------------------------------------------------
+    # ONLY ALLOW EDITING BEFORE WORK HAS PROGRESSED
+    # --------------------------------------------------------
+
+    editable_statuses = [
+        "submitted",
+        "quoted",
+    ]
+
+    if task.status not in editable_statuses:
+
+        messages.error(
+            request,
+            "This task can no longer be edited because work has already progressed."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
+        )
+
+    # --------------------------------------------------------
+    # POST — SAVE CHANGES
+    # --------------------------------------------------------
+
+    if request.method == "POST":
+
+        form = TaskForm(
+            request.POST,
+            instance=task
+        )
+
+        if form.is_valid():
+
+            updated_task = form.save()
+
+            messages.success(
+                request,
+                "Your task has been updated successfully."
+            )
+
+            return redirect(
+                "task_detail",
+                task_id=updated_task.id
+            )
+
+    # --------------------------------------------------------
+    # GET — SHOW EXISTING INFORMATION
+    # --------------------------------------------------------
+
+    else:
+
+        form = TaskForm(
+            instance=task
+        )
+
+    # --------------------------------------------------------
+    # RENDER PAGE
+    # --------------------------------------------------------
+
+    return render(
+        request,
+        "tasks/edit_task.html",
+        {
+            "form": form,
+            "task": task,
+        }
+    )
+
 # ============================================================
 # MY TASKS — CUSTOMER
 # ============================================================
