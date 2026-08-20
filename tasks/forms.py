@@ -3,6 +3,10 @@ from django import forms
 from .models import Task, TaskDocument
 
 
+# ============================================================
+# TASK FORM
+# ============================================================
+
 class TaskForm(forms.ModelForm):
 
     class Meta:
@@ -59,6 +63,10 @@ class TaskForm(forms.ModelForm):
             ),
         }
 
+
+# ============================================================
+# TASK DOCUMENT FORM
+# ============================================================
 
 class TaskDocumentForm(forms.ModelForm):
 
