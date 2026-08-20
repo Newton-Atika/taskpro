@@ -490,6 +490,202 @@ def edit_task(request, task_id):
             "documents": documents,
         }
     )
+
+
+
+# ============================================================
+# EDIT TASK DOCUMENT — CUSTOMER
+# ============================================================
+
+@login_required
+def edit_task_document(
+    request,
+    task_id,
+    document_id
+):
+
+    # --------------------------------------------------------
+    # GET TASK
+    #
+    # Only the task owner can edit the document.
+    # --------------------------------------------------------
+
+    task = get_object_or_404(
+        Task,
+        id=task_id,
+        customer=request.user
+    )
+
+    # --------------------------------------------------------
+    # LOCK EDITING
+    #
+    # Cannot edit after:
+    #
+    # 1. Quote acceptance
+    # 2. Staff assignment
+    # --------------------------------------------------------
+
+    if (
+        task.quoted_amount_accepted
+        or task.assigned_staff
+    ):
+
+        messages.error(
+            request,
+            "Documents can no longer be edited because "
+            "the quote has been accepted or the task "
+            "has already been assigned."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
+        )
+
+    # --------------------------------------------------------
+    # GET DOCUMENT
+    #
+    # Important: document must belong to this task.
+    # --------------------------------------------------------
+
+    document = get_object_or_404(
+        TaskDocument,
+        id=document_id,
+        task=task
+    )
+
+    # --------------------------------------------------------
+    # POST — UPDATE DOCUMENT
+    # --------------------------------------------------------
+
+    if request.method == "POST":
+
+        form = TaskDocumentForm(
+            request.POST,
+            request.FILES,
+            instance=document
+        )
+
+        if form.is_valid():
+
+            updated_document = form.save(
+                commit=False
+            )
+
+            # Keep original uploader if already set.
+            if not updated_document.uploaded_by:
+
+                updated_document.uploaded_by = (
+                    request.user
+                )
+
+            updated_document.save()
+
+            messages.success(
+                request,
+                "Document updated successfully."
+            )
+
+            return redirect(
+                "edit_task",
+                task_id=task.id
+            )
+
+    # --------------------------------------------------------
+    # GET — SHOW EXISTING DOCUMENT
+    # --------------------------------------------------------
+
+    else:
+
+        form = TaskDocumentForm(
+            instance=document
+        )
+
+    # --------------------------------------------------------
+    # RENDER PAGE
+    # --------------------------------------------------------
+
+    return render(
+        request,
+        "tasks/edit_task_document.html",
+        {
+            "task": task,
+            "document": document,
+            "form": form,
+        }
+    )
+
+
+# ============================================================
+# DELETE TASK DOCUMENT — CUSTOMER
+# ============================================================
+
+@login_required
+def delete_task_document(
+    request,
+    task_id,
+    document_id
+):
+
+    # --------------------------------------------------------
+    # GET TASK
+    # --------------------------------------------------------
+
+    task = get_object_or_404(
+        Task,
+        id=task_id,
+        customer=request.user
+    )
+
+    # --------------------------------------------------------
+    # LOCK EDITING
+    # --------------------------------------------------------
+
+    if (
+        task.quoted_amount_accepted
+        or task.assigned_staff
+    ):
+
+        messages.error(
+            request,
+            "Documents can no longer be deleted because "
+            "the quote has been accepted or the task "
+            "has already been assigned."
+        )
+
+        return redirect(
+            "task_detail",
+            task_id=task.id
+        )
+
+    # --------------------------------------------------------
+    # GET DOCUMENT
+    # --------------------------------------------------------
+
+    document = get_object_or_404(
+        TaskDocument,
+        id=document_id,
+        task=task
+    )
+
+    # --------------------------------------------------------
+    # ONLY ALLOW POST
+    # --------------------------------------------------------
+
+    if request.method == "POST":
+
+        document.delete()
+
+        messages.success(
+            request,
+            "Document deleted successfully."
+        )
+
+    return redirect(
+        "edit_task",
+        task_id=task.id
+    )
+
 # ============================================================
 # MY TASKS — CUSTOMER
 # ============================================================
