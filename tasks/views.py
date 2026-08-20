@@ -408,19 +408,25 @@ def edit_task(request, task_id):
     )
 
     # --------------------------------------------------------
-    # ONLY ALLOW EDITING BEFORE WORK HAS PROGRESSED
+    # LOCK EDITING
+    #
+    # Customer cannot edit if:
+    #
+    # 1. Quote has been accepted
+    # OR
+    # 2. Task has been assigned to staff
     # --------------------------------------------------------
 
-    editable_statuses = [
-        "submitted",
-        "quoted",
-    ]
-
-    if task.status not in editable_statuses:
+    if (
+        task.quoted_amount_accepted
+        or task.assigned_staff
+    ):
 
         messages.error(
             request,
-            "This task can no longer be edited because work has already progressed."
+            "This task can no longer be edited because "
+            "the quote has been accepted or the task "
+            "has already been assigned."
         )
 
         return redirect(
@@ -429,7 +435,7 @@ def edit_task(request, task_id):
         )
 
     # --------------------------------------------------------
-    # POST — SAVE CHANGES
+    # POST — SAVE TASK CHANGES
     # --------------------------------------------------------
 
     if request.method == "POST":
@@ -441,7 +447,7 @@ def edit_task(request, task_id):
 
         if form.is_valid():
 
-            updated_task = form.save()
+            form.save()
 
             messages.success(
                 request,
@@ -449,8 +455,8 @@ def edit_task(request, task_id):
             )
 
             return redirect(
-                "task_detail",
-                task_id=updated_task.id
+                "edit_task",
+                task_id=task.id
             )
 
     # --------------------------------------------------------
@@ -464,6 +470,14 @@ def edit_task(request, task_id):
         )
 
     # --------------------------------------------------------
+    # GET DOCUMENTS
+    # --------------------------------------------------------
+
+    documents = task.documents.all().order_by(
+        "-uploaded_at"
+    )
+
+    # --------------------------------------------------------
     # RENDER PAGE
     # --------------------------------------------------------
 
@@ -473,9 +487,9 @@ def edit_task(request, task_id):
         {
             "form": form,
             "task": task,
+            "documents": documents,
         }
     )
-
 # ============================================================
 # MY TASKS — CUSTOMER
 # ============================================================
