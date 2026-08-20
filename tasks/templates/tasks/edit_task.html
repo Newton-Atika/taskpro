@@ -1,0 +1,712 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        Edit Task | Workload
+    </title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        body {
+
+            font-family: "Segoe UI", sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f7fb,
+                    #eef2f7
+                );
+
+            color: #212529;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-brand {
+
+            font-size: 22px;
+
+        }
+
+
+        /* =====================================================
+           EDIT CARD
+        ====================================================== */
+
+        .edit-task-card {
+
+            border: none;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 12px 40px
+                rgba(0, 0, 0, 0.10);
+
+        }
+
+
+        .edit-task-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #6610f2
+                );
+
+            color: #ffffff;
+
+            padding: 25px 30px;
+
+        }
+
+
+        .edit-task-header h3 {
+
+            color: #ffffff;
+
+            margin-bottom: 5px;
+
+            font-weight: 700;
+
+        }
+
+
+        .edit-task-header p {
+
+            color:
+                rgba(255, 255, 255, 0.85);
+
+            margin-bottom: 0;
+
+        }
+
+
+        .edit-task-body {
+
+            background: #ffffff;
+
+            padding: 35px;
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        .form-label {
+
+            color: #212529;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-control,
+        .form-select {
+
+            min-height: 48px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid
+                #dee2e6;
+
+        }
+
+
+        textarea.form-control {
+
+            min-height: 150px;
+
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 0.2rem
+                rgba(13, 110, 253, 0.15);
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ====================================================== */
+
+        .btn-save {
+
+            background: #0d6efd;
+
+            border: none;
+
+            min-height: 48px;
+
+            padding:
+                10px 25px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+        }
+
+
+        .btn-save:hover {
+
+            background: #0b5ed7;
+
+        }
+
+
+        .btn-cancel {
+
+            min-height: 48px;
+
+            padding:
+                10px 25px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           ERRORS
+        ====================================================== */
+
+        .error-message {
+
+            color: #dc3545;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 576px) {
+
+            .edit-task-body {
+
+                padding: 20px;
+
+            }
+
+
+            .edit-task-header {
+
+                padding: 20px;
+
+            }
+
+
+            .action-buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .action-buttons .btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav
+        class="navbar navbar-dark bg-dark shadow-sm"
+    >
+
+        <div class="container">
+
+            <a
+                class="navbar-brand fw-bold"
+                href="{% url 'home' %}"
+            >
+
+                <i
+                    class="fa-solid fa-briefcase me-2"
+                ></i>
+
+                Workload
+
+            </a>
+
+
+            <a
+                href="{% url 'task_detail' task.id %}"
+                class="btn btn-outline-light btn-sm"
+            >
+
+                <i
+                    class="fa-solid fa-arrow-left me-1"
+                ></i>
+
+                Back to Task
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main
+        class="container py-4 py-md-5"
+    >
+
+        <div
+            class="row justify-content-center"
+        >
+
+            <div
+                class="col-12 col-lg-8"
+            >
+
+
+                <!-- =============================================
+                     EDIT TASK CARD
+                ============================================== -->
+
+                <div
+                    class="card edit-task-card"
+                >
+
+
+                    <!-- =========================================
+                         CARD HEADER
+                    ========================================== -->
+
+                    <div
+                        class="edit-task-header"
+                    >
+
+                        <h3>
+
+                            <i
+                                class="fa-solid fa-pen-to-square me-2"
+                            ></i>
+
+                            Edit Task
+
+                        </h3>
+
+
+                        <p>
+
+                            Update the details of your task and
+                            save your changes.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         CARD BODY
+                    ========================================== -->
+
+                    <div
+                        class="edit-task-body"
+                    >
+
+
+                        <!-- =====================================
+                             DJANGO MESSAGES
+                        ====================================== -->
+
+                        {% if messages %}
+
+                            {% for message in messages %}
+
+                                <div
+                                    class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                                    role="alert"
+                                >
+
+                                    {{ message }}
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                    ></button>
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% endif %}
+
+
+                        <!-- =====================================
+                             FORM
+                        ====================================== -->
+
+                        <form
+                            method="POST"
+                        >
+
+                            {% csrf_token %}
+
+
+                            <!-- =================================
+                                 NON-FIELD ERRORS
+                            ================================== -->
+
+                            {% if form.non_field_errors %}
+
+                                <div
+                                    class="alert alert-danger"
+                                >
+
+                                    {{ form.non_field_errors }}
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- =================================
+                                 TASK TITLE
+                            ================================== -->
+
+                            <div
+                                class="mb-4"
+                            >
+
+                                <label
+                                    for="{{ form.title.id_for_label }}"
+                                    class="form-label"
+                                >
+
+                                    Task Title
+
+                                </label>
+
+
+                                {{ form.title }}
+
+
+                                {% if form.title.errors %}
+
+                                    <div
+                                        class="error-message"
+                                    >
+
+                                        {{ form.title.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 CATEGORY
+                            ================================== -->
+
+                            <div
+                                class="mb-4"
+                            >
+
+                                <label
+                                    for="{{ form.category.id_for_label }}"
+                                    class="form-label"
+                                >
+
+                                    Category
+
+                                </label>
+
+
+                                {{ form.category }}
+
+
+                                {% if form.category.errors %}
+
+                                    <div
+                                        class="error-message"
+                                    >
+
+                                        {{ form.category.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 DESCRIPTION
+                            ================================== -->
+
+                            <div
+                                class="mb-4"
+                            >
+
+                                <label
+                                    for="{{ form.description.id_for_label }}"
+                                    class="form-label"
+                                >
+
+                                    Task Description
+
+                                </label>
+
+
+                                {{ form.description }}
+
+
+                                {% if form.description.errors %}
+
+                                    <div
+                                        class="error-message"
+                                    >
+
+                                        {{ form.description.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 DEADLINE
+                            ================================== -->
+
+                            <div
+                                class="mb-4"
+                            >
+
+                                <label
+                                    for="{{ form.deadline.id_for_label }}"
+                                    class="form-label"
+                                >
+
+                                    Deadline
+
+                                </label>
+
+
+                                {{ form.deadline }}
+
+
+                                {% if form.deadline.errors %}
+
+                                    <div
+                                        class="error-message"
+                                    >
+
+                                        {{ form.deadline.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 BUDGET
+                            ================================== -->
+
+                            <div
+                                class="mb-4"
+                            >
+
+                                <label
+                                    for="{{ form.budget.id_for_label }}"
+                                    class="form-label"
+                                >
+
+                                    Your Budget
+
+                                    <span
+                                        class="text-muted fw-normal"
+                                    >
+
+                                        (Optional)
+
+                                    </span>
+
+                                </label>
+
+
+                                <div
+                                    class="input-group"
+                                >
+
+                                    <span
+                                        class="input-group-text"
+                                    >
+
+                                        KES
+
+                                    </span>
+
+
+                                    {{ form.budget }}
+
+                                </div>
+
+
+                                {% if form.budget.errors %}
+
+                                    <div
+                                        class="error-message"
+                                    >
+
+                                        {{ form.budget.errors }}
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 ACTION BUTTONS
+                            ================================== -->
+
+                            <div
+                                class="d-flex gap-2 action-buttons pt-2"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary btn-save"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-floppy-disk me-2"
+                                    ></i>
+
+                                    Save Changes
+
+                                </button>
+
+
+                                <a
+                                    href="{% url 'task_detail' task.id %}"
+                                    class="btn btn-outline-secondary btn-cancel"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-xmark me-2"
+                                    ></i>
+
+                                    Cancel
+
+                                </a>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         BOOTSTRAP JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+</body>
+
+</html>
+```
