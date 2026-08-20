@@ -223,5 +223,26 @@ urlpatterns = [
         "<int:task_id>/edit/",
         views.edit_task,
         name="edit_task"
+    ),    
+    
+    # ============================================================
+    # EDIT TASK DOCUMENT
+    # ============================================================
+    
+    path(
+        "<int:task_id>/documents/<int:document_id>/edit/",
+        views.edit_task_document,
+        name="edit_task_document"
+    ),
+    
+    
+    # ============================================================
+    # DELETE TASK DOCUMENT
+    # ============================================================
+    
+    path(
+        "<int:task_id>/documents/<int:document_id>/delete/",
+        views.delete_task_document,
+        name="delete_task_document"
     ),
 ]
