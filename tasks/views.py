@@ -455,7 +455,7 @@ def edit_task(request, task_id):
             )
 
             return redirect(
-                "edit_task",
+                "task_detail",
                 task_id=task.id
             )
 
