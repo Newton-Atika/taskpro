@@ -25,6 +25,74 @@
     >
 
     <style>
+        /* =========================
+           PLATFORM STATS
+        ========================= */
+        
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 45px;
+            margin-top: 45px;
+        }
+        
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1;
+            color: #ffffff;
+        }
+        
+        
+        .stat-label {
+            margin-top: 8px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.80);
+            font-weight: 500;
+        }
+        
+        
+        .stat-divider {
+            width: 1px;
+            height: 65px;
+            background: rgba(255, 255, 255, 0.35);
+        }
+        
+        
+        /* =========================
+           MOBILE
+        ========================= */
+        
+        @media (max-width: 576px) {
+        
+            .hero-stats {
+                gap: 20px;
+                margin-top: 35px;
+            }
+        
+        
+            .stat-number {
+                font-size: 30px;
+            }
+        
+        
+            .stat-label {
+                font-size: 12px;
+            }
+        
+        
+            .stat-divider {
+                height: 50px;
+            }
+        
+        }
 
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -1648,6 +1716,53 @@
                     and much more.
 
                 </p>
+                <!-- =====================================================
+                     PLATFORM STATS
+                ====================================================== -->
+                
+                <div class="hero-stats mt-5">
+                
+                    <div class="stat-item">
+                
+                        <div
+                            class="stat-number"
+                            data-target="1000"
+                            data-suffix="+"
+                        >
+                            0
+                        </div>
+                
+                        <div class="stat-label">
+                
+                            Clients Served
+                
+                        </div>
+                
+                    </div>
+                
+                
+                    <div class="stat-divider"></div>
+                
+                
+                    <div class="stat-item">
+                
+                        <div
+                            class="stat-number"
+                            data-target="100"
+                            data-suffix="+"
+                        >
+                            0
+                        </div>
+                
+                        <div class="stat-label">
+                
+                            Organizations Served
+                
+                        </div>
+                
+                    </div>
+                
+                </div>                
 
 
                 <div class="mt-4">
@@ -3750,7 +3865,80 @@ document.addEventListener(
 
 </script>
 
+<script>
 
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const counters = document.querySelectorAll(
+                ".stat-number"
+            );
+
+
+            counters.forEach(function (counter) {
+
+                const target = parseInt(
+                    counter.getAttribute(
+                        "data-target"
+                    )
+                );
+
+                const suffix =
+                    counter.getAttribute(
+                        "data-suffix"
+                    ) || "";
+
+
+                let current = 0;
+
+
+                const duration = 2000;
+
+                const increment =
+                    Math.max(
+                        1,
+                        Math.ceil(
+                            target / (
+                                duration / 20
+                            )
+                        )
+                    );
+
+
+                const timer = setInterval(
+                    function () {
+
+                        current += increment;
+
+
+                        if (current >= target) {
+
+                            counter.textContent =
+                                target.toLocaleString()
+                                + suffix;
+
+                            clearInterval(timer);
+
+                        } else {
+
+                            counter.textContent =
+                                current.toLocaleString();
+
+                        }
+
+                    },
+                    20
+                );
+
+            });
+
+        }
+    );
+
+</script>
+
+    
 </body>
 
 </html>
