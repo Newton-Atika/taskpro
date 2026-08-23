@@ -25,6 +25,1356 @@
     >
 
     <style>
+
+        /* =========================================================
+           OUR WORK / PORTFOLIO
+        ========================================================= */
+        
+        .our-work-section {
+        
+            padding: 100px 0;
+        
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f5f8fc 100%
+                );
+        
+        }
+        
+        
+        .our-work-header {
+        
+            max-width: 800px;
+        
+            margin:
+                0 auto
+                55px;
+        
+        }
+        
+        
+        .portfolio-label {
+        
+            display: inline-flex;
+        
+            align-items: center;
+        
+            gap: 8px;
+        
+            background: rgba(13, 110, 253, 0.1);
+        
+            color: #0d6efd;
+        
+            padding:
+                8px 16px;
+        
+            border-radius: 50px;
+        
+            font-size: 12px;
+        
+            font-weight: 700;
+        
+            letter-spacing: 1px;
+        
+            margin-bottom: 18px;
+        
+        }
+        
+        
+        .our-work-header h2 {
+        
+            font-size: 42px;
+        
+            font-weight: 800;
+        
+            color: #212529;
+        
+            margin-bottom: 15px;
+        
+        }
+        
+        
+        .our-work-header p {
+        
+            color: #6c757d;
+        
+            font-size: 18px;
+        
+            line-height: 1.7;
+        
+        }
+        
+        
+        /* =========================================================
+           PORTFOLIO CARD
+        ========================================================= */
+        
+        .portfolio-card {
+        
+            height: 100%;
+        
+            background: #ffffff;
+        
+            border-radius: 20px;
+        
+            overflow: hidden;
+        
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.08);
+        
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        
+        }
+        
+        
+        .portfolio-card:hover {
+        
+            transform:
+                translateY(-10px);
+        
+            box-shadow:
+                0 22px 50px
+                rgba(0, 0, 0, 0.14);
+        
+        }
+        
+        
+        /* =========================================================
+           PREVIEW
+        ========================================================= */
+        
+        .portfolio-preview {
+        
+            position: relative;
+        
+            min-height: 300px;
+        
+            padding: 20px;
+        
+            overflow: hidden;
+        
+        }
+        
+        
+        .dashboard-preview {
+        
+            background:
+                linear-gradient(
+                    135deg,
+                    #edf7f0,
+                    #dff3e5
+                );
+        
+        }
+        
+        
+        .presentation-preview {
+        
+            background:
+                linear-gradient(
+                    135deg,
+                    #edf3ff,
+                    #e7e0ff
+                );
+        
+        }
+        
+        
+        .evaluation-preview {
+        
+            background:
+                linear-gradient(
+                    135deg,
+                    #effaf5,
+                    #e3f6ee
+                );
+        
+        }
+        
+        
+        .preview-badge {
+        
+            position: absolute;
+        
+            top: 15px;
+        
+            right: 15px;
+        
+            display: flex;
+        
+            align-items: center;
+        
+            gap: 6px;
+        
+            background: rgba(25, 135, 84, 0.95);
+        
+            color: #ffffff;
+        
+            padding:
+                6px 10px;
+        
+            border-radius: 50px;
+        
+            font-size: 9px;
+        
+            font-weight: 700;
+        
+            letter-spacing: .5px;
+        
+        }
+        
+        
+        .powerpoint-badge {
+        
+            background: rgba(220, 53, 69, 0.95);
+        
+        }
+        
+        
+        .evaluation-badge {
+        
+            background: rgba(13, 110, 253, 0.95);
+        
+        }
+        
+        
+        /* =========================================================
+           EXCEL DASHBOARD
+        ========================================================= */
+        
+        .dashboard-window {
+        
+            background: #ffffff;
+        
+            border-radius: 10px;
+        
+            overflow: hidden;
+        
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.15);
+        
+        }
+        
+        
+        .dashboard-topbar {
+        
+            background: #198754;
+        
+            color: #ffffff;
+        
+            display: flex;
+        
+            justify-content: space-between;
+        
+            padding: 10px;
+        
+            font-size: 9px;
+        
+            font-weight: 600;
+        
+        }
+        
+        
+        .dashboard-brand {
+        
+            display: flex;
+        
+            align-items: center;
+        
+            gap: 5px;
+        
+        }
+        
+        
+        .dashboard-kpis {
+        
+            display: grid;
+        
+            grid-template-columns:
+                repeat(3, 1fr);
+        
+            gap: 6px;
+        
+            padding: 10px;
+        
+        }
+        
+        
+        .dashboard-kpi {
+        
+            background: #f8f9fa;
+        
+            padding: 8px;
+        
+            border-radius: 6px;
+        
+        }
+        
+        
+        .dashboard-kpi span {
+        
+            display: block;
+        
+            font-size: 7px;
+        
+            color: #6c757d;
+        
+        }
+        
+        
+        .dashboard-kpi strong {
+        
+            display: block;
+        
+            font-size: 16px;
+        
+            color: #212529;
+        
+            margin: 3px 0;
+        
+        }
+        
+        
+        .dashboard-kpi small {
+        
+            font-size: 7px;
+        
+            color: #6c757d;
+        
+        }
+        
+        
+        .positive {
+        
+            color: #198754 !important;
+        
+        }
+        
+        
+        .dashboard-charts {
+        
+            display: grid;
+        
+            grid-template-columns:
+                1.5fr 1fr;
+        
+            gap: 8px;
+        
+            padding:
+                0 10px
+                10px;
+        
+        }
+        
+        
+        .mini-chart {
+        
+            background: #f8f9fa;
+        
+            border-radius: 6px;
+        
+            padding: 8px;
+        
+        }
+        
+        
+        .chart-title {
+        
+            font-size: 8px;
+        
+            font-weight: 600;
+        
+            margin-bottom: 8px;
+        
+        }
+        
+        
+        .bar-chart {
+        
+            height: 65px;
+        
+            display: flex;
+        
+            align-items: end;
+        
+            justify-content: space-around;
+        
+            gap: 5px;
+        
+        }
+        
+        
+        .chart-bar {
+        
+            flex: 1;
+        
+            height: 100%;
+        
+            display: flex;
+        
+            align-items: end;
+        
+        }
+        
+        
+        .chart-bar span {
+        
+            width: 100%;
+        
+            background:
+                linear-gradient(
+                    180deg,
+                    #198754,
+                    #6fda9a
+                );
+        
+            border-radius:
+                3px 3px
+                0 0;
+        
+        }
+        
+        
+        .chart-bar:nth-child(1) span {
+        
+            height: 45%;
+        
+        }
+        
+        
+        .chart-bar:nth-child(2) span {
+        
+            height: 65%;
+        
+        }
+        
+        
+        .chart-bar:nth-child(3) span {
+        
+            height: 55%;
+        
+        }
+        
+        
+        .chart-bar:nth-child(4) span {
+        
+            height: 80%;
+        
+        }
+        
+        
+        .chart-bar:nth-child(5) span {
+        
+            height: 72%;
+        
+        }
+        
+        
+        .chart-bar:nth-child(6) span {
+        
+            height: 95%;
+        
+        }
+        
+        
+        .pie-area {
+        
+            display: flex;
+        
+            flex-direction: column;
+        
+            align-items: center;
+        
+        }
+        
+        
+        .fake-donut {
+        
+            width: 65px;
+        
+            height: 65px;
+        
+            border-radius: 50%;
+        
+            background:
+                conic-gradient(
+                    #198754 0 87%,
+                    #e9ecef 87% 100%
+                );
+        
+            display: flex;
+        
+            align-items: center;
+        
+            justify-content: center;
+        
+        }
+        
+        
+        .donut-center {
+        
+            width: 46px;
+        
+            height: 46px;
+        
+            background: #ffffff;
+        
+            border-radius: 50%;
+        
+            display: flex;
+        
+            align-items: center;
+        
+            justify-content: center;
+        
+            font-size: 10px;
+        
+            font-weight: 700;
+        
+        }
+        
+        
+        .dashboard-table {
+        
+            margin: 0 10px 10px;
+        
+            border-top:
+                1px solid #eeeeee;
+        
+        }
+        
+        
+        .table-row {
+        
+            display: grid;
+        
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+        
+            padding: 5px;
+        
+            font-size: 7px;
+        
+            border-bottom:
+                1px solid #f0f0f0;
+        
+        }
+        
+        
+        .table-heading {
+        
+            font-weight: 700;
+        
+            background: #f8f9fa;
+        
+        }
+        
+        
+        .positive-text {
+        
+            color: #198754;
+        
+            font-weight: 700;
+        
+        }
+        
+        
+        /* =========================================================
+           POWERPOINT
+        ========================================================= */
+        
+        .presentation-window {
+        
+            background: #ffffff;
+        
+            border-radius: 8px;
+        
+            padding: 8px;
+        
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.15);
+        
+        }
+        
+        
+        .presentation-slide {
+        
+            min-height: 240px;
+        
+            padding: 22px;
+        
+            border-radius: 4px;
+        
+            background:
+                linear-gradient(
+                    135deg,
+                    #002060,
+                    #006471
+                );
+        
+            color: #ffffff;
+        
+        }
+        
+        
+        .presentation-slide-header {
+        
+            display: flex;
+        
+            justify-content: space-between;
+        
+            font-size: 8px;
+        
+            font-weight: 700;
+        
+            letter-spacing: 1px;
+        
+        }
+        
+        
+        .presentation-slide h3 {
+        
+            color: #ffffff;
+        
+            font-size: 23px;
+        
+            font-weight: 800;
+        
+            margin:
+                28px 0
+                6px;
+        
+        }
+        
+        
+        .presentation-subtitle {
+        
+            font-size: 9px;
+        
+            color:
+                rgba(255, 255, 255, 0.75);
+        
+        }
+        
+        
+        .presentation-stats {
+        
+            display: grid;
+        
+            grid-template-columns:
+                repeat(3, 1fr);
+        
+            gap: 6px;
+        
+            margin-top: 20px;
+        
+        }
+        
+        
+        .presentation-stats div {
+        
+            background:
+                rgba(255, 255, 255, 0.12);
+        
+            padding: 8px;
+        
+            border-radius: 5px;
+        
+        }
+        
+        
+        .presentation-stats strong {
+        
+            display: block;
+        
+            color: #00ffcc;
+        
+            font-size: 17px;
+        
+        }
+        
+        
+        .presentation-stats span {
+        
+            font-size: 7px;
+        
+            color:
+                rgba(255, 255, 255, 0.8);
+        
+        }
+        
+        
+        .presentation-bottom {
+        
+            display: flex;
+        
+            align-items: end;
+        
+            justify-content: space-between;
+        
+            margin-top: 18px;
+        
+        }
+        
+        
+        .presentation-chart {
+        
+            display: flex;
+        
+            align-items: end;
+        
+            gap: 5px;
+        
+            height: 38px;
+        
+        }
+        
+        
+        .presentation-chart div {
+        
+            width: 12px;
+        
+            background: #00ffcc;
+        
+            border-radius:
+                3px 3px
+                0 0;
+        
+        }
+        
+        
+        .presentation-chart div:nth-child(1) {
+        
+            height: 35%;
+        
+        }
+        
+        
+        .presentation-chart div:nth-child(2) {
+        
+            height: 55%;
+        
+        }
+        
+        
+        .presentation-chart div:nth-child(3) {
+        
+            height: 70%;
+        
+        }
+        
+        
+        .presentation-chart div:nth-child(4) {
+        
+            height: 100%;
+        
+        }
+        
+        
+        .presentation-highlight {
+        
+            display: flex;
+        
+            align-items: center;
+        
+            gap: 5px;
+        
+            font-size: 7px;
+        
+            color: #00ffcc;
+        
+        }
+        
+        
+        .slide-dots {
+        
+            display: flex;
+        
+            justify-content: center;
+        
+            gap: 5px;
+        
+            padding-top: 8px;
+        
+        }
+        
+        
+        .slide-dots span {
+        
+            width: 5px;
+        
+            height: 5px;
+        
+            border-radius: 50%;
+        
+            background: #cccccc;
+        
+        }
+        
+        
+        .slide-dots .active {
+        
+            width: 15px;
+        
+            border-radius: 10px;
+        
+            background: #0d6efd;
+        
+        }
+        
+        
+        /* =========================================================
+           EVALUATION MODEL
+        ========================================================= */
+        
+        .evaluation-window {
+        
+            background: #ffffff;
+        
+            border-radius: 12px;
+        
+            padding: 15px;
+        
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.12);
+        
+        }
+        
+        
+        .evaluation-header {
+        
+            display: flex;
+        
+            justify-content: space-between;
+        
+            align-items: start;
+        
+        }
+        
+        
+        .small-label {
+        
+            color: #6c757d;
+        
+            font-size: 8px;
+        
+            font-weight: 700;
+        
+            letter-spacing: 1px;
+        
+        }
+        
+        
+        .evaluation-header h5 {
+        
+            margin: 4px 0;
+        
+            font-size: 16px;
+        
+            font-weight: 700;
+        
+        }
+        
+        
+        .evaluation-status {
+        
+            font-size: 8px;
+        
+            color: #198754;
+        
+            background: #e7f7ed;
+        
+            padding: 5px 7px;
+        
+            border-radius: 20px;
+        
+        }
+        
+        
+        .before-after {
+        
+            display: grid;
+        
+            grid-template-columns:
+                1fr auto 1fr;
+        
+            align-items: center;
+        
+            gap: 8px;
+        
+            margin: 18px 0;
+        
+        }
+        
+        
+        .before-box,
+        .after-box {
+        
+            padding: 10px;
+        
+            border-radius: 8px;
+        
+            text-align: center;
+        
+        }
+        
+        
+        .before-box {
+        
+            background: #fff0f0;
+        
+        }
+        
+        
+        .after-box {
+        
+            background: #e8f8ee;
+        
+        }
+        
+        
+        .before-box span,
+        .after-box span {
+        
+            display: block;
+        
+            font-size: 8px;
+        
+            font-weight: 700;
+        
+        }
+        
+        
+        .before-box strong {
+        
+            display: block;
+        
+            color: #dc3545;
+        
+            font-size: 25px;
+        
+        }
+        
+        
+        .after-box strong {
+        
+            display: block;
+        
+            color: #198754;
+        
+            font-size: 25px;
+        
+        }
+        
+        
+        .before-box small,
+        .after-box small {
+        
+            font-size: 7px;
+        
+            color: #6c757d;
+        
+        }
+        
+        
+        .arrow-box {
+        
+            color: #0d6efd;
+        
+        }
+        
+        
+        .trend-title {
+        
+            font-size: 9px;
+        
+            font-weight: 700;
+        
+        }
+        
+        
+        .trend-chart {
+        
+            height: 85px;
+        
+            margin-top: 5px;
+        
+        }
+        
+        
+        .trend-chart svg {
+        
+            width: 100%;
+        
+            height: 100%;
+        
+        }
+        
+        
+        .trend-labels {
+        
+            display: flex;
+        
+            justify-content: space-between;
+        
+            font-size: 7px;
+        
+            color: #6c757d;
+        
+        }
+        
+        
+        .evaluation-result {
+        
+            margin-top: 12px;
+        
+            display: flex;
+        
+            align-items: center;
+        
+            gap: 7px;
+        
+            background: #f1f8f4;
+        
+            color: #198754;
+        
+            padding: 9px;
+        
+            border-radius: 7px;
+        
+            font-size: 8px;
+        
+        }
+        
+        
+        .evaluation-result i {
+        
+            font-size: 15px;
+        
+        }
+        
+        
+        /* =========================================================
+           PORTFOLIO CONTENT
+        ========================================================= */
+        
+        .portfolio-content {
+        
+            padding: 25px;
+        
+        }
+        
+        
+        .portfolio-icon {
+        
+            width: 48px;
+        
+            height: 48px;
+        
+            border-radius: 12px;
+        
+            display: flex;
+        
+            align-items: center;
+        
+            justify-content: center;
+        
+            font-size: 21px;
+        
+            margin-bottom: 18px;
+        
+        }
+        
+        
+        .excel-icon {
+        
+            background: #e7f7ed;
+        
+            color: #198754;
+        
+        }
+        
+        
+        .powerpoint-icon {
+        
+            background: #fff0f0;
+        
+            color: #dc3545;
+        
+        }
+        
+        
+        .evaluation-icon {
+        
+            background: #e9f2ff;
+        
+            color: #0d6efd;
+        
+        }
+        
+        
+        .portfolio-content h4 {
+        
+            font-size: 21px;
+        
+            font-weight: 700;
+        
+            color: #212529;
+        
+        }
+        
+        
+        .portfolio-content p {
+        
+            color: #6c757d;
+        
+            line-height: 1.7;
+        
+            font-size: 14px;
+        
+        }
+        
+        
+        .portfolio-tags {
+        
+            display: flex;
+        
+            flex-wrap: wrap;
+        
+            gap: 6px;
+        
+            margin-top: 18px;
+        
+        }
+        
+        
+        .portfolio-tags span {
+        
+            background: #f1f3f5;
+        
+            color: #6c757d;
+        
+            padding:
+                5px 9px;
+        
+            border-radius: 20px;
+        
+            font-size: 10px;
+        
+            font-weight: 600;
+        
+        }
+        
+        
+        /* =========================================================
+           AND MUCH MORE
+        ========================================================= */
+        
+        .portfolio-more {
+        
+            max-width: 850px;
+        
+            margin:
+                70px auto
+                0;
+        
+            padding:
+                50px 30px;
+        
+            border-radius: 24px;
+        
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #6610f2
+                );
+        
+            color: #ffffff;
+        
+            box-shadow:
+                0 20px 50px
+                rgba(13, 110, 253, 0.2);
+        
+        }
+        
+        
+        .portfolio-more-icon {
+        
+            width: 60px;
+        
+            height: 60px;
+        
+            margin:
+                0 auto
+                18px;
+        
+            border-radius: 50%;
+        
+            background:
+                rgba(255, 255, 255, 0.15);
+        
+            display: flex;
+        
+            align-items: center;
+        
+            justify-content: center;
+        
+            font-size: 24px;
+        
+            color: #ffffff;
+        
+        }
+        
+        
+        .portfolio-more h3 {
+        
+            color: #ffffff;
+        
+            font-size: 30px;
+        
+            font-weight: 800;
+        
+        }
+        
+        
+        .portfolio-more p {
+        
+            max-width: 700px;
+        
+            margin:
+                15px auto;
+        
+            color:
+                rgba(255, 255, 255, 0.85);
+        
+            line-height: 1.8;
+        
+        }
+        
+        
+        .portfolio-more-highlight {
+        
+            font-size: 17px;
+        
+            color: #ffffff !important;
+        
+        }
+        
+        
+        .portfolio-submit-button {
+        
+            margin-top: 15px;
+        
+            background: #ffffff;
+        
+            color: #0d6efd;
+        
+            border: none;
+        
+            font-weight: 700;
+        
+            padding:
+                13px 28px;
+        
+            border-radius: 10px;
+        
+        }
+        
+        
+        .portfolio-submit-button:hover {
+        
+            background: #f8f9fa;
+        
+            color: #0b5ed7;
+        
+        }
+        
+        
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+        
+        @media (max-width: 768px) {
+        
+            .our-work-section {
+        
+                padding: 65px 0;
+        
+            }
+        
+        
+            .our-work-header h2 {
+        
+                font-size: 30px;
+        
+            }
+        
+        
+            .our-work-header p {
+        
+                font-size: 16px;
+        
+            }
+        
+        
+            .portfolio-preview {
+        
+                min-height: 270px;
+        
+            }
+        
+        
+            .portfolio-more {
+        
+                margin-top: 40px;
+        
+                padding:
+                    40px 20px;
+        
+            }
+        
+        }
+        
+        
+        @media (max-width: 420px) {
+        
+            .dashboard-kpi strong {
+        
+                font-size: 13px;
+        
+            }
+        
+        
+            .presentation-slide {
+        
+                padding: 15px;
+        
+            }
+        
+        
+            .presentation-slide h3 {
+        
+                font-size: 19px;
+        
+            }
+        
+        
+            .portfolio-content {
+        
+                padding: 20px;
+        
+            }
+        
+        }
         /* =========================
            PLATFORM STATS
         ========================= */
@@ -1800,6 +3150,944 @@
                 >
 
             </div>
+
+            <!-- =========================================================
+                 OUR WORK / PORTFOLIO SECTION
+            ========================================================= -->
+            
+            <section class="our-work-section">
+            
+                <div class="container">
+            
+            
+                    <!-- =================================================
+                         SECTION HEADER
+                    ================================================== -->
+            
+                    <div class="text-center our-work-header">
+            
+                        <span class="portfolio-label">
+            
+                            <i class="fa-solid fa-briefcase"></i>
+            
+                            OUR WORK
+            
+                        </span>
+            
+            
+                        <h2>
+            
+                            See What We Can Help You Create
+            
+                        </h2>
+            
+            
+                        <p>
+            
+                            From powerful data dashboards and professional
+                            presentations to advanced analysis and evaluation
+                            models, we turn ideas and data into work you can
+                            confidently use.
+            
+                        </p>
+            
+                    </div>
+            
+            
+                    <!-- =================================================
+                         PORTFOLIO CARDS
+                    ================================================== -->
+            
+                    <div class="row g-4">
+            
+            
+                        <!-- =============================================
+                             EXCEL DASHBOARD
+                        ============================================== -->
+            
+                        <div class="col-lg-4 col-md-6">
+            
+                            <div class="portfolio-card">
+            
+            
+                                <div class="portfolio-preview dashboard-preview">
+            
+            
+                                    <!-- EXCEL WINDOW -->
+            
+                                    <div class="dashboard-window">
+            
+            
+                                        <!-- TOP BAR -->
+            
+                                        <div class="dashboard-topbar">
+            
+                                            <div class="dashboard-brand">
+            
+                                                <i class="fa-solid fa-chart-line"></i>
+            
+                                                Performance Dashboard
+            
+                                            </div>
+            
+            
+                                            <div class="dashboard-period">
+            
+                                                2026
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                        <!-- KPI CARDS -->
+            
+                                        <div class="dashboard-kpis">
+            
+            
+                                            <div class="dashboard-kpi">
+            
+                                                <span>
+            
+                                                    Total Clients
+            
+                                                </span>
+            
+                                                <strong>
+            
+                                                    12,486
+            
+                                                </strong>
+            
+                                                <small class="positive">
+            
+                                                    <i class="fa-solid fa-arrow-up"></i>
+            
+                                                    18.4%
+            
+                                                </small>
+            
+                                            </div>
+            
+            
+                                            <div class="dashboard-kpi">
+            
+                                                <span>
+            
+                                                    Achievement
+            
+                                                </span>
+            
+                                                <strong>
+            
+                                                    87%
+            
+                                                </strong>
+            
+                                                <small class="positive">
+            
+                                                    <i class="fa-solid fa-arrow-up"></i>
+            
+                                                    9.2%
+            
+                                                </small>
+            
+                                            </div>
+            
+            
+                                            <div class="dashboard-kpi">
+            
+                                                <span>
+            
+                                                    Target
+            
+                                                </span>
+            
+                                                <strong>
+            
+                                                    14,300
+            
+                                                </strong>
+            
+                                                <small>
+            
+                                                    Annual target
+            
+                                                </small>
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                        <!-- CHARTS -->
+            
+                                        <div class="dashboard-charts">
+            
+            
+                                            <div class="mini-chart">
+            
+                                                <div class="chart-title">
+            
+                                                    Monthly Performance
+            
+                                                </div>
+            
+            
+                                                <div class="bar-chart">
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+            
+                                                    <div class="chart-bar">
+            
+                                                        <span></span>
+            
+                                                    </div>
+            
+                                                </div>
+            
+                                            </div>
+            
+            
+                                            <div class="mini-chart pie-area">
+            
+                                                <div class="chart-title">
+            
+                                                    Performance
+            
+                                                </div>
+            
+            
+                                                <div class="fake-donut">
+            
+                                                    <div class="donut-center">
+            
+                                                        87%
+            
+                                                    </div>
+            
+                                                </div>
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                        <!-- TABLE -->
+            
+                                        <div class="dashboard-table">
+            
+                                            <div class="table-row table-heading">
+            
+                                                <span>Region</span>
+            
+                                                <span>Target</span>
+            
+                                                <span>Actual</span>
+            
+                                            </div>
+            
+            
+                                            <div class="table-row">
+            
+                                                <span>Central</span>
+            
+                                                <span>4,500</span>
+            
+                                                <span class="positive-text">
+            
+                                                    4,230
+            
+                                                </span>
+            
+                                            </div>
+            
+            
+                                            <div class="table-row">
+            
+                                                <span>Eastern</span>
+            
+                                                <span>3,800</span>
+            
+                                                <span class="positive-text">
+            
+                                                    3,410
+            
+                                                </span>
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                    </div>
+            
+            
+                                    <div class="preview-badge">
+            
+                                        <i class="fa-solid fa-file-excel"></i>
+            
+                                        DATA ANALYSIS
+            
+                                    </div>
+            
+                                </div>
+            
+            
+                                <div class="portfolio-content">
+            
+                                    <div class="portfolio-icon excel-icon">
+            
+                                        <i class="fa-solid fa-file-excel"></i>
+            
+                                    </div>
+            
+            
+                                    <h4>
+            
+                                        Interactive Excel Dashboard
+            
+                                    </h4>
+            
+            
+                                    <p>
+            
+                                        Clean, automated dashboards that turn
+                                        raw data into KPIs, charts, trends,
+                                        summaries and actionable insights.
+            
+                                    </p>
+            
+            
+                                    <div class="portfolio-tags">
+            
+                                        <span>Excel</span>
+            
+                                        <span>Power Query</span>
+            
+                                        <span>Dashboards</span>
+            
+                                        <span>Analytics</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- =============================================
+                             POWERPOINT PRESENTATION
+                        ============================================== -->
+            
+                        <div class="col-lg-4 col-md-6">
+            
+                            <div class="portfolio-card">
+            
+            
+                                <div class="portfolio-preview presentation-preview">
+            
+            
+                                    <!-- POWERPOINT WINDOW -->
+            
+                                    <div class="presentation-window">
+            
+            
+                                        <!-- SLIDE -->
+            
+                                        <div class="presentation-slide">
+            
+            
+                                            <div class="presentation-slide-header">
+            
+                                                <span>
+            
+                                                    PROJECT PERFORMANCE
+            
+                                                </span>
+            
+                                                <small>
+            
+                                                    Q2 2026
+            
+                                                </small>
+            
+                                            </div>
+            
+            
+                                            <h3>
+            
+                                                Key Results & Impact
+            
+                                            </h3>
+            
+            
+                                            <p class="presentation-subtitle">
+            
+                                                Turning performance data into
+                                                clear decisions.
+            
+                                            </p>
+            
+            
+                                            <div class="presentation-stats">
+            
+            
+                                                <div>
+            
+                                                    <strong>
+            
+                                                        84%
+            
+                                                    </strong>
+            
+                                                    <span>
+            
+                                                        Achievement
+            
+                                                    </span>
+            
+                                                </div>
+            
+            
+                                                <div>
+            
+                                                    <strong>
+            
+                                                        12K+
+            
+                                                    </strong>
+            
+                                                    <span>
+            
+                                                        Clients Reached
+            
+                                                    </span>
+            
+                                                </div>
+            
+            
+                                                <div>
+            
+                                                    <strong>
+            
+                                                        26
+            
+                                                    </strong>
+            
+                                                    <span>
+            
+                                                        Locations
+            
+                                                    </span>
+            
+                                                </div>
+            
+                                            </div>
+            
+            
+                                            <div class="presentation-bottom">
+            
+            
+                                                <div class="presentation-chart">
+            
+                                                    <div></div>
+            
+                                                    <div></div>
+            
+                                                    <div></div>
+            
+                                                    <div></div>
+            
+                                                </div>
+            
+            
+                                                <div class="presentation-highlight">
+            
+                                                    <i class="fa-solid fa-lightbulb"></i>
+            
+                                                    <span>
+            
+                                                        Data-driven decisions
+            
+                                                    </span>
+            
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+            
+            
+                                        <!-- SLIDE DOTS -->
+            
+                                        <div class="slide-dots">
+            
+                                            <span class="active"></span>
+            
+                                            <span></span>
+            
+                                            <span></span>
+            
+                                        </div>
+            
+                                    </div>
+            
+            
+                                    <div class="preview-badge powerpoint-badge">
+            
+                                        <i class="fa-solid fa-file-powerpoint"></i>
+            
+                                        PRESENTATIONS
+            
+                                    </div>
+            
+                                </div>
+            
+            
+                                <div class="portfolio-content">
+            
+                                    <div class="portfolio-icon powerpoint-icon">
+            
+                                        <i class="fa-solid fa-file-powerpoint"></i>
+            
+                                    </div>
+            
+            
+                                    <h4>
+            
+                                        Professional Presentations
+            
+                                    </h4>
+            
+            
+                                    <p>
+            
+                                        Beautiful, clear and professional
+                                        PowerPoint presentations for reports,
+                                        meetings, proposals, projects and
+                                        important decisions.
+            
+                                    </p>
+            
+            
+                                    <div class="portfolio-tags">
+            
+                                        <span>PowerPoint</span>
+            
+                                        <span>Reports</span>
+            
+                                        <span>Infographics</span>
+            
+                                        <span>Storytelling</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- =============================================
+                             EVALUATION MODEL
+                        ============================================== -->
+            
+                        <div class="col-lg-4 col-md-6">
+            
+                            <div class="portfolio-card">
+            
+            
+                                <div class="portfolio-preview evaluation-preview">
+            
+            
+                                    <!-- ANALYTICS WINDOW -->
+            
+                                    <div class="evaluation-window">
+            
+            
+                                        <div class="evaluation-header">
+            
+                                            <div>
+            
+                                                <span class="small-label">
+            
+                                                    PROGRAM EVALUATION
+            
+                                                </span>
+            
+            
+                                                <h5>
+            
+                                                    Impact Analysis
+            
+                                                </h5>
+            
+                                            </div>
+            
+            
+                                            <span class="evaluation-status">
+            
+                                                <i class="fa-solid fa-circle-check"></i>
+            
+                                                Complete
+            
+                                            </span>
+            
+                                        </div>
+            
+            
+                                        <!-- BEFORE AFTER -->
+            
+                                        <div class="before-after">
+            
+            
+                                            <div class="before-box">
+            
+                                                <span>
+            
+                                                    BEFORE
+            
+                                                </span>
+            
+            
+                                                <strong>
+            
+                                                    42%
+            
+                                                </strong>
+            
+            
+                                                <small>
+            
+                                                    Baseline Performance
+            
+                                                </small>
+            
+                                            </div>
+            
+            
+                                            <div class="arrow-box">
+            
+                                                <i class="fa-solid fa-arrow-right"></i>
+            
+                                            </div>
+            
+            
+                                            <div class="after-box">
+            
+                                                <span>
+            
+                                                    AFTER
+            
+                                                </span>
+            
+            
+                                                <strong>
+            
+                                                    78%
+            
+                                                </strong>
+            
+            
+                                                <small>
+            
+                                                    After Implementation
+            
+                                                </small>
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                        <!-- TREND GRAPH -->
+            
+                                        <div class="trend-area">
+            
+            
+                                            <div class="trend-title">
+            
+                                                Performance Trend
+            
+                                            </div>
+            
+            
+                                            <div class="trend-chart">
+            
+            
+                                                <svg
+                                                    viewBox="0 0 400 160"
+                                                    preserveAspectRatio="none"
+                                                >
+            
+                                                    <defs>
+            
+                                                        <linearGradient
+                                                            id="trendGradient"
+                                                            x1="0"
+                                                            y1="0"
+                                                            x2="0"
+                                                            y2="1"
+                                                        >
+            
+                                                            <stop
+                                                                offset="0%"
+                                                                stop-color="#198754"
+                                                                stop-opacity="0.35"
+                                                            />
+            
+                                                            <stop
+                                                                offset="100%"
+                                                                stop-color="#198754"
+                                                                stop-opacity="0"
+                                                            />
+            
+                                                        </linearGradient>
+            
+                                                    </defs>
+            
+            
+                                                    <path
+                                                        d="M0,135
+                                                           C30,130 45,125 70,122
+                                                           C100,120 120,110 145,100
+                                                           C170,90 180,80 205,78
+                                                           C230,75 245,60 270,52
+                                                           C300,42 330,30 400,18
+                                                           L400,160
+                                                           L0,160 Z"
+                                                        fill="url(#trendGradient)"
+                                                    />
+            
+            
+                                                    <path
+                                                        d="M0,135
+                                                           C30,130 45,125 70,122
+                                                           C100,120 120,110 145,100
+                                                           C170,90 180,80 205,78
+                                                           C230,75 245,60 270,52
+                                                           C300,42 330,30 400,18"
+                                                        fill="none"
+                                                        stroke="#198754"
+                                                        stroke-width="5"
+                                                        stroke-linecap="round"
+                                                    />
+            
+                                                </svg>
+            
+                                            </div>
+            
+            
+                                            <div class="trend-labels">
+            
+                                                <span>
+            
+                                                    Baseline
+            
+                                                </span>
+            
+            
+                                                <span>
+            
+                                                    Implementation
+            
+                                                </span>
+            
+            
+                                                <span>
+            
+                                                    Evaluation
+            
+                                                </span>
+            
+                                            </div>
+            
+                                        </div>
+            
+            
+                                        <!-- RESULT -->
+            
+                                        <div class="evaluation-result">
+            
+                                            <i class="fa-solid fa-arrow-trend-up"></i>
+            
+            
+                                            <span>
+            
+                                                <strong>
+            
+                                                    +36 percentage points
+            
+                                                </strong>
+            
+                                                improvement after implementation
+            
+                                            </span>
+            
+                                        </div>
+            
+            
+                                    </div>
+            
+            
+                                    <div class="preview-badge evaluation-badge">
+            
+                                        <i class="fa-solid fa-chart-line"></i>
+            
+                                        EVALUATION
+            
+                                    </div>
+            
+                                </div>
+            
+            
+                                <div class="portfolio-content">
+            
+                                    <div class="portfolio-icon evaluation-icon">
+            
+                                        <i class="fa-solid fa-chart-line"></i>
+            
+                                    </div>
+            
+            
+                                    <h4>
+            
+                                        Evaluation & Impact Models
+            
+                                    </h4>
+            
+            
+                                    <p>
+            
+                                        Before-and-after analysis, trends,
+                                        statistical models and clear visual
+                                        evidence to measure results and impact.
+            
+                                    </p>
+            
+            
+                                    <div class="portfolio-tags">
+            
+                                        <span>Evaluation</span>
+            
+                                        <span>Statistics</span>
+            
+                                        <span>Trends</span>
+            
+                                        <span>Impact</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+            
+                    </div>
+            
+            
+                    <!-- =================================================
+                         MORE WORK
+                    ================================================== -->
+            
+                    <div class="portfolio-more text-center">
+            
+            
+                        <div class="portfolio-more-icon">
+            
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            
+                        </div>
+            
+            
+                        <h3>
+            
+                            And Much More
+            
+                        </h3>
+            
+            
+                        <p>
+            
+                            Websites. Python applications. Research. GIS maps.
+                            Business plans. Automated reports. Data cleaning.
+                            Statistical analysis. Assignments. Graphic design.
+                            Documents. Systems. Custom tools.
+            
+                        </p>
+            
+            
+                        <p class="portfolio-more-highlight">
+            
+                            If you can describe what you need done,
+                            <strong>
+            
+                                Workload can help you get it done.
+            
+                            </strong>
+            
+                        </p>
+            
+            
+                        <a
+                            href="{% url 'submit_task' %}"
+                            class="btn btn-primary btn-lg portfolio-submit-button"
+                        >
+            
+                            <i class="fa-solid fa-plus me-2"></i>
+            
+                            Submit Your Task
+            
+                        </a>
+            
+                    </div>
+            
+            
+                </div>
+            
+            </section>
+            
 
         </div>
 
