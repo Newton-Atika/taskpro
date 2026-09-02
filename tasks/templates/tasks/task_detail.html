@@ -993,16 +993,25 @@
 
         </h4>
 
-        <div>
+        <div class="info-value">
 
-            {{ task.description|linebreaks }}
+            {% if task.description %}
+
+                {{ task.description|linebreaks }}
+
+            {% else %}
+
+                <span class="text-muted">
+                    No task description was provided.
+                </span>
+
+            {% endif %}
 
         </div>
 
     </div>
 
 </div>
-
 
 <!-- ================================================= -->
 <!-- CUSTOMER DOCUMENTS -->
