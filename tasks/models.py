@@ -3,6 +3,7 @@ from django.db import models
 from accounts.models import CustomUser
 from cloudinary.models import CloudinaryField
 
+
 class Task(models.Model):
     
     CATEGORY_CHOICES = [
@@ -62,7 +63,9 @@ class Task(models.Model):
         choices=CATEGORY_CHOICES
     )
 
-    description = models.TextField()
+    description = models.TextField(
+        blank=True
+    )
 
     deadline = models.DateTimeField()
 
@@ -171,12 +174,15 @@ class TaskDocument(models.Model):
 
     file = CloudinaryField(
         "file",
-        resource_type="raw"
+        resource_type="raw",
+        blank=True,
+        null=True
     )
 
     description = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
 
     uploaded_by = models.ForeignKey(
