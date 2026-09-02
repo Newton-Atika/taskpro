@@ -1,10 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from .forms import RegisterForm
 from .staff_forms import StaffProfileForm
-from django.utils.http import url_has_allowed_host_and_scheme
+
 
 # ============================================================
 # LOGIN
@@ -12,12 +13,22 @@ from django.utils.http import url_has_allowed_host_and_scheme
 
 def user_login(request):
 
+    # Get the destination the user originally wanted.
+    next_url = request.GET.get("next") or request.POST.get("next")
+
     # If already logged in, send the user
-    # to the appropriate dashboard.
+    # to the appropriate destination.
     if request.user.is_authenticated:
 
         if request.user.is_staff:
             return redirect("staff_dashboard")
+
+        if next_url and url_has_allowed_host_and_scheme(
+            next_url,
+            allowed_hosts={request.get_host()},
+            require_https=request.is_secure(),
+        ):
+            return redirect(next_url)
 
         return redirect("home")
 
@@ -36,11 +47,20 @@ def user_login(request):
 
             login(request, user)
 
-            # Staff users go to the staff dashboard
+            # Staff users always go to the staff dashboard
             if user.is_staff:
                 return redirect("staff_dashboard")
 
-            # Normal customers go home
+            # Normal customers go to the page they originally
+            # requested, if one was provided.
+            if next_url and url_has_allowed_host_and_scheme(
+                next_url,
+                allowed_hosts={request.get_host()},
+                require_https=request.is_secure(),
+            ):
+                return redirect(next_url)
+
+            # Otherwise normal customers go home.
             return redirect("home")
 
         messages.error(
@@ -50,7 +70,10 @@ def user_login(request):
 
     return render(
         request,
-        "accounts/login.html"
+        "accounts/login.html",
+        {
+            "next": next_url or "",
+        }
     )
 
 
@@ -69,8 +92,10 @@ def user_logout(request):
 # REGISTER
 # ============================================================
 
-
 def register(request):
+
+    # Get the destination from either GET or POST.
+    next_url = request.GET.get("next") or request.POST.get("next")
 
     if request.method == "POST":
 
@@ -92,11 +117,7 @@ def register(request):
             # Automatically log the newly registered user in.
             login(request, user)
 
-            # Check whether the registration request specified
-            # a page to go to after account creation.
-            next_url = request.POST.get("next") or request.GET.get("next")
-
-            # Only allow safe internal redirects.
+            # Redirect to the original destination if valid.
             if next_url and url_has_allowed_host_and_scheme(
                 next_url,
                 allowed_hosts={request.get_host()},
@@ -104,8 +125,7 @@ def register(request):
             ):
                 return redirect(next_url)
 
-            # If no valid next URL exists, use the normal
-            # default redirect.
+            # Normal fallback.
             return redirect("home")
 
     else:
@@ -117,9 +137,10 @@ def register(request):
         "accounts/register.html",
         {
             "form": form,
-            "next": request.GET.get("next", ""),
+            "next": next_url or "",
         }
     )
+
 
 # ============================================================
 # STAFF PROFILE
