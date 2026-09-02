@@ -1,3 +1,4 @@
+```html
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,7 +7,6 @@
 
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +29,7 @@
         min-height: 100vh;
     }
 
+
     /* ==============================
        MAIN WRAPPER
     ============================== */
@@ -42,6 +43,7 @@
 
         padding: 40px 15px;
     }
+
 
     .login-container {
         width: 100%;
@@ -663,7 +665,6 @@
     }
 
 </style>
-```
 
 </head>
 
@@ -671,7 +672,6 @@
 
 <div class="login-wrapper">
 
-```
 <div class="login-container">
 
     <div class="row g-0">
@@ -829,6 +829,14 @@
                 >
 
                     {% csrf_token %}
+
+                    <!-- PRESERVE ORIGINAL DESTINATION -->
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ next }}"
+                    >
 
 
                     <!-- EMAIL -->
@@ -1012,7 +1020,7 @@
 
                     Don't have an account?
 
-                    <a href="{% url 'register' %}">
+                    <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
                         Create one
                     </a>
 
@@ -1038,9 +1046,9 @@
     </div>
 
 </div>
-```
 
 </div>
+
 
 <script>
 
@@ -1180,6 +1188,10 @@
        PASSWORD VALIDATION
     ========================================= */
 
+    const passwordMessage =
+        document.getElementById("passwordMessage");
+
+
     password.addEventListener(
         "input",
         function () {
@@ -1277,3 +1289,4 @@
 </body>
 
 </html>
+```
