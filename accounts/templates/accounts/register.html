@@ -6,7 +6,6 @@
 
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -433,7 +432,6 @@
     }
 
 </style>
-```
 
 </head>
 
@@ -441,7 +439,6 @@
 
 <div class="register-wrapper">
 
-```
 <div class="register-container">
 
     <div class="row g-0">
@@ -552,6 +549,16 @@
                 <form method="POST" id="registrationForm">
 
                     {% csrf_token %}
+
+                    <!-- ==================================================
+                         PRESERVE WHERE THE USER SHOULD GO AFTER REGISTERING
+                         ================================================== -->
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ request.GET.next|default:'' }}"
+                    >
 
 
                     <!-- FULL NAME -->
@@ -883,7 +890,6 @@
     </div>
 
 </div>
-```
 
 </div>
 
