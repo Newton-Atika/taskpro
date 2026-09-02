@@ -92,7 +92,8 @@ def register(request):
             # Automatically log the newly registered user in.
             login(request, user)
 
-            # Get the page the user should go to after registration.
+            # Check whether the registration request specified
+            # a page to go to after account creation.
             next_url = request.POST.get("next") or request.GET.get("next")
 
             # Only allow safe internal redirects.
@@ -103,7 +104,8 @@ def register(request):
             ):
                 return redirect(next_url)
 
-            # Default redirect if no valid "next" page was provided.
+            # If no valid next URL exists, use the normal
+            # default redirect.
             return redirect("home")
 
     else:
