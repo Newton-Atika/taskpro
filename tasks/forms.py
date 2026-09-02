@@ -63,6 +63,21 @@ class TaskForm(forms.ModelForm):
             ),
         }
 
+    # ========================================================
+    # MAKE DESCRIPTION OPTIONAL
+    # ========================================================
+
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "rows": 6,
+                "placeholder":
+                    "Describe exactly what you need done... (optional)"
+            }
+        )
+    )
+
 
 # ============================================================
 # TASK DOCUMENT FORM
@@ -95,3 +110,31 @@ class TaskDocumentForm(forms.ModelForm):
                 }
             ),
         }
+
+    # ========================================================
+    # MAKE DOCUMENT FILE OPTIONAL
+    # ========================================================
+
+    file = forms.FileField(
+        required=False,
+        widget=forms.ClearableFileInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+
+    # ========================================================
+    # MAKE DOCUMENT DESCRIPTION OPTIONAL
+    # ========================================================
+
+    description = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder":
+                    "Briefly describe this document (optional)"
+            }
+        )
+    )
