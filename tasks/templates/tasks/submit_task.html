@@ -330,7 +330,7 @@
 
                         <!-- =================================================
                              TASK DESCRIPTION
-                             OPTIONAL
+                             REQUIRED
                         ================================================== -->
 
                         <div class="mb-4">
@@ -342,9 +342,7 @@
 
                                 Describe Your Task
 
-                                <span class="text-muted">
-                                    (Optional)
-                                </span>
+                                <span class="required">*</span>
 
                             </label>
 
@@ -466,7 +464,7 @@
 
                             <label
                                 class="form-label"
-                                for="id_file"
+                                for="{{ document_form.file.id_for_label }}"
                             >
 
                                 <i class="fa-solid fa-paperclip me-1"></i>
@@ -480,19 +478,7 @@
                             </label>
 
 
-                            <!--
-                                IMPORTANT:
-                                There is NO "required" attribute here.
-                                The customer can submit without selecting
-                                a document.
-                            -->
-
-                            <input
-                                type="file"
-                                name="file"
-                                id="id_file"
-                                class="form-control"
-                            >
+                            {{ document_form.file }}
 
 
                             <div class="form-text">
@@ -525,7 +511,7 @@
 
                             <label
                                 class="form-label"
-                                for="id_document_description"
+                                for="{{ document_form.description.id_for_label }}"
                             >
 
                                 Document Description
@@ -537,19 +523,7 @@
                             </label>
 
 
-                            <!--
-                                IMPORTANT:
-                                This field also has NO "required"
-                                attribute.
-                            -->
-
-                            <input
-                                type="text"
-                                name="description"
-                                id="id_document_description"
-                                class="form-control"
-                                placeholder="Briefly describe this document (optional)"
-                            >
+                            {{ document_form.description }}
 
 
                             <div class="form-text">
