@@ -317,7 +317,8 @@ def submit_task(request):
 
         document_form = TaskDocumentForm(
             request.POST,
-            request.FILES
+            request.FILES,
+            prefix="document"
         )
 
         if task_form.is_valid() and document_form.is_valid():
@@ -330,8 +331,6 @@ def submit_task(request):
             task.status = "submitted"
 
             task.save()
-
-
 
             notify_user(
 
@@ -351,7 +350,7 @@ def submit_task(request):
             # Save initial document if uploaded
             # ------------------------------------------------
 
-            if request.FILES.get("file"):
+            if document_form.cleaned_data.get("file"):
 
                 document = document_form.save(
                     commit=False
@@ -375,7 +374,10 @@ def submit_task(request):
     else:
 
         task_form = TaskForm()
-        document_form = TaskDocumentForm()
+
+        document_form = TaskDocumentForm(
+            prefix="document"
+        )
 
     return render(
         request,
@@ -385,8 +387,6 @@ def submit_task(request):
             "document_form": document_form,
         }
     )
-
-
 
 # ============================================================
 # EDIT TASK — CUSTOMER
