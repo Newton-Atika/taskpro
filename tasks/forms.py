@@ -27,7 +27,7 @@ class TaskForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "placeholder":
-                        "e.g. Develop a Python dashboard"
+                        "e.g. Product or performance presentation"
                 }
             ),
 
@@ -73,7 +73,7 @@ class TaskForm(forms.ModelForm):
                 "class": "form-control",
                 "rows": 6,
                 "placeholder":
-                    "Describe exactly what you need done... (optional)"
+                    "Describe exactly what you need done..."
             }
         )
     )
@@ -84,57 +84,23 @@ class TaskForm(forms.ModelForm):
 # ============================================================
 
 class TaskDocumentForm(forms.ModelForm):
-
-    class Meta:
-
-        model = TaskDocument
-
-        fields = [
-            "file",
-            "description",
-        ]
-
-        widgets = {
-
-            "file": forms.ClearableFileInput(
-                attrs={
-                    "class": "form-control"
-                }
-            ),
-
-            "description": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder":
-                        "Briefly describe this document (optional)"
-                }
-            ),
-        }
-
-    # ========================================================
-    # MAKE DOCUMENT FILE OPTIONAL
-    # ========================================================
-
     file = forms.FileField(
         required=False,
         widget=forms.ClearableFileInput(
-            attrs={
-                "class": "form-control"
-            }
+            attrs={"class": "form-control"}
         )
     )
-
-    # ========================================================
-    # MAKE DOCUMENT DESCRIPTION OPTIONAL
-    # ========================================================
 
     description = forms.CharField(
         required=False,
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder":
-                    "Briefly describe this document (optional)"
+                "placeholder": "Briefly describe this document (optional)"
             }
         )
     )
+
+    class Meta:
+        model = TaskDocument
+        fields = ["file", "description"]
