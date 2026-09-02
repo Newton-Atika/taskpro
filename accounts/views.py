@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from .forms import RegisterForm
 from .staff_forms import StaffProfileForm
-
+from django.utils.http import url_has_allowed_host_and_scheme
 
 # ============================================================
 # LOGIN
@@ -69,6 +69,7 @@ def user_logout(request):
 # REGISTER
 # ============================================================
 
+
 def register(request):
 
     if request.method == "POST":
@@ -88,8 +89,21 @@ def register(request):
 
             user.save()
 
+            # Automatically log the newly registered user in.
             login(request, user)
 
+            # Get the page the user should go to after registration.
+            next_url = request.POST.get("next") or request.GET.get("next")
+
+            # Only allow safe internal redirects.
+            if next_url and url_has_allowed_host_and_scheme(
+                next_url,
+                allowed_hosts={request.get_host()},
+                require_https=request.is_secure(),
+            ):
+                return redirect(next_url)
+
+            # Default redirect if no valid "next" page was provided.
             return redirect("home")
 
     else:
@@ -100,10 +114,10 @@ def register(request):
         request,
         "accounts/register.html",
         {
-            "form": form
+            "form": form,
+            "next": request.GET.get("next", ""),
         }
     )
-
 
 # ============================================================
 # STAFF PROFILE
