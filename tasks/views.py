@@ -308,7 +308,6 @@ PAYSTACK_VERIFY_URL = (
 # SUBMIT TASK
 # ============================================================
 
-@login_required
 def submit_task(request):
 
     if request.method == "POST":
