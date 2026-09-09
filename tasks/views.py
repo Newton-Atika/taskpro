@@ -323,6 +323,10 @@ from .models import Task
 # AUTHENTICATED TASK SUBMISSION
 # ============================================================
 
+# ============================================================
+# CUSTOMER — AUTHENTICATED TASK SUBMISSION
+# ============================================================
+
 @login_required
 def submit_task(request):
 
@@ -338,6 +342,10 @@ def submit_task(request):
 
         if task_form.is_valid() and document_form.is_valid():
 
+            # ------------------------------------------------
+            # Create task
+            # ------------------------------------------------
+
             task = task_form.save(commit=False)
 
             task.customer = request.user
@@ -347,22 +355,6 @@ def submit_task(request):
 
             task.save()
 
-            # ------------------------------------------------
-            # Notification
-            # ------------------------------------------------
-
-            notify_user(
-                user=request.user,
-
-                title="Task Submitted",
-
-                message=(
-                    f"Your task #{task.id} "
-                    f"'{task.title}' has been submitted successfully."
-                ),
-
-                task=task,
-            )
 
             # ------------------------------------------------
             # Save initial document if uploaded
@@ -375,95 +367,211 @@ def submit_task(request):
                 )
 
                 document.task = task
+
                 document.uploaded_by = request.user
 
                 document.save()
 
-            messages.success(
-                request,
-                "Your task has been submitted successfully."
+
+            # ------------------------------------------------
+            # Notification
+            # ------------------------------------------------
+
+            notify_user(
+
+                user=request.user,
+
+                title="Task Submitted",
+
+                message=(
+                    f"Your task #{task.id} "
+                    f"'{task.title}' has been submitted successfully."
+                ),
+
+                task=task,
+
             )
 
-            return redirect(
-                "task_detail",
-                task_id=task.id
+
+            # ------------------------------------------------
+            # Success message
+            # ------------------------------------------------
+
+            messages.success(
+
+                request,
+
+                "Your task has been submitted successfully."
+
             )
+
+
+            # ------------------------------------------------
+            # Go to task details
+            # ------------------------------------------------
+
+            return redirect(
+
+                "task_detail",
+
+                task_id=task.id
+
+            )
+
 
     else:
 
         task_form = TaskForm()
 
         document_form = TaskDocumentForm(
+
             prefix="document"
+
         )
 
+
     return render(
+
         request,
+
         "tasks/submit_task.html",
+
         {
+
             "form": task_form,
+
             "document_form": document_form,
+
         }
+
     )
 
 
 # ============================================================
-# GUEST TASK START
+# CUSTOMER — GUEST TASK START
 # ============================================================
 
-def start_task(request):
+def guest_start_task(request):
 
     # --------------------------------------------------------
-    # If already logged in, use the normal task submission
+    # If the visitor is already authenticated,
+    # use the normal authenticated submission page.
     # --------------------------------------------------------
 
     if request.user.is_authenticated:
-        return redirect("submit_task")
+
+        return redirect(
+            "submit_task"
+        )
+
 
     # --------------------------------------------------------
-    # POST = visitor has completed task information
+    # POST
     # --------------------------------------------------------
 
     if request.method == "POST":
 
-        form = TaskForm(request.POST)
+        form = TaskForm(
+            request.POST
+        )
+
+
+        # ----------------------------------------------------
+        # Validate task information
+        # ----------------------------------------------------
 
         if form.is_valid():
 
+            deadline = form.cleaned_data.get(
+                "deadline"
+            )
+
+            budget = form.cleaned_data.get(
+                "budget"
+            )
+
+
             # ------------------------------------------------
             # Store task information temporarily in session
+            #
+            # IMPORTANT:
+            # We do not store uploaded files in the session.
             # ------------------------------------------------
 
             request.session["guest_task"] = {
-                "title": form.cleaned_data["title"],
-                "category": form.cleaned_data["category"],
-                "description": form.cleaned_data["description"],
-                "deadline": form.cleaned_data["deadline"].isoformat(),
-                "budget": (
-                    str(form.cleaned_data["budget"])
-                    if form.cleaned_data["budget"] is not None
+
+                "title": (
+                    form.cleaned_data.get(
+                        "title"
+                    )
+                ),
+
+                "category": (
+                    form.cleaned_data.get(
+                        "category"
+                    )
+                ),
+
+                "description": (
+                    form.cleaned_data.get(
+                        "description"
+                    )
+                ),
+
+                "deadline": (
+                    deadline.isoformat()
+                    if deadline
                     else ""
                 ),
+
+                "budget": (
+                    str(budget)
+                    if budget is not None
+                    else ""
+                ),
+
             }
 
+
+            # ------------------------------------------------
+            # Make sure session is saved
+            # ------------------------------------------------
+
             request.session.modified = True
+
 
             # ------------------------------------------------
             # Send visitor to registration
             # ------------------------------------------------
 
-            return redirect("register")
+            return redirect(
+                "register"
+            )
+
+
+    # --------------------------------------------------------
+    # GET
+    # --------------------------------------------------------
 
     else:
 
         form = TaskForm()
 
+
+    # --------------------------------------------------------
+    # Render guest task page
+    # --------------------------------------------------------
+
     return render(
+
         request,
+
         "tasks/start_task.html",
+
         {
             "form": form,
         }
+
     )
 
 
@@ -473,34 +581,107 @@ def start_task(request):
 
 def create_guest_task(request, user):
 
-    guest_task = request.session.get("guest_task")
+    from datetime import datetime
+
+
+    # --------------------------------------------------------
+    # Get temporary task information
+    # --------------------------------------------------------
+
+    guest_task = request.session.get(
+        "guest_task"
+    )
+
+
+    # --------------------------------------------------------
+    # No guest task
+    # --------------------------------------------------------
 
     if not guest_task:
+
         return None
+
+
+    # --------------------------------------------------------
+    # Convert deadline
+    # --------------------------------------------------------
+
+    deadline_value = guest_task.get(
+        "deadline"
+    )
+
+    if deadline_value:
+
+        try:
+
+            deadline_value = datetime.fromisoformat(
+                deadline_value
+            )
+
+        except (ValueError, TypeError):
+
+            deadline_value = None
+
+    else:
+
+        deadline_value = None
+
+
+    # --------------------------------------------------------
+    # Convert budget
+    # --------------------------------------------------------
+
+    budget_value = guest_task.get(
+        "budget"
+    )
+
+    if not budget_value:
+
+        budget_value = None
+
+
+    # --------------------------------------------------------
+    # Create task
+    # --------------------------------------------------------
 
     try:
 
         with transaction.atomic():
 
             task = Task.objects.create(
+
                 customer=user,
-                title=guest_task["title"],
-                category=guest_task["category"],
-                description=guest_task["description"],
-                deadline=guest_task["deadline"],
-                budget=(
-                    guest_task["budget"]
-                    if guest_task["budget"]
-                    else None
+
+                title=guest_task.get(
+                    "title",
+                    ""
                 ),
+
+                category=guest_task.get(
+                    "category",
+                    ""
+                ),
+
+                description=guest_task.get(
+                    "description",
+                    ""
+                ),
+
+                deadline=deadline_value,
+
+                budget=budget_value,
+
                 status="submitted",
+
             )
 
+
             # ------------------------------------------------
-            # Notification
+            # Notify customer
             # ------------------------------------------------
 
             notify_user(
+
                 user=user,
 
                 title="Task Submitted",
@@ -511,22 +692,43 @@ def create_guest_task(request, user):
                 ),
 
                 task=task,
+
             )
 
+
         # ----------------------------------------------------
-        # Remove temporary task data
+        # Task was successfully created.
+        #
+        # Only now remove the temporary session data.
         # ----------------------------------------------------
 
-        request.session.pop("guest_task", None)
+        request.session.pop(
+            "guest_task",
+            None
+        )
 
         request.session.modified = True
 
+
         return task
 
-    except Exception:
+
+    except Exception as e:
+
+        # ----------------------------------------------------
+        # Keep the session data intact if task creation fails.
+        #
+        # This allows the registration process to finish and
+        # the task to potentially be retried instead of silently
+        # losing the visitor's task.
+        # ----------------------------------------------------
+
+        print(
+            "Error creating guest task:",
+            e
+        )
 
         return None
-
 
 # ============================================================
 # EDIT TASK — CUSTOMER
