@@ -308,6 +308,22 @@ PAYSTACK_VERIFY_URL = (
 # SUBMIT TASK
 # ============================================================
 
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.shortcuts import render, redirect, get_object_or_404
+
+from .forms import TaskForm, TaskDocumentForm
+from .models import Task
+
+
+# ============================================================
+# AUTHENTICATED TASK SUBMISSION
+# ============================================================
+
+@login_required
 def submit_task(request):
 
     if request.method == "POST":
@@ -326,13 +342,16 @@ def submit_task(request):
 
             task.customer = request.user
 
-            # New tasks start as SUBMITTED
+            # New tasks start as submitted
             task.status = "submitted"
 
             task.save()
 
-            notify_user(
+            # ------------------------------------------------
+            # Notification
+            # ------------------------------------------------
 
+            notify_user(
                 user=request.user,
 
                 title="Task Submitted",
@@ -386,6 +405,128 @@ def submit_task(request):
             "document_form": document_form,
         }
     )
+
+
+# ============================================================
+# GUEST TASK START
+# ============================================================
+
+def start_task(request):
+
+    # --------------------------------------------------------
+    # If already logged in, use the normal task submission
+    # --------------------------------------------------------
+
+    if request.user.is_authenticated:
+        return redirect("submit_task")
+
+    # --------------------------------------------------------
+    # POST = visitor has completed task information
+    # --------------------------------------------------------
+
+    if request.method == "POST":
+
+        form = TaskForm(request.POST)
+
+        if form.is_valid():
+
+            # ------------------------------------------------
+            # Store task information temporarily in session
+            # ------------------------------------------------
+
+            request.session["guest_task"] = {
+                "title": form.cleaned_data["title"],
+                "category": form.cleaned_data["category"],
+                "description": form.cleaned_data["description"],
+                "deadline": form.cleaned_data["deadline"].isoformat(),
+                "budget": (
+                    str(form.cleaned_data["budget"])
+                    if form.cleaned_data["budget"] is not None
+                    else ""
+                ),
+            }
+
+            request.session.modified = True
+
+            # ------------------------------------------------
+            # Send visitor to registration
+            # ------------------------------------------------
+
+            return redirect("register")
+
+    else:
+
+        form = TaskForm()
+
+    return render(
+        request,
+        "tasks/start_task.html",
+        {
+            "form": form,
+        }
+    )
+
+
+# ============================================================
+# CREATE TASK FROM GUEST SESSION
+# ============================================================
+
+def create_guest_task(request, user):
+
+    guest_task = request.session.get("guest_task")
+
+    if not guest_task:
+        return None
+
+    try:
+
+        with transaction.atomic():
+
+            task = Task.objects.create(
+                customer=user,
+                title=guest_task["title"],
+                category=guest_task["category"],
+                description=guest_task["description"],
+                deadline=guest_task["deadline"],
+                budget=(
+                    guest_task["budget"]
+                    if guest_task["budget"]
+                    else None
+                ),
+                status="submitted",
+            )
+
+            # ------------------------------------------------
+            # Notification
+            # ------------------------------------------------
+
+            notify_user(
+                user=user,
+
+                title="Task Submitted",
+
+                message=(
+                    f"Your task #{task.id} "
+                    f"'{task.title}' has been submitted successfully."
+                ),
+
+                task=task,
+            )
+
+        # ----------------------------------------------------
+        # Remove temporary task data
+        # ----------------------------------------------------
+
+        request.session.pop("guest_task", None)
+
+        request.session.modified = True
+
+        return task
+
+    except Exception:
+
+        return None
+
 
 # ============================================================
 # EDIT TASK — CUSTOMER
