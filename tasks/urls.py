@@ -6,7 +6,18 @@ from . import views
 urlpatterns = [
 
     # ============================================================
-    # CUSTOMER
+    # CUSTOMER — GUEST TASK START
+    # ============================================================
+
+    path(
+        "start/",
+        views.guest_start_task,
+        name="guest_start_task"
+    ),
+
+
+    # ============================================================
+    # CUSTOMER — AUTHENTICATED TASK SUBMISSION
     # ============================================================
 
     path(
@@ -215,34 +226,37 @@ urlpatterns = [
         name="task_detail"
     ),
 
+
     # ============================================================
     # EDIT TASK
     # ============================================================
-    
+
     path(
         "<int:task_id>/edit/",
         views.edit_task,
         name="edit_task"
-    ),    
-    
+    ),
+
+
     # ============================================================
     # EDIT TASK DOCUMENT
     # ============================================================
-    
+
     path(
         "<int:task_id>/documents/<int:document_id>/edit/",
         views.edit_task_document,
         name="edit_task_document"
     ),
-    
-    
+
+
     # ============================================================
     # DELETE TASK DOCUMENT
     # ============================================================
-    
+
     path(
         "<int:task_id>/documents/<int:document_id>/delete/",
         views.delete_task_document,
         name="delete_task_document"
     ),
+
 ]
