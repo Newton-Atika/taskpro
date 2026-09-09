@@ -6,1529 +6,1540 @@
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
-<title>Login | Workload</title>
+    <title>Login | Workload</title>
 
 
-<!-- =====================================================
-     BOOTSTRAP
-====================================================== -->
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
 
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
 
-<!-- =====================================================
-     FONT AWESOME
-====================================================== -->
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
 
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    rel="stylesheet"
->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        rel="stylesheet"
+    >
 
 
-<style>
+    <style>
 
-    * {
-        box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
 
-    body {
+        body {
 
-        font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
 
-        background:
-            linear-gradient(
-                135deg,
-                #f4f7fb,
-                #eef2f7
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f7fb,
+                    #eef2f7
+                );
 
-        color: #212529;
+            color: #212529;
 
-        min-height: 100vh;
+            min-height: 100vh;
 
-        margin: 0;
-
-    }
-
-
-    /* =====================================================
-       PAGE WRAPPER
-    ====================================================== */
-
-    .page-wrapper {
-
-        min-height: 100vh;
-
-        padding: 35px 15px;
-
-    }
-
-
-    /* =====================================================
-       MAIN CONTAINER
-    ====================================================== */
-
-    .main-container {
-
-        width: 100%;
-
-        max-width: 1150px;
-
-        margin: 0 auto;
-
-    }
-
-
-    /* =====================================================
-       TOP BRAND
-    ====================================================== */
-
-    .top-brand {
-
-        display: flex;
-
-        justify-content: space-between;
-
-        align-items: center;
-
-        margin-bottom: 25px;
-
-    }
-
-
-    .brand {
-
-        color: #212529;
-
-        text-decoration: none;
-
-        font-size: 24px;
-
-        font-weight: 700;
-
-    }
-
-
-    .brand i {
-
-        color: #0d6efd;
-
-        margin-right: 8px;
-
-    }
-
-
-    .home-link {
-
-        color: #6c757d;
-
-        text-decoration: none;
-
-        font-size: 14px;
-
-    }
-
-
-    .home-link:hover {
-
-        color: #0d6efd;
-
-    }
-
-
-    /* =====================================================
-       LOGIN CARD
-    ====================================================== */
-
-    .login-container {
-
-        background: #ffffff;
-
-        border-radius: 24px;
-
-        overflow: hidden;
-
-        box-shadow:
-            0 20px 60px
-            rgba(0, 0, 0, 0.10);
-
-    }
-
-
-    /* =====================================================
-       BRAND PANEL
-    ====================================================== */
-
-    .brand-panel {
-
-        background:
-            linear-gradient(
-                145deg,
-                #0d6efd 0%,
-                #6610f2 100%
-            );
-
-        color: #ffffff;
-
-        min-height: 650px;
-
-        padding: 55px 45px;
-
-        display: flex;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        position: relative;
-
-        overflow: hidden;
-
-    }
-
-
-    .brand-panel::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 350px;
-
-        height: 350px;
-
-        border-radius: 50%;
-
-        background:
-            rgba(255,255,255,0.08);
-
-        top: -150px;
-
-        right: -150px;
-
-    }
-
-
-    .brand-panel::after {
-
-        content: "";
-
-        position: absolute;
-
-        width: 260px;
-
-        height: 260px;
-
-        border-radius: 50%;
-
-        background:
-            rgba(255,255,255,0.06);
-
-        bottom: -120px;
-
-        left: -120px;
-
-    }
-
-
-    .brand-logo {
-
-        font-size: 28px;
-
-        font-weight: 700;
-
-        margin-bottom: 45px;
-
-        position: relative;
-
-        z-index: 2;
-
-    }
-
-
-    .brand-panel h1 {
-
-        font-size: 44px;
-
-        font-weight: 700;
-
-        line-height: 1.15;
-
-        position: relative;
-
-        z-index: 2;
-
-    }
-
-
-    .brand-panel p {
-
-        font-size: 16px;
-
-        line-height: 1.7;
-
-        opacity: 0.92;
-
-        margin-top: 20px;
-
-        position: relative;
-
-        z-index: 2;
-
-    }
-
-
-    /* =====================================================
-       BENEFITS
-    ====================================================== */
-
-    .benefit {
-
-        display: flex;
-
-        align-items: center;
-
-        margin-top: 22px;
-
-        position: relative;
-
-        z-index: 2;
-
-    }
-
-
-    .benefit-icon {
-
-        width: 44px;
-
-        height: 44px;
-
-        min-width: 44px;
-
-        border-radius: 12px;
-
-        background:
-            rgba(255,255,255,0.15);
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        margin-right: 14px;
-
-    }
-
-
-    .benefit span {
-
-        font-size: 14px;
-
-    }
-
-
-    /* =====================================================
-       FORM PANEL
-    ====================================================== */
-
-    .form-panel {
-
-        padding: 50px;
-
-        min-height: 650px;
-
-    }
-
-
-    .form-title {
-
-        font-size: 31px;
-
-        font-weight: 700;
-
-        color: #1f2937;
-
-        margin-bottom: 8px;
-
-    }
-
-
-    .form-subtitle {
-
-        color: #6b7280;
-
-        margin-bottom: 30px;
-
-    }
-
-
-    /* =====================================================
-       MESSAGES
-    ====================================================== */
-
-    .message-box {
-
-        padding: 13px 15px;
-
-        border-radius: 10px;
-
-        margin-bottom: 20px;
-
-        font-size: 14px;
-
-    }
-
-
-    .message-box.error {
-
-        background: #fff1f2;
-
-        border: 1px solid #fecdd3;
-
-        color: #dc3545;
-
-    }
-
-
-    .message-box.success {
-
-        background: #f0fdf4;
-
-        border: 1px solid #bbf7d0;
-
-        color: #198754;
-
-    }
-
-
-    /* =====================================================
-       FORM FIELDS
-    ====================================================== */
-
-    .field-group {
-
-        margin-bottom: 21px;
-
-    }
-
-
-    .field-label {
-
-        font-weight: 600;
-
-        color: #374151;
-
-        margin-bottom: 8px;
-
-        display: block;
-
-    }
-
-
-    .input-wrapper {
-
-        position: relative;
-
-    }
-
-
-    .input-icon {
-
-        position: absolute;
-
-        left: 16px;
-
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        color: #9ca3af;
-
-        z-index: 2;
-
-    }
-
-
-    .form-control {
-
-        height: 52px;
-
-        border-radius: 11px;
-
-        border: 1px solid #dbe1ea;
-
-        padding-left: 46px;
-
-        padding-right: 45px;
-
-        font-size: 15px;
-
-    }
-
-
-    .form-control:focus {
-
-        border-color: #0d6efd;
-
-        box-shadow:
-            0 0 0 4px
-            rgba(13,110,253,0.10);
-
-    }
-
-
-    textarea.form-control {
-
-        height: auto;
-
-        min-height: 120px;
-
-        padding-top: 14px;
-
-    }
-
-
-    select.form-control {
-
-        padding-left: 15px;
-
-    }
-
-
-    /* =====================================================
-       PASSWORD
-    ====================================================== */
-
-    .password-toggle {
-
-        position: absolute;
-
-        right: 15px;
-
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        border: none;
-
-        background: transparent;
-
-        color: #9ca3af;
-
-        cursor: pointer;
-
-    }
-
-
-    .password-toggle:hover {
-
-        color: #0d6efd;
-
-    }
-
-
-    /* =====================================================
-       LOGIN BUTTON
-    ====================================================== */
-
-    .login-btn {
-
-        width: 100%;
-
-        height: 54px;
-
-        border: none;
-
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #0d6efd,
-                #6610f2
-            );
-
-        color: white;
-
-        font-size: 16px;
-
-        font-weight: 600;
-
-        transition: all 0.25s ease;
-
-    }
-
-
-    .login-btn:hover {
-
-        transform: translateY(-2px);
-
-        box-shadow:
-            0 10px 25px
-            rgba(13,110,253,0.25);
-
-    }
-
-
-    /* =====================================================
-       LOGIN LINKS
-    ====================================================== */
-
-    .form-links {
-
-        display: flex;
-
-        justify-content: space-between;
-
-        align-items: center;
-
-        margin-bottom: 22px;
-
-        font-size: 14px;
-
-    }
-
-
-    .remember-me {
-
-        color: #6b7280;
-
-    }
-
-
-    .forgot-password {
-
-        color: #0d6efd;
-
-        text-decoration: none;
-
-        font-weight: 600;
-
-    }
-
-
-    .forgot-password:hover {
-
-        text-decoration: underline;
-
-    }
-
-
-    /* =====================================================
-       DIVIDER
-    ====================================================== */
-
-    .divider {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 12px;
-
-        margin: 30px 0;
-
-        color: #9ca3af;
-
-        font-size: 13px;
-
-    }
-
-
-    .divider::before,
-    .divider::after {
-
-        content: "";
-
-        flex: 1;
-
-        height: 1px;
-
-        background: #e5e7eb;
-
-    }
-
-
-    /* =====================================================
-       SUBMIT TASK CTA
-    ====================================================== */
-
-    .task-cta {
-
-        background:
-            linear-gradient(
-                135deg,
-                #f0f7ff,
-                #f7f2ff
-            );
-
-        border: 1px solid #dbe7ff;
-
-        border-radius: 16px;
-
-        padding: 22px;
-
-        margin-top: 10px;
-
-    }
-
-
-    .task-cta-header {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 13px;
-
-        margin-bottom: 10px;
-
-    }
-
-
-    .task-cta-icon {
-
-        width: 42px;
-
-        height: 42px;
-
-        border-radius: 11px;
-
-        background: #0d6efd;
-
-        color: #ffffff;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-    }
-
-
-    .task-cta h5 {
-
-        margin: 0;
-
-        font-weight: 700;
-
-        color: #1f2937;
-
-    }
-
-
-    .task-cta p {
-
-        color: #6b7280;
-
-        font-size: 14px;
-
-        line-height: 1.6;
-
-        margin-bottom: 17px;
-
-    }
-
-
-    .submit-task-btn {
-
-        width: 100%;
-
-        height: 48px;
-
-        border-radius: 10px;
-
-        font-weight: 600;
-
-    }
-
-
-    /* =====================================================
-       REGISTER SECTION
-    ====================================================== */
-
-    .register-section {
-
-        margin-top: 28px;
-
-        padding-top: 25px;
-
-        border-top: 1px solid #e9ecef;
-
-        text-align: center;
-
-    }
-
-
-    .register-section h6 {
-
-        font-size: 16px;
-
-        font-weight: 700;
-
-        color: #212529;
-
-        margin-bottom: 7px;
-
-    }
-
-
-    .register-section p {
-
-        color: #6c757d;
-
-        font-size: 14px;
-
-        margin-bottom: 15px;
-
-    }
-
-
-    .register-btn {
-
-        width: 100%;
-
-        height: 48px;
-
-        border-radius: 10px;
-
-        font-weight: 600;
-
-    }
-
-
-    /* =====================================================
-       SECURITY
-    ====================================================== */
-
-    .security-note {
-
-        text-align: center;
-
-        margin-top: 22px;
-
-        font-size: 12px;
-
-        color: #9ca3af;
-
-    }
-
-
-    .security-note i {
-
-        color: #198754;
-
-        margin-right: 5px;
-
-    }
-
-
-    /* =====================================================
-       TASK MODAL
-    ====================================================== */
-
-    .task-modal-icon {
-
-        width: 50px;
-
-        height: 50px;
-
-        border-radius: 13px;
-
-        background: #eaf3ff;
-
-        color: #0d6efd;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        font-size: 21px;
-
-    }
-
-
-    .modal-title {
-
-        font-weight: 700;
-
-    }
-
-
-    .task-info-box {
-
-        background: #f8f9fa;
-
-        border-radius: 10px;
-
-        padding: 13px;
-
-        font-size: 13px;
-
-        color: #6c757d;
-
-        margin-bottom: 20px;
-
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ====================================================== */
-
-    @media (max-width: 991px) {
-
-        .brand-panel {
-
-            min-height: auto;
-
-            padding: 40px 35px;
+            margin: 0;
 
         }
 
 
-        .brand-panel h1 {
-
-            font-size: 36px;
-
-        }
-
-
-        .form-panel {
-
-            min-height: auto;
-
-            padding: 40px 35px;
-
-        }
-
-    }
-
-
-    @media (max-width: 576px) {
+        /* =====================================================
+           PAGE WRAPPER
+        ====================================================== */
 
         .page-wrapper {
 
-            padding: 0;
+            min-height: 100vh;
+
+            padding: 35px 15px;
 
         }
 
 
+        /* =====================================================
+           MAIN CONTAINER
+        ====================================================== */
+
+        .main-container {
+
+            width: 100%;
+
+            max-width: 1150px;
+
+            margin: 0 auto;
+
+        }
+
+
+        /* =====================================================
+           TOP BRAND
+        ====================================================== */
+
         .top-brand {
 
-            padding: 15px 18px;
+            display: flex;
 
-            margin-bottom: 0;
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
 
         }
 
 
         .brand {
 
-            font-size: 21px;
+            color: #212529;
+
+            text-decoration: none;
+
+            font-size: 24px;
+
+            font-weight: 700;
 
         }
 
+
+        .brand i {
+
+            color: #0d6efd;
+
+            margin-right: 8px;
+
+        }
+
+
+        .home-link {
+
+            color: #6c757d;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .home-link:hover {
+
+            color: #0d6efd;
+
+        }
+
+
+        /* =====================================================
+           LOGIN CARD
+        ====================================================== */
 
         .login-container {
 
-            border-radius: 0;
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.10);
 
         }
 
 
+        /* =====================================================
+           BRAND PANEL
+        ====================================================== */
+
         .brand-panel {
 
-            padding: 35px 22px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #0d6efd 0%,
+                    #6610f2 100%
+                );
+
+            color: #ffffff;
+
+            min-height: 650px;
+
+            padding: 55px 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .brand-panel::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            top: -150px;
+
+            right: -150px;
+
+        }
+
+
+        .brand-panel::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+
+            height: 260px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            bottom: -120px;
+
+            left: -120px;
 
         }
 
 
         .brand-logo {
 
-            margin-bottom: 30px;
+            font-size: 28px;
 
-            font-size: 24px;
+            font-weight: 700;
+
+            margin-bottom: 45px;
+
+            position: relative;
+
+            z-index: 2;
 
         }
 
 
         .brand-panel h1 {
 
-            font-size: 31px;
+            font-size: 44px;
+
+            font-weight: 700;
+
+            line-height: 1.15;
+
+            position: relative;
+
+            z-index: 2;
 
         }
 
 
         .brand-panel p {
 
-            font-size: 15px;
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            opacity: 0.92;
+
+            margin-top: 20px;
+
+            position: relative;
+
+            z-index: 2;
 
         }
 
 
+        /* =====================================================
+           BENEFITS
+        ====================================================== */
+
+        .benefit {
+
+            display: flex;
+
+            align-items: center;
+
+            margin-top: 22px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .benefit-icon {
+
+            width: 44px;
+
+            height: 44px;
+
+            min-width: 44px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-right: 14px;
+
+        }
+
+
+        .benefit span {
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           FORM PANEL
+        ====================================================== */
+
         .form-panel {
 
-            padding: 30px 20px;
+            padding: 50px;
+
+            min-height: 650px;
 
         }
 
 
         .form-title {
 
-            font-size: 27px;
+            font-size: 31px;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+            margin-bottom: 8px;
 
         }
 
+
+        .form-subtitle {
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =====================================================
+           MESSAGES
+        ====================================================== */
+
+        .message-box {
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+
+        }
+
+
+        .message-box.error {
+
+            background: #fff1f2;
+
+            border: 1px solid #fecdd3;
+
+            color: #dc3545;
+
+        }
+
+
+        .message-box.success {
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            color: #198754;
+
+        }
+
+
+        /* =====================================================
+           FORM FIELDS
+        ====================================================== */
+
+        .field-group {
+
+            margin-bottom: 21px;
+
+        }
+
+
+        .field-label {
+
+            font-weight: 600;
+
+            color: #374151;
+
+            margin-bottom: 8px;
+
+            display: block;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 16px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9ca3af;
+
+            z-index: 2;
+
+        }
+
+
+        .form-control {
+
+            height: 52px;
+
+            border-radius: 11px;
+
+            border: 1px solid #dbe1ea;
+
+            padding-left: 46px;
+
+            padding-right: 45px;
+
+            font-size: 15px;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(13,110,253,0.10);
+
+        }
+
+
+        textarea.form-control {
+
+            height: auto;
+
+            min-height: 120px;
+
+            padding-top: 14px;
+
+        }
+
+
+        select.form-control {
+
+            padding-left: 15px;
+
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #9ca3af;
+
+            cursor: pointer;
+
+        }
+
+
+        .password-toggle:hover {
+
+            color: #0d6efd;
+
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ====================================================== */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #6610f2
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            transition: all 0.25s ease;
+
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(13,110,253,0.25);
+
+        }
+
+
+        /* =====================================================
+           LOGIN LINKS
+        ====================================================== */
 
         .form-links {
 
-            flex-direction: column;
+            display: flex;
 
-            align-items: flex-start;
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+
+            font-size: 14px;
+
+        }
+
+
+        .remember-me {
+
+            color: #6b7280;
+
+        }
+
+
+        .forgot-password {
+
+            color: #0d6efd;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .forgot-password:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           DIVIDER
+        ====================================================== */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
 
             gap: 12px;
 
+            margin: 30px 0;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
         }
 
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* =====================================================
+           SUBMIT TASK CTA
+        ====================================================== */
 
         .task-cta {
 
-            padding: 18px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0f7ff,
+                    #f7f2ff
+                );
+
+            border: 1px solid #dbe7ff;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            margin-top: 10px;
 
         }
 
-    }
 
-</style>
-```
+        .task-cta-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .task-cta-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 11px;
+
+            background: #0d6efd;
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .task-cta h5 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+        }
+
+
+        .task-cta p {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .submit-task-btn {
+
+            width: 100%;
+
+            height: 48px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           REGISTER SECTION
+        ====================================================== */
+
+        .register-section {
+
+            margin-top: 28px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #e9ecef;
+
+            text-align: center;
+
+        }
+
+
+        .register-section h6 {
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            color: #212529;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .register-section p {
+
+            color: #6c757d;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .register-btn {
+
+            width: 100%;
+
+            height: 48px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           SECURITY
+        ====================================================== */
+
+        .security-note {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+
+        }
+
+
+        .security-note i {
+
+            color: #198754;
+
+            margin-right: 5px;
+
+        }
+
+
+        /* =====================================================
+           TASK MODAL
+        ====================================================== */
+
+        .task-modal-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 13px;
+
+            background: #eaf3ff;
+
+            color: #0d6efd;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+        }
+
+
+        .modal-title {
+
+            font-weight: 700;
+
+        }
+
+
+        .task-info-box {
+
+            background: #f8f9fa;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            font-size: 13px;
+
+            color: #6c757d;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 991px) {
+
+            .brand-panel {
+
+                min-height: auto;
+
+                padding: 40px 35px;
+
+            }
+
+
+            .brand-panel h1 {
+
+                font-size: 36px;
+
+            }
+
+
+            .form-panel {
+
+                min-height: auto;
+
+                padding: 40px 35px;
+
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .page-wrapper {
+
+                padding: 0;
+
+            }
+
+
+            .top-brand {
+
+                padding: 15px 18px;
+
+                margin-bottom: 0;
+
+            }
+
+
+            .brand {
+
+                font-size: 21px;
+
+            }
+
+
+            .login-container {
+
+                border-radius: 0;
+
+            }
+
+
+            .brand-panel {
+
+                padding: 35px 22px;
+
+            }
+
+
+            .brand-logo {
+
+                margin-bottom: 30px;
+
+                font-size: 24px;
+
+            }
+
+
+            .brand-panel h1 {
+
+                font-size: 31px;
+
+            }
+
+
+            .brand-panel p {
+
+                font-size: 15px;
+
+            }
+
+
+            .form-panel {
+
+                padding: 30px 20px;
+
+            }
+
+
+            .form-title {
+
+                font-size: 27px;
+
+            }
+
+
+            .form-links {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 12px;
+
+            }
+
+
+            .task-cta {
+
+                padding: 18px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
 
 <div class="page-wrapper">
 
-```
-<div class="main-container">
+
+    <div class="main-container">
 
 
-    <!-- =====================================================
-         TOP BRAND
-    ====================================================== -->
+        <!-- =====================================================
+             TOP BRAND
+        ====================================================== -->
 
-    <div class="top-brand">
-
-        <a
-            href="{% url 'home' %}"
-            class="brand"
-        >
-
-            <i class="fa-solid fa-briefcase"></i>
-
-            Workload
-
-        </a>
+        <div class="top-brand">
 
 
-        <a
-            href="{% url 'home' %}"
-            class="home-link"
-        >
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
 
-            <i class="fa-solid fa-house me-1"></i>
+                <i class="fa-solid fa-briefcase"></i>
 
-            Back to Home
+                Workload
 
-        </a>
-
-    </div>
+            </a>
 
 
-    <!-- =====================================================
-         MAIN CARD
-    ====================================================== -->
+            <a
+                href="{% url 'home' %}"
+                class="home-link"
+            >
 
-    <div class="login-container">
+                <i class="fa-solid fa-house me-1"></i>
 
+                Back to Home
 
-        <div class="row g-0">
-
-
-            <!-- =================================================
-                 BRAND PANEL
-            ================================================== -->
-
-            <div class="col-lg-5">
-
-                <div class="brand-panel">
+            </a>
 
 
-                    <div class="brand-logo">
-
-                        <i class="fa-solid fa-briefcase"></i>
-
-                        Workload
-
-                    </div>
+        </div>
 
 
-                    <h1>
+        <!-- =====================================================
+             MAIN CARD
+        ====================================================== -->
 
-                        Get your work
-                        <br>
-
-                        done.
-
-                    </h1>
+        <div class="login-container">
 
 
-                    <p>
-
-                        Submit your task, tell us what you need,
-                        and let our professionals handle the work
-                        for you.
-
-                    </p>
+            <div class="row g-0">
 
 
-                    <div class="benefit">
+                <!-- =================================================
+                     BRAND PANEL
+                ================================================== -->
 
-                        <div class="benefit-icon">
+                <div class="col-lg-5">
 
-                            <i class="fa-solid fa-paper-plane"></i>
+
+                    <div class="brand-panel">
+
+
+                        <div class="brand-logo">
+
+                            <i class="fa-solid fa-briefcase"></i>
+
+                            Workload
 
                         </div>
 
-                        <span>
 
-                            Submit your task in minutes
+                        <h1>
 
-                        </span>
+                            Get your work
 
-                    </div>
+                            <br>
 
+                            done.
 
-                    <div class="benefit">
-
-                        <div class="benefit-icon">
-
-                            <i class="fa-solid fa-chart-line"></i>
-
-                        </div>
-
-                        <span>
-
-                            Track your task progress
-
-                        </span>
-
-                    </div>
+                        </h1>
 
 
-                    <div class="benefit">
+                        <p>
 
-                        <div class="benefit-icon">
+                            Submit your task, tell us what you need,
+                            and let our professionals handle the work
+                            for you.
 
-                            <i class="fa-solid fa-file-circle-check"></i>
-
-                        </div>
-
-                        <span>
-
-                            Receive your completed work
-
-                        </span>
-
-                    </div>
+                        </p>
 
 
-                    <div class="benefit">
+                        <div class="benefit">
 
-                        <div class="benefit-icon">
+                            <div class="benefit-icon">
 
-                            <i class="fa-solid fa-shield-halved"></i>
-
-                        </div>
-
-                        <span>
-
-                            Secure and confidential
-
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 RIGHT SIDE
-            ================================================== -->
-
-            <div class="col-lg-7">
-
-                <div class="form-panel">
-
-
-                    <!-- =========================================
-                         LOGIN
-                    ========================================== -->
-
-                    <div class="form-title">
-
-                        Welcome back
-
-                    </div>
-
-
-                    <div class="form-subtitle">
-
-                        Login to manage your tasks and requests.
-
-                    </div>
-
-
-                    <!-- DJANGO MESSAGES -->
-
-                    {% if messages %}
-
-                        {% for message in messages %}
-
-                            <div
-                                class="message-box
-                                {% if message.tags == 'success' %}
-                                    success
-                                {% else %}
-                                    error
-                                {% endif %}"
-                            >
-
-                                {% if message.tags == 'success' %}
-
-                                    <i class="fa-solid fa-circle-check me-2"></i>
-
-                                {% else %}
-
-                                    <i class="fa-solid fa-circle-exclamation me-2"></i>
-
-                                {% endif %}
-
-                                {{ message }}
+                                <i class="fa-solid fa-paper-plane"></i>
 
                             </div>
 
-                        {% endfor %}
+                            <span>
 
-                    {% endif %}
-
-
-                    <!-- LOGIN FORM -->
-
-                    <form
-                        method="POST"
-                        id="loginForm"
-                    >
-
-                        {% csrf_token %}
-
-
-                        <input
-                            type="hidden"
-                            name="next"
-                            value="{{ next }}"
-                        >
-
-
-                        <!-- EMAIL -->
-
-                        <div class="field-group">
-
-                            <label
-                                for="email"
-                                class="field-label"
-                            >
-
-                                Email Address
-
-                            </label>
-
-
-                            <div class="input-wrapper">
-
-                                <i
-                                    class="fa-solid fa-envelope input-icon"
-                                ></i>
-
-
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    class="form-control"
-                                    placeholder="you@example.com"
-                                    autocomplete="email"
-                                    required
-                                >
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- PASSWORD -->
-
-                        <div class="field-group">
-
-                            <label
-                                for="password"
-                                class="field-label"
-                            >
-
-                                Password
-
-                            </label>
-
-
-                            <div class="input-wrapper">
-
-                                <i
-                                    class="fa-solid fa-lock input-icon"
-                                ></i>
-
-
-                                <input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    class="form-control"
-                                    placeholder="Enter your password"
-                                    autocomplete="current-password"
-                                    required
-                                >
-
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    id="togglePassword"
-                                    aria-label="Show password"
-                                >
-
-                                    <i
-                                        class="fa-solid fa-eye"
-                                        id="passwordIcon"
-                                    ></i>
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- LINKS -->
-
-                        <div class="form-links">
-
-                            <div class="remember-me">
-
-                                <input
-                                    type="checkbox"
-                                    id="remember"
-                                    class="form-check-input me-1"
-                                >
-
-                                <label for="remember">
-
-                                    Remember me
-
-                                </label>
-
-                            </div>
-
-
-                            <a
-                                href="#"
-                                class="forgot-password"
-                            >
-
-                                Forgot password?
-
-                            </a>
-
-                        </div>
-
-
-                        <!-- LOGIN BUTTON -->
-
-                        <button
-                            type="submit"
-                            class="login-btn"
-                            id="loginButton"
-                        >
-
-                            <span id="loginButtonText">
-
-                                <i class="fa-solid fa-right-to-bracket me-2"></i>
-
-                                Login
+                                Submit your task in minutes
 
                             </span>
 
-                        </button>
-
-                    </form>
+                        </div>
 
 
-                    <!-- =================================================
-                         DIVIDER
-                    ================================================== -->
+                        <div class="benefit">
 
-                    <div class="divider">
+                            <div class="benefit-icon">
 
-                        OR
-
-                    </div>
-
-
-                    <!-- =================================================
-                         SUBMIT TASK SECTION
-                    ================================================== -->
-
-                    <div class="task-cta">
-
-
-                        <div class="task-cta-header">
-
-                            <div class="task-cta-icon">
-
-                                <i class="fa-solid fa-plus"></i>
+                                <i class="fa-solid fa-chart-line"></i>
 
                             </div>
 
+                            <span>
 
-                            <div>
+                                Track your task progress
 
-                                <h5>
-
-                                    Need something done?
-
-                                </h5>
-
-                            </div>
+                            </span>
 
                         </div>
 
 
-                        <p>
+                        <div class="benefit">
 
-                            You don't need to start by creating an
-                            account. Tell us what you need done first,
-                            then continue with your account when you're
-                            ready.
+                            <div class="benefit-icon">
 
-                        </p>
+                                <i class="fa-solid fa-file-circle-check"></i>
+
+                            </div>
+
+                            <span>
+
+                                Receive your completed work
+
+                            </span>
+
+                        </div>
 
 
-                        <button
-                            type="button"
-                            class="btn btn-primary submit-task-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#taskModal"
-                        >
+                        <div class="benefit">
 
-                            <i class="fa-solid fa-paper-plane me-2"></i>
+                            <div class="benefit-icon">
 
-                            Submit a Task
+                                <i class="fa-solid fa-shield-halved"></i>
 
-                        </button>
+                            </div>
+
+                            <span>
+
+                                Secure and confidential
+
+                            </span>
+
+                        </div>
+
 
                     </div>
-
-
-                    <!-- =================================================
-                         REGISTER
-                    ================================================== -->
-
-                    <div class="register-section">
-
-                        <h6>
-
-                            New to Workload?
-
-                        </h6>
-
-
-                        <p>
-
-                            Create your free account to submit and
-                            track your tasks.
-
-                        </p>
-
-
-                        <a
-                            href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}"
-                            class="btn btn-outline-primary register-btn"
-                        >
-
-                            <i class="fa-solid fa-user-plus me-2"></i>
-
-                            Create an Account
-
-                        </a>
-
-                    </div>
-
-
-                    <!-- =================================================
-                         SECURITY
-                    ================================================== -->
-
-                    <div class="security-note">
-
-                        <i class="fa-solid fa-lock"></i>
-
-                        Your connection and account information
-                        are protected.
-
-                    </div>
-
 
                 </div>
 
-            </div>
 
+                <!-- =================================================
+                     RIGHT SIDE
+                ================================================== -->
+
+                <div class="col-lg-7">
+
+
+                    <div class="form-panel">
+
+
+                        <!-- =========================================
+                             LOGIN
+                        ========================================== -->
+
+                        <div class="form-title">
+
+                            Welcome back
+
+                        </div>
+
+
+                        <div class="form-subtitle">
+
+                            Login to manage your tasks and requests.
+
+                        </div>
+
+
+                        <!-- DJANGO MESSAGES -->
+
+                        {% if messages %}
+
+                            {% for message in messages %}
+
+                                <div
+                                    class="message-box
+                                    {% if message.tags == 'success' %}
+                                        success
+                                    {% else %}
+                                        error
+                                    {% endif %}"
+                                >
+
+                                    {% if message.tags == 'success' %}
+
+                                        <i class="fa-solid fa-circle-check me-2"></i>
+
+                                    {% else %}
+
+                                        <i class="fa-solid fa-circle-exclamation me-2"></i>
+
+                                    {% endif %}
+
+                                    {{ message }}
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% endif %}
+
+
+                        <!-- LOGIN FORM -->
+
+                        <form
+                            method="POST"
+                            id="loginForm"
+                        >
+
+                            {% csrf_token %}
+
+
+                            <input
+                                type="hidden"
+                                name="next"
+                                value="{{ next }}"
+                            >
+
+
+                            <!-- EMAIL -->
+
+                            <div class="field-group">
+
+                                <label
+                                    for="email"
+                                    class="field-label"
+                                >
+
+                                    Email Address
+
+                                </label>
+
+
+                                <div class="input-wrapper">
+
+                                    <i
+                                        class="fa-solid fa-envelope input-icon"
+                                    ></i>
+
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        class="form-control"
+                                        placeholder="you@example.com"
+                                        autocomplete="email"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PASSWORD -->
+
+                            <div class="field-group">
+
+                                <label
+                                    for="password"
+                                    class="field-label"
+                                >
+
+                                    Password
+
+                                </label>
+
+
+                                <div class="input-wrapper">
+
+                                    <i
+                                        class="fa-solid fa-lock input-icon"
+                                    ></i>
+
+
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        class="form-control"
+                                        placeholder="Enter your password"
+                                        autocomplete="current-password"
+                                        required
+                                    >
+
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        id="togglePassword"
+                                        aria-label="Show password"
+                                    >
+
+                                        <i
+                                            class="fa-solid fa-eye"
+                                            id="passwordIcon"
+                                        ></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- LINKS -->
+
+                            <div class="form-links">
+
+
+                                <div class="remember-me">
+
+                                    <input
+                                        type="checkbox"
+                                        id="remember"
+                                        class="form-check-input me-1"
+                                    >
+
+                                    <label for="remember">
+
+                                        Remember me
+
+                                    </label>
+
+                                </div>
+
+
+                                <a
+                                    href="#"
+                                    class="forgot-password"
+                                >
+
+                                    Forgot password?
+
+                                </a>
+
+                            </div>
+
+
+                            <!-- LOGIN BUTTON -->
+
+                            <button
+                                type="submit"
+                                class="login-btn"
+                                id="loginButton"
+                            >
+
+                                <span id="loginButtonText">
+
+                                    <i class="fa-solid fa-right-to-bracket me-2"></i>
+
+                                    Login
+
+                                </span>
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- =================================================
+                             DIVIDER
+                        ================================================== -->
+
+                        <div class="divider">
+
+                            OR
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SUBMIT TASK SECTION
+                        ================================================== -->
+
+                        <div class="task-cta">
+
+
+                            <div class="task-cta-header">
+
+
+                                <div class="task-cta-icon">
+
+                                    <i class="fa-solid fa-plus"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h5>
+
+                                        Need something done?
+
+                                    </h5>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <p>
+
+                                You don't need to start by creating an
+                                account. Tell us what you need done first,
+                                then continue with your account when you're
+                                ready.
+
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-primary submit-task-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#taskModal"
+                            >
+
+                                <i class="fa-solid fa-paper-plane me-2"></i>
+
+                                Submit a Task
+
+                            </button>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             REGISTER
+                        ================================================== -->
+
+                        <div class="register-section">
+
+
+                            <h6>
+
+                                New to Workload?
+
+                            </h6>
+
+
+                            <p>
+
+                                Create your free account to submit and
+                                track your tasks.
+
+                            </p>
+
+
+                            <a
+                                href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}"
+                                class="btn btn-outline-primary register-btn"
+                            >
+
+                                <i class="fa-solid fa-user-plus me-2"></i>
+
+                                Create an Account
+
+                            </a>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SECURITY
+                        ================================================== -->
+
+                        <div class="security-note">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            Your connection and account information
+                            are protected.
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
 
     </div>
 
 </div>
-```
 
-</div>
 
 <!-- =============================================================
      SUBMIT TASK MODAL
@@ -1542,305 +1553,355 @@
     aria-hidden="true"
 >
 
-```
-<div class="modal-dialog modal-dialog-centered modal-lg">
 
-    <div class="modal-content border-0 shadow-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
 
 
-        <!-- HEADER -->
+        <div class="modal-content border-0 shadow-lg">
 
-        <div class="modal-header">
 
-            <div class="d-flex align-items-center gap-3">
+            <!-- HEADER -->
 
-                <div class="task-modal-icon">
+            <div class="modal-header">
 
-                    <i class="fa-solid fa-clipboard-list"></i>
 
-                </div>
+                <div class="d-flex align-items-center gap-3">
 
 
-                <div>
+                    <div class="task-modal-icon">
 
-                    <h5
-                        class="modal-title"
-                        id="taskModalLabel"
-                    >
+                        <i class="fa-solid fa-clipboard-list"></i>
 
-                        Tell us what you need
+                    </div>
 
-                    </h5>
 
+                    <div>
 
-                    <small class="text-muted">
 
-                        Give us the basic details of your task.
-
-                    </small>
-
-                </div>
-
-            </div>
-
-
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-            ></button>
-
-        </div>
-
-
-        <!-- BODY -->
-
-        <div class="modal-body p-4">
-
-
-            <div class="task-info-box">
-
-                <i class="fa-solid fa-circle-info me-2 text-primary"></i>
-
-                You can describe your task first. We will then guide
-                you through the next step.
-
-            </div>
-
-
-            <!-- =================================================
-                 TASK FORM
-            ================================================== -->
-
-            <form
-                method="POST"
-                action="{% url 'submit_task' %}"
-                id="quickTaskForm"
-            >
-
-                {% csrf_token %}
-
-
-                <!-- TITLE -->
-
-                <div class="mb-3">
-
-                    <label
-                        class="form-label fw-semibold"
-                        for="quickTaskTitle"
-                    >
-
-                        What do you need done?
-
-                    </label>
-
-
-                    <input
-                        type="text"
-                        name="title"
-                        id="quickTaskTitle"
-                        class="form-control"
-                        placeholder="e.g. Analyse my survey data"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- CATEGORY -->
-
-                <div class="mb-3">
-
-                    <label
-                        class="form-label fw-semibold"
-                        for="quickTaskCategory"
-                    >
-
-                        Category
-
-                    </label>
-
-
-                    <select
-                        name="category"
-                        id="quickTaskCategory"
-                        class="form-control"
-                        required
-                    >
-
-                        <option value="">
-                            Select a category
-                        </option>
-
-                        <option value="programming">
-                            Programming & IT
-                        </option>
-
-                        <option value="data_analysis">
-                            Data Analysis
-                        </option>
-
-                        <option value="writing">
-                            Writing & Research
-                        </option>
-
-                        <option value="design">
-                            Graphic Design
-                        </option>
-
-                        <option value="presentation">
-                            Presentations
-                        </option>
-
-                        <option value="excel">
-                            Excel & Spreadsheets
-                        </option>
-
-                        <option value="gis">
-                            GIS & Mapping
-                        </option>
-
-                        <option value="business">
-                            Business Services
-                        </option>
-
-                        <option value="academic">
-                            Academic Support
-                        </option>
-
-                        <option value="other">
-                            Other
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- DESCRIPTION -->
-
-                <div class="mb-3">
-
-                    <label
-                        class="form-label fw-semibold"
-                        for="quickTaskDescription"
-                    >
-
-                        Describe the task
-
-                    </label>
-
-
-                    <textarea
-                        name="description"
-                        id="quickTaskDescription"
-                        class="form-control"
-                        rows="5"
-                        placeholder="Explain what you need, what you already have, and what you would like us to deliver..."
-                        required
-                    ></textarea>
-
-                </div>
-
-
-                <!-- DEADLINE -->
-
-                <div class="mb-3">
-
-                    <label
-                        class="form-label fw-semibold"
-                        for="quickTaskDeadline"
-                    >
-
-                        When do you need it?
-
-                    </label>
-
-
-                    <input
-                        type="datetime-local"
-                        name="deadline"
-                        id="quickTaskDeadline"
-                        class="form-control"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- BUDGET -->
-
-                <div class="mb-4">
-
-                    <label
-                        class="form-label fw-semibold"
-                        for="quickTaskBudget"
-                    >
-
-                        Your Budget
-
-                        <span class="text-muted fw-normal">
-
-                            (Optional)
-
-                        </span>
-
-                    </label>
-
-
-                    <div class="input-group">
-
-                        <span class="input-group-text">
-
-                            KES
-
-                        </span>
-
-
-                        <input
-                            type="number"
-                            name="budget"
-                            id="quickTaskBudget"
-                            class="form-control"
-                            min="0"
-                            step="0.01"
-                            placeholder="Optional"
+                        <h5
+                            class="modal-title"
+                            id="taskModalLabel"
                         >
+
+                            Tell us what you need
+
+                        </h5>
+
+
+                        <small class="text-muted">
+
+                            Give us the basic details of your task.
+
+                        </small>
+
 
                     </div>
 
                 </div>
 
 
-                <!-- BUTTON -->
-
                 <button
-                    type="submit"
-                    class="btn btn-primary w-100"
-                    style="
-                        height: 50px;
-                        border-radius: 10px;
-                        font-weight: 600;
-                    "
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="modal-body p-4">
+
+
+                <div class="task-info-box">
+
+                    <i class="fa-solid fa-circle-info me-2 text-primary"></i>
+
+                    You can describe your task first. No account is
+                    required at this stage. After you continue, we'll
+                    ask you to create a free account and your task will
+                    be saved to it automatically.
+
+                </div>
+
+
+                <!-- =================================================
+                     TASK FORM
+                ================================================== -->
+
+                <form
+                    method="POST"
+                    action="{% url 'guest_start_task' %}"
+                    id="quickTaskForm"
                 >
 
-                    <i class="fa-solid fa-paper-plane me-2"></i>
-
-                    Continue With Task
-
-                </button>
+                    {% csrf_token %}
 
 
-            </form>
+                    <!-- TITLE -->
+
+                    <div class="mb-3">
+
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="quickTaskTitle"
+                        >
+
+                            What do you need done?
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="title"
+                            id="quickTaskTitle"
+                            class="form-control"
+                            placeholder="e.g. Analyse my survey data"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="mb-3">
+
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="quickTaskCategory"
+                        >
+
+                            Category
+
+                        </label>
+
+
+                        <select
+                            name="category"
+                            id="quickTaskCategory"
+                            class="form-control"
+                            required
+                        >
+
+                            <option value="">
+
+                                Select a category
+
+                            </option>
+
+
+                            <option value="programming">
+
+                                Programming & IT
+
+                            </option>
+
+
+                            <option value="data_analysis">
+
+                                Data Analysis
+
+                            </option>
+
+
+                            <option value="writing">
+
+                                Writing & Research
+
+                            </option>
+
+
+                            <option value="design">
+
+                                Graphic Design
+
+                            </option>
+
+
+                            <option value="presentation">
+
+                                Presentations
+
+                            </option>
+
+
+                            <option value="excel">
+
+                                Excel & Spreadsheets
+
+                            </option>
+
+
+                            <option value="gis">
+
+                                GIS & Mapping
+
+                            </option>
+
+
+                            <option value="business">
+
+                                Business Services
+
+                            </option>
+
+
+                            <option value="academic">
+
+                                Academic Support
+
+                            </option>
+
+
+                            <option value="other">
+
+                                Other
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="mb-3">
+
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="quickTaskDescription"
+                        >
+
+                            Describe the task
+
+                        </label>
+
+
+                        <textarea
+                            name="description"
+                            id="quickTaskDescription"
+                            class="form-control"
+                            rows="5"
+                            placeholder="Explain what you need, what you already have, and what you would like us to deliver..."
+                            required
+                        ></textarea>
+
+
+                    </div>
+
+
+                    <!-- DEADLINE -->
+
+                    <div class="mb-3">
+
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="quickTaskDeadline"
+                        >
+
+                            When do you need it?
+
+                        </label>
+
+
+                        <input
+                            type="datetime-local"
+                            name="deadline"
+                            id="quickTaskDeadline"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- BUDGET -->
+
+                    <div class="mb-4">
+
+
+                        <label
+                            class="form-label fw-semibold"
+                            for="quickTaskBudget"
+                        >
+
+                            Your Budget
+
+                            <span class="text-muted fw-normal">
+
+                                (Optional)
+
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-group">
+
+
+                            <span class="input-group-text">
+
+                                KES
+
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="budget"
+                                id="quickTaskBudget"
+                                class="form-control"
+                                min="0"
+                                step="0.01"
+                                placeholder="Optional"
+                            >
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100"
+                        style="
+                            height: 50px;
+                            border-radius: 10px;
+                            font-weight: 600;
+                        "
+                    >
+
+                        <i class="fa-solid fa-paper-plane me-2"></i>
+
+                        Continue With Task
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
 
         </div>
 
     </div>
 
 </div>
-```
 
-</div>
 
 <!-- =============================================================
      BOOTSTRAP JS
@@ -1849,6 +1910,7 @@
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
 ></script>
+
 
 <script>
 
@@ -1860,8 +1922,10 @@
     const password =
         document.getElementById("password");
 
+
     const togglePassword =
         document.getElementById("togglePassword");
+
 
     const passwordIcon =
         document.getElementById("passwordIcon");
@@ -1876,26 +1940,32 @@
             "click",
             function () {
 
+
                 if (
                     password.type === "password"
                 ) {
 
                     password.type = "text";
 
+
                     passwordIcon.className =
                         "fa-solid fa-eye-slash";
+
 
                     togglePassword.setAttribute(
                         "aria-label",
                         "Hide password"
                     );
 
+
                 } else {
 
                     password.type = "password";
 
+
                     passwordIcon.className =
                         "fa-solid fa-eye";
+
 
                     togglePassword.setAttribute(
                         "aria-label",
@@ -1917,8 +1987,10 @@
     const loginForm =
         document.getElementById("loginForm");
 
+
     const loginButton =
         document.getElementById("loginButton");
+
 
     const loginButtonText =
         document.getElementById("loginButtonText");
@@ -1929,6 +2001,7 @@
         loginForm.addEventListener(
             "submit",
             function () {
+
 
                 if (loginButton) {
 
@@ -1967,6 +2040,7 @@
             "submit",
             function () {
 
+
                 const button =
                     quickTaskForm.querySelector(
                         "button[type='submit']"
@@ -1977,11 +2051,12 @@
 
                     button.disabled = true;
 
+
                     button.innerHTML =
 
                         '<span class="spinner-border spinner-border-sm me-2"></span>' +
 
-                        'Processing...';
+                        'Saving Task...';
 
                 }
 
@@ -1992,6 +2067,7 @@
 
 
 </script>
+
 
 </body>
 
