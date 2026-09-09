@@ -92,9 +92,9 @@ def user_logout(request):
 # REGISTER
 # ============================================================
 
+from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.utils.http import url_has_allowed_host_and_scheme
 
 from .forms import RegisterForm
